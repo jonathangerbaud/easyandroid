@@ -1,0 +1,7 @@
+def androidconfig = [:]
+    androidconfig.minSdkVersion = 22
+    androidconfig.targetSdkVersion = 28
+    androidconfig.compileSdkVersion = 28
+    androidconfig.versionCode = 1
+    androidconfig.versionName = "1.0"
+ext.androidconfig = androidconfig

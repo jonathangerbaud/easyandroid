@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="default_screen_margin">@dimen/dp_24</dimen>
+    <dimen name="default_gutter">@dimen/dp_24</dimen>
+</resources>

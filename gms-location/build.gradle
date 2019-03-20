@@ -1,0 +1,5 @@
+dependencies {
+    implementation project(libraries.core)
+    implementation deps.gms.location
+    implementation deps.androidx.lifecycle.common
+}

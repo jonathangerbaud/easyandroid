@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">inappbilling</string>
+
+    <string name="jg_cant_connect_to_google_play">Impossible de se connecter à Google Play</string>
+</resources>

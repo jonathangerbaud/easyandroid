@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="fontFamilyRegular" tools:ignore="ExtraTranslation">sans-serif</string>
+    <string name="fontFamilyMedium" tools:ignore="ExtraTranslation">sans-serif-medium</string>
+    <string name="fontFamilyBlack" tools:ignore="ExtraTranslation">sans-serif-black</string>
+    <string name="fontFamilyLight" tools:ignore="ExtraTranslation">sans-serif-light</string>
+    <string name="fontFamilyThin" tools:ignore="ExtraTranslation">sans-serif-thin</string>
+    <string name="fontFamilySmallcaps" tools:ignore="ExtraTranslation">sans-serif-smallcaps</string>
+    <string name="fontFamilyCondensed" tools:ignore="ExtraTranslation">sans-serif-condensed</string>
+    <string name="fontFamilyCondensedLight" tools:ignore="ExtraTranslation">sans-serif-condensed-light</string>
+    <string name="fontFamilyCondensedMedium" tools:ignore="ExtraTranslation">sans-serif-condensed-medium</string>
+</resources>

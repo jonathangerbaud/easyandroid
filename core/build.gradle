@@ -1,0 +1,6 @@
+dependencies {
+    api deps.kotlin
+    api deps.androidx.appcompat
+    api deps.androidx.lifecycle.extensions
+    implementation deps.logging.timber
+}

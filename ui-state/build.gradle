@@ -1,0 +1,4 @@
+dependencies {
+    implementation project(libraries.network)
+    implementation deps.androidx.lifecycle.common_java8
+}
