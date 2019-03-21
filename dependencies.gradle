@@ -126,7 +126,8 @@ ext.libraries = libraries
 def addRepos(RepositoryHandler handler) {
     handler.google()
     handler.jcenter()
+    handler.mavenCentral()
     //handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-    handler.maven { url 'https://jitpack.io' }
+    handler.maven { url "https://jitpack.io" }
 }
 ext.addRepos = this.&addRepos
