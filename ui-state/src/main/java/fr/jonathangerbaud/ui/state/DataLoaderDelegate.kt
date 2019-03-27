@@ -1,4 +1,4 @@
-package fr.jonathan.ui.state
+package fr.jonathangerbaud.ui.state
 
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner

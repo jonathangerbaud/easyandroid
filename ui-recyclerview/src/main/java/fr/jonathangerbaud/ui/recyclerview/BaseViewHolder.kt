@@ -1,4 +1,4 @@
-package fr.jonathan.ui.recyclerview
+package fr.jonathangerbaud.ui.recyclerview
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

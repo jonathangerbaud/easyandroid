@@ -3,7 +3,7 @@ package fr.jonathangerbaud.core
 import android.app.Application
 import timber.log.Timber
 
-class BaseApp : Application()
+open class BaseApp : Application()
 {
 
     override fun onCreate()

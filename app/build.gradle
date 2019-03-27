@@ -24,11 +24,6 @@ android {
 }
 
 dependencies {
-    implementation deps.kotlin
-    implementation deps.androidx.appcompat
-    implementation deps.androidx.core_ktx
-    implementation deps.androidx.constraintlayout
-
     implementation project(libraries.core)
     implementation project(libraries.gms.location)
     implementation project(libraries.gms.maps)

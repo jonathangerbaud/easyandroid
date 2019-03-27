@@ -39,4 +39,18 @@
 
     <dimen name="default_screen_margin">@dimen/dp_16</dimen>
     <dimen name="default_gutter">@dimen/dp_16</dimen>
+
+    <dimen name="md_text_h1">96sp</dimen>
+    <dimen name="md_text_h2">60sp</dimen>
+    <dimen name="md_text_h3">48sp</dimen>
+    <dimen name="md_text_h4">34sp</dimen>
+    <dimen name="md_text_h5">24sp</dimen>
+    <dimen name="md_text_h6">20sp</dimen>
+    <dimen name="md_text_subtitle1">16sp</dimen>
+    <dimen name="md_text_subtitle2">46sp</dimen>
+    <dimen name="md_text_body1">16sp</dimen>
+    <dimen name="md_text_body2">14sp</dimen>
+    <dimen name="md_text_button">14sp</dimen>
+    <dimen name="md_text_caption">12sp</dimen>
+    <dimen name="md_text_overline">10sp</dimen>
 </resources>

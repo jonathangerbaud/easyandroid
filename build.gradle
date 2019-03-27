@@ -12,6 +12,9 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+    repositories {
+        mavenCentral()
+    }
 }
 
 allprojects {
@@ -22,6 +25,8 @@ subprojects {
     // it = module (app, core, gms_location, ...
     if (it.name != 'app') {
         apply plugin: 'com.android.library'
+        apply plugin: 'kotlin-android-extensions'
+        apply plugin: 'kotlin-android'
 
         // Trick to get several libraries in one Github project
         // and then only get the libraries we need via JitPack

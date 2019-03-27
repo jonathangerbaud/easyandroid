@@ -47,8 +47,8 @@ def androidx = [:]
     androidx.core                       = "androidx.core:core:$versions.androidX"
     androidx.core_ktx                   = "androidx.core:core-ktx:$versions.androidX"
     androidx.appcompat                  = "androidx.appcompat:appcompat:$versions.androidX"
-    androidx.constraintlayout           =  "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
-    androidx.constraintlayout_solver    =  "androidx.constraintlayout:constraintlayout-solver:$versions.constraintlayout"
+    androidx.constraintlayout           = "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
+    androidx.constraintlayout_solver    = "androidx.constraintlayout:constraintlayout-solver:$versions.constraintlayout"
     androidx.recyclerview               = "androidx.recyclerview:recyclerview:$versions.androidX"
 
     def lifecycle = [:]

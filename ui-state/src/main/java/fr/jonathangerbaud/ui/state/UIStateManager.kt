@@ -1,8 +1,8 @@
-package fr.jonathan.ui.state
+package fr.jonathangerbaud.ui.state
 
 import android.view.View
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import fr.jonathan.ui.state.widget.DataStateView
+import fr.jonathangerbaud.ui.state.widget.DataStateView
 import fr.jonathangerbaud.ui.core.ext.ViewVisibility.Companion.hide
 import fr.jonathangerbaud.ui.core.ext.ViewVisibility.Companion.show
 

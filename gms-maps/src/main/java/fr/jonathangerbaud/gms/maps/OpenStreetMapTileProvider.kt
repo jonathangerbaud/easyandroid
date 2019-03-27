@@ -1,4 +1,4 @@
-package fr.jonathan.gms.maps
+package fr.jonathangerbaud.gms.maps
 
 import java.net.URL
 

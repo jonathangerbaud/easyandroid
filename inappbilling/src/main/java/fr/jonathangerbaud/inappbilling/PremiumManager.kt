@@ -1,4 +1,4 @@
-package fr.jonathan.inappbilling
+package fr.jonathangerbaud.inappbilling
 
 import android.app.Activity
 import android.content.Intent

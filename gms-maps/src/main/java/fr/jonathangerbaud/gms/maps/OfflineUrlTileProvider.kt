@@ -1,4 +1,4 @@
-package fr.jonathan.gms.maps
+package fr.jonathangerbaud.gms.maps
 
 import com.google.android.gms.maps.model.Tile
 import com.google.android.gms.maps.model.TileProvider

@@ -1,4 +1,6 @@
 dependencies {
-    implementation project(libraries.ui.core)
-    implementation deps.androidx.recyclerview
+    api project(libraries.ui.core)
+    api deps.androidx.recyclerview
+    api deps.androidx.constraintlayout
+    api deps.androidx.constraintlayout_solver
 }

@@ -1,30 +1,26 @@
-package fr.jonathan.ui.recyclerview
+package fr.jonathangerbaud.ui.recyclerview
 
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.RecyclerView.Adapter
 import kotlin.reflect.KClass
 
 
-interface RecyclerViewDelegate
+open class BaseRecyclerViewAdapter : Adapter<BaseViewHolder>()
 {
-    val DEFAULT_TYPE
-            get() = 0
+    protected val DEFAULT_TYPE = 0
 
-    private val viewHolderMap: MutableList<ViewHolderFactory>
-            get() = mutableListOf()
-    private val typeMap: MutableMap<KClass<*>, Int>
-        get() = HashMap()
+    private val viewHolderMap: MutableList<ViewHolderFactory> = mutableListOf()
+    private val typeMap: MutableMap<KClass<*>, Int> = HashMap()
 
-    val data: List<Any>
-        get() = mutableListOf()
-        /*set(value) {
+    var data: MutableList<Any> = mutableListOf()
+        set(value) {
             field = value
             notifyDataSetChanged()
             liveData.value = value
-        }*/
+        }
 
-    private val liveData: MutableLiveData<List<Any>>
-        get() = MutableLiveData()
+    val liveData: MutableLiveData<List<Any>> = MutableLiveData()
 
     fun addView(type: KClass<*>, factory: ViewHolderFactory)
     {
@@ -32,7 +28,7 @@ interface RecyclerViewDelegate
         typeMap[type] = viewHolderMap.size - 1
     }
 
-    fun getItemViewType(position: Int): Int
+    override fun getItemViewType(position: Int): Int
     {
         val type: KClass<Any> = data[position].javaClass.kotlin
 
@@ -43,16 +39,16 @@ interface RecyclerViewDelegate
     }
 
 
-    fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder
     {
         return viewHolderMap[viewType].build(parent)
     }
 
-    fun getItemCount(): Int {
+    override fun getItemCount(): Int {
         return data.size
     }
 
-    fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         viewHolderMap[getItemViewType(position)].bind(holder, data[position], position)
     }
 }

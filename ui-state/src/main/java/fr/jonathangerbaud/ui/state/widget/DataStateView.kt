@@ -1,4 +1,4 @@
-package fr.jonathan.ui.state.widget
+package fr.jonathangerbaud.ui.state.widget
 
 
 import android.annotation.TargetApi
@@ -17,7 +17,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.annotation.StyleRes
 import androidx.core.view.MarginLayoutParamsCompat
-import fr.jonathan.ui.state.R
+import fr.jonathangerbaud.ui.state.R
 import fr.jonathangerbaud.core.ext.getDimensionPixelsSize
 import fr.jonathangerbaud.ui.core.ext.ViewVisibility
 import fr.jonathangerbaud.ui.core.ext.hide
