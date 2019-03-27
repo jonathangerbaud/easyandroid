@@ -47,7 +47,7 @@
     <dimen name="md_text_h5">24sp</dimen>
     <dimen name="md_text_h6">20sp</dimen>
     <dimen name="md_text_subtitle1">16sp</dimen>
-    <dimen name="md_text_subtitle2">46sp</dimen>
+    <dimen name="md_text_subtitle2">14sp</dimen>
     <dimen name="md_text_body1">16sp</dimen>
     <dimen name="md_text_body2">14sp</dimen>
     <dimen name="md_text_button">14sp</dimen>

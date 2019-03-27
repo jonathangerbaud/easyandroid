@@ -1,6 +1,6 @@
 package fr.jonathangerbaud.ui.recyclerview.items
 
-class IconBuilder : ImageBuilder()
+class LargeIconBuilder : ImageBuilder()
 {
     init {
         measurements(IconMeasurements())
@@ -10,22 +10,24 @@ class IconBuilder : ImageBuilder()
     {
         override fun getMinListItemHeight():Int
         {
-            return SIZE_56
+            return SIZE_72
         }
 
-        override fun getTopPadding(minHeight:Int):Int
-        {
-            return if (minHeight < SIZE_72) SIZE_8 else SIZE_16
+        override fun getTopPadding(minHeight: Int): Int {
+            if (minHeight <= SIZE_88)
+                return SIZE_8
+            else
+                return SIZE_16
         }
 
         override fun getWidth(): Int
         {
-            return SIZE_40
+            return SIZE_56
         }
 
         override fun getHeight(): Int
         {
-            return SIZE_40
+            return SIZE_56
         }
     }
 }

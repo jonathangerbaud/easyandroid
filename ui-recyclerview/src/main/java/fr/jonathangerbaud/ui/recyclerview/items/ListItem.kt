@@ -7,6 +7,7 @@ import android.view.View
 import androidx.annotation.AttrRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import fr.jonathangerbaud.core.util.ResUtils
 import fr.jonathangerbaud.ui.recyclerview.R
 import fr.jonathangerbaud.ui.recyclerview.ext.*
 
@@ -53,17 +54,24 @@ open class ListItem : ConstraintLayout
 
         fun build(context: Context): ListItem
         {
-            val view = ListItem(context)
+            return build(context, ListItem(context))
+        }
 
+        fun build(context: Context, view: ListItem):ListItem
+        {
+            view.setBackgroundColor(0xffffffff.toInt())
             val startItem: View? = startBuilder?.buildView(context)
             val mainItem: View? = mainBuilder?.buildView(context)
             val endItem: View? = endBuilder?.buildView(context)
 
             // Define min height
-            var height = 48
+            var height = 0
 
-            startItem?.run { height = Math.min(height, startBuilder!!.measurements.getMinListItemHeight()) }
-            endItem?.run { height = Math.min(height, endBuilder!!.measurements.getMinListItemHeight()) }
+            startItem?.run { height = Math.max(height, startBuilder!!.measurements.getMinListItemHeight()) }
+            mainItem?.run { height = Math.max(height, mainBuilder!!.measurements.getMinListItemHeight()) }
+            endItem?.run { height = Math.max(height, endBuilder!!.measurements.getMinListItemHeight()) }
+
+            height = height
 
             startItem?.apply { id = R.id.startContent }
             mainItem?.apply { id = R.id.mainContent }
@@ -79,9 +87,12 @@ open class ListItem : ConstraintLayout
                 if (gravity == Gravity.CENTER_VERTICAL || gravity == Gravity.CENTER)
                     cs.centerInParentVertically(it)
                 else if (gravity == Gravity.BOTTOM)
-                    cs.alignParentTop(it, startBuilder!!.measurements.getTopPadding(height))
-                else
                     cs.alignParentBottom(it, startBuilder!!.measurements.getTopPadding(height))
+                else
+                    cs.alignParentTop(it, startBuilder!!.measurements.getTopPadding(height))
+
+                cs.constrainWidth(it.id, startBuilder!!.measurements.getWidth())
+                cs.constrainHeight(it.id, startBuilder!!.measurements.getHeight())
             }
 
             mainItem?.let {
@@ -90,12 +101,15 @@ open class ListItem : ConstraintLayout
                 if (startItem != null)
                     cs.alignStartToEnd(startItem, mainItem, startBuilder!!.measurements.getEndMargin())
                 else
-                    cs.alignStartParentStart(mainItem, 16) // ToDo set constant for default padding
+                    cs.alignStartParentStart(mainItem, ResUtils.getDpInPx(16)) // ToDo set constant for default padding
 
                 if (endItem != null)
-                    cs.alignEndToStart(mainItem, startItem!!, mainBuilder!!.measurements.getEndMargin())
+                    cs.alignEndToStart(mainItem, endItem, mainBuilder!!.measurements.getEndMargin())
                 else
                     cs.alignEndParentEnd(mainItem, mainBuilder!!.measurements.getEndMarginIfEndComponent())
+
+                cs.constrainWidth(it.id, mainBuilder!!.measurements.getWidth())
+                cs.constrainHeight(it.id, mainBuilder!!.measurements.getHeight())
             }
 
             endItem?.let {
@@ -105,21 +119,23 @@ open class ListItem : ConstraintLayout
                 if (gravity == Gravity.CENTER_VERTICAL || gravity == Gravity.CENTER)
                     cs.centerInParentVertically(it)
                 else if (gravity == Gravity.BOTTOM)
-                    cs.alignParentTop(it, endBuilder!!.measurements.getTopPadding(height))
-                else
                     cs.alignParentBottom(it, endBuilder!!.measurements.getTopPadding(height))
+                else
+                    cs.alignParentTop(it, endBuilder!!.measurements.getTopPadding(height))
 
-                cs.constrainWidth(it.id, ConstraintSet.MATCH_CONSTRAINT_WRAP)
-                cs.constrainHeight(it.id, ConstraintSet.WRAP_CONTENT)
+                cs.constrainWidth(it.id, endBuilder!!.measurements.getWidth())
+                cs.constrainHeight(it.id, endBuilder!!.measurements.getHeight())
             }
 
             view.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-            view.minimumHeight = height
+            view.minHeight = height
 
             // Add children
             startItem?.let { view.addView(startItem) }
             mainItem?.let { view.addView(mainItem) }
-            endItem?.let { view.addView(startItem) }
+            endItem?.let { view.addView(endItem) }
+
+            cs.applyTo(view)
 
             view.startContent = startItem
             view.mainContent = mainItem

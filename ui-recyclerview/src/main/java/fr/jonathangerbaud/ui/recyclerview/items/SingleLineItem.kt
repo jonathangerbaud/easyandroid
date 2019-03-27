@@ -15,18 +15,13 @@ class SingleLineItem(context: Context) : ListItem(context)
         private set
 
     init {
+        ListItem.Builder()
+            .startContent(SmallIconBuilder().drawable(R.drawable.abc_ic_go_search_api_material))
+            .endContent(SwitchBuilder())
+            .mainContent(SingleLineBuilder().text("hello"))
+            .build(context, this)
+
         icon = startContent as ImageView
         title = mainContent as TextView
-    }
-
-    companion object
-    {
-        fun build(context:Context):SingleLineItem
-        {
-            return ListItem.Builder()
-                .startContent(IconBuilder().drawable(R.drawable.jg_ic_arrow_left))
-                .mainContent(SingleLineBuilder().text("hello"))
-                .build(context) as SingleLineItem
-        }
     }
 }

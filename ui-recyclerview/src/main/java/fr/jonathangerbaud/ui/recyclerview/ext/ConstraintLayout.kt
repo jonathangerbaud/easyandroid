@@ -24,5 +24,5 @@ fun ConstraintSet.centerInParent(view: View)
     centerInParentVertically(view)
 }
 
-fun ConstraintSet.alignEndToStart(endView: View, startView: View, margin: Int = 0) = connect(startView.id, ConstraintSet.START, endView.id, ConstraintSet.END, margin)
+fun ConstraintSet.alignEndToStart(endView: View, startView: View, margin: Int = 0) = connect(endView.id, ConstraintSet.END, startView.id, ConstraintSet.START, margin)
 fun ConstraintSet.alignStartToEnd(endView: View, startView: View, margin: Int = 0) = connect(startView.id, ConstraintSet.START, endView.id, ConstraintSet.END, margin)

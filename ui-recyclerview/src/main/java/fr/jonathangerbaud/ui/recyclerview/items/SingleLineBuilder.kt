@@ -22,10 +22,10 @@ class SingleLineBuilder : WidgetBuilder()
     private var truncate:TextUtils.TruncateAt? = null
 
     init {
-        measurements(IconMeasurements())
+        measurements(TextMeasurements())
     }
 
-    private class IconMeasurements : DefaultMeasurements()
+    private class TextMeasurements : DefaultMeasurements()
     {
         override fun getWidth(): Int
         {
