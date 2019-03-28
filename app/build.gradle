@@ -30,6 +30,7 @@ dependencies {
     implementation project(libraries.inappbilling)
     implementation project(libraries.network)
     implementation project(libraries.ui.core)
+    implementation project(libraries.ui.listitems)
     implementation project(libraries.ui.recyclerview)
     implementation project(libraries.ui.state)
 }

@@ -114,8 +114,11 @@ def libraries = [:]
 
     def ui = [:]
         ui.core             = ":ui-core"
+        ui.constraintlayout = ":ui-constraintlayout"
+        ui.listitems        = ":ui-listitems"
         ui.recyclerview     = ":ui-recyclerview"
         ui.state            = ":ui-state"
+        ui.widgets          = ":ui-widgets"
     libraries.ui = ui
 ext.libraries = libraries
 

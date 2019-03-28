@@ -5,7 +5,8 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import fr.jonathangerbaud.core.util.ResUtils
 import fr.jonathangerbaud.ui.core.MaterialColor
-import fr.jonathangerbaud.ui.recyclerview.items.*
+import fr.jonathangerbaud.ui.listitems.Row
+import fr.jonathangerbaud.ui.listitems.widgets.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,17 +29,62 @@ class MainActivity : AppCompatActivity() {
         layout.addView(v2)*/
 
         layout.addView(
-            ListItem.Builder()
-                .startContent(SmallIconBuilder().drawable(fr.jonathangerbaud.ui.recyclerview.R.drawable.abc_ic_go_search_api_material))
-                .mainContent(SingleLineBuilder().text("hello"))
-                .endContent(SwitchBuilder())
+            Row.Builder()
+                .mainItem(HeadlineItem().text("Headline"))
                 .build(this))
 
         layout.addView(
-            ListItem.Builder()
-                .startContent(SmallIconBuilder().drawable(R.drawable.ic_launcher_foreground).backgroundRes(R.color.colorPrimary))
-                .mainContent(SingleLineBuilder().text("This is my super text"))
-                .endContent(CheckboxBuilder())
+            Row.Builder()
+                .startItem(SmallIconItem().drawable(R.drawable.abc_ic_go_search_api_material))
+                .mainItem(TitleItem().text("Title"))
+                .endItem(CheckboxItem())
+                .build(this))
+
+        layout.addView(
+            Row.Builder()
+                .startItem(SmallIconItem().drawable(R.drawable.abc_ic_go_search_api_material))
+                .mainItem(TextBodyItem().text("Text Body"))
+                .endItem(SwitchItem())
+                .build(this))
+
+        layout.addView(
+            Row.Builder()
+                .startItem(IconItem().drawable(R.drawable.jg_ic_arrow_left).background(R.color.md_green400))
+                .mainItem(OverlineItem().text("Overline"))
+                .endItem(SwitchItem())
+                .build(this))
+
+        layout.addView(
+            Row.Builder()
+                .startItem(SmallIconItem().drawable(R.drawable.ic_launcher_foreground).backgroundRes(R.color.colorPrimary))
+                .mainItem(CaptionItem().text("My super caption"))
+                .endItem(CheckboxItem())
+                .build(this))
+
+        layout.addView(
+            Row.Builder()
+                .startItem(SmallIconItem().drawable(R.drawable.ic_launcher_foreground).backgroundRes(R.color.colorPrimary))
+                .mainItem(MetaTextItem().text("Meta text"))
+                .endItem(CheckboxItem())
+                .build(this))
+
+        layout.addView(
+            Row.Builder()
+                .startItem(SmallIconItem().drawable(R.drawable.ic_launcher_foreground).backgroundRes(R.color.colorPrimary))
+                .mainItem(TextStackItem()
+                    .addText(TitleItem().text("Three-line text"))
+                    .addText(TextBodyItem().text("Secondary line text. Lorem ipsum dolor sit amet")))
+                .endItem(CheckboxItem())
+                .build(this))
+
+        layout.addView(
+            Row.Builder()
+                .startItem(SmallIconItem().drawable(R.drawable.ic_launcher_foreground).backgroundRes(R.color.colorPrimary))
+                .mainItem(TextStackItem()
+                            .addText(OverlineItem().text("Overline"))
+                            .addText(TitleItem().text("Three-line text"))
+                            .addText(TextBodyItem().text("Secondary line text. Lorem ipsum")))
+                .endItem(CheckboxItem())
                 .build(this))
     }
 }

@@ -1,0 +1,4 @@
+dependencies {
+    api deps.androidx.constraintlayout
+    api deps.androidx.constraintlayout_solver
+}

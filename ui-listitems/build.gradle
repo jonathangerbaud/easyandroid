@@ -1,0 +1,5 @@
+dependencies {
+    api project(libraries.ui.core)
+    api project(libraries.ui.constraintlayout)
+    api project(libraries.ui.widgets)
+}
