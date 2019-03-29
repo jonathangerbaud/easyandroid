@@ -88,7 +88,7 @@ open class Row : ConstraintLayout
             startView?.let {
                 cs.alignStartParentStart(it, startSpecs!!.getStartMarginIfStartComponent())
 
-                val gravity = startSpecs!!.getVerticalGravity()
+                val gravity = startSpecs.getVerticalGravity()
                 if (gravity == Gravity.CENTER_VERTICAL || gravity == Gravity.CENTER)
                     cs.centerInParentVertically(it)
                 else if (gravity == Gravity.BOTTOM)

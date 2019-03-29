@@ -40,7 +40,16 @@ abstract class WidgetBuilder<T : WidgetBuilder<T>> : ViewBuilder
 
     fun gone() = applySelf {         this.visibility = View.GONE }
 
-    protected fun applyViewAttributes(view: View)
+    final override fun buildView(context: Context): View
+    {
+        val view = createView(context)
+        applyViewAttributes(view)
+        return view
+    }
+
+    abstract fun createView(context:Context): View
+
+    open protected fun applyViewAttributes(view: View)
     {
         alpha?.let { view.alpha = it }
         foregroundDrawable?.let {

@@ -11,6 +11,17 @@
         android:divider="@drawable/divider"
         android:id="@+id/layout">
 
+    <TextView
+            android:text="Normal text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <TextView
+            android:id="@+id/customText"
+            android:text="Customized text via Text Appearance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
     <View
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"

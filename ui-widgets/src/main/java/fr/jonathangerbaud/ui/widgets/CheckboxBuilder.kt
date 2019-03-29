@@ -4,13 +4,10 @@ import android.content.Context
 import android.view.View
 import android.widget.CheckBox
 
-open class CheckboxBuilder<T : CheckboxBuilder<T>> : WidgetBuilder<T>()
+open class CheckboxBuilder<T : CheckboxBuilder<T>> : CompoundButtonBuilder<T>()
 {
-    override fun buildView(context: Context): View
+    override fun createView(context: Context): View
     {
-        val view = CheckBox(context)
-        applyViewAttributes(view)
-
-        return view
+        return CheckBox(context)
     }
 }

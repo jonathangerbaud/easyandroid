@@ -20,10 +20,16 @@ open class ImageBuilder<T : ImageBuilder<T>> : WidgetBuilder<T>()
     private var tintRes: Int? = null
     private var scaleType: ImageView.ScaleType? = null
 
-    override fun buildView(context: Context): View
+    override fun createView(context: Context): View
     {
-        val view = ImageView(context)
-        applyViewAttributes(view)
+        return ImageView(context)
+    }
+
+    @Suppress("NAME_SHADOWING")
+    override fun applyViewAttributes(view: View)
+    {
+        super.applyViewAttributes(view)
+        val view = view as ImageView
 
         bitmap?.let { view.setImageBitmap(it) }
         drawableRes?.let { view.setImageResource(it) }
@@ -31,19 +37,11 @@ open class ImageBuilder<T : ImageBuilder<T>> : WidgetBuilder<T>()
         tint?.let { view.imageTintList = ColorStateList.valueOf(it) }
         tint?.let { view.imageTintList = ColorStateList.valueOf(ResUtils.getColor(it)) }
         scaleType?.let { view.scaleType = scaleType }
-
-        return view
     }
 
     fun bitmap(bitmap: Bitmap) = applySelf { this.bitmap = bitmap }
 
     fun drawable(@DrawableRes drawableRes: Int) = applySelf { this.drawableRes = drawableRes }
-
-    /*fun drawable(@DrawableRes drawableRes: Int): ImageBuilder
-    {
-        this.drawableRes = drawableRes
-        return this
-    }*/
 
     fun drawable(drawable: Drawable) = applySelf { this.drawable = drawable }
 

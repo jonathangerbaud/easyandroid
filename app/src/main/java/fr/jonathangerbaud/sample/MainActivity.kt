@@ -2,9 +2,11 @@ package fr.jonathangerbaud.sample
 
 import android.os.Bundle
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import fr.jonathangerbaud.core.util.ResUtils
 import fr.jonathangerbaud.ui.core.MaterialColor
+import fr.jonathangerbaud.ui.core.text.TextAppearance
 import fr.jonathangerbaud.ui.listitems.Row
 import fr.jonathangerbaud.ui.listitems.widgets.*
 
@@ -13,12 +15,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val a = ResUtils.getDpInPx(12)
-        val c = MaterialColor.AMBER_100
 
         val layout = findViewById<LinearLayout>(R.id.layout)
         layout.setBackgroundColor(0xffcccccc.toInt())
 
+        var customText = findViewById<TextView>(R.id.customText)
+        TextAppearance.fromStyle(this, R.style.CustomTextAppearance).apply(customText)
         /*val v1 = SingleLineItem(this)
         val v2 = SingleLineItem(this)
 

@@ -13,7 +13,7 @@ class TextStackItem : WidgetBuilder<TextStackItem>(), RowItem
 {
     val stack: ArrayList<TextItem> = ArrayList()
 
-    override fun buildView(context: Context): View
+    override fun createView(context: Context): View
     {
         val view = LinearLayoutCompat(context)
         view.orientation = LinearLayoutCompat.VERTICAL
