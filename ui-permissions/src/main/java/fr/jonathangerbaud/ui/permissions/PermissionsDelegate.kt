@@ -1,6 +1,7 @@
 package fr.jonathangerbaud.ui.permissions
 
 
+import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
@@ -30,6 +31,31 @@ class PermissionsDelegate private constructor(
     {
         private val semaphore: Semaphore = Semaphore(1)
         private const val FRAGMENT_TAG = "PermissionsDelegateFragment"
+
+        const val READ_CALENDAR = Manifest.permission.READ_CALENDAR
+        const val WRITE_CALENDAR = Manifest.permission.WRITE_CALENDAR
+        const val CAMERA = Manifest.permission.CAMERA
+        const val READ_CONTACTS = Manifest.permission.READ_CONTACTS
+        const val WRITE_CONTACTS = Manifest.permission.WRITE_CONTACTS
+        const val GET_ACCOUNTS = Manifest.permission.GET_ACCOUNTS
+        const val ACCESS_FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION
+        const val ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION
+        const val RECORD_AUDIO = Manifest.permission.RECORD_AUDIO
+        const val READ_PHONE_STATE = Manifest.permission.READ_PHONE_STATE
+        const val CALL_PHONE = Manifest.permission.CALL_PHONE
+        const val READ_CALL_LOG = Manifest.permission.READ_CALL_LOG
+        const val WRITE_CALL_LOG = Manifest.permission.WRITE_CALL_LOG
+        const val ADD_VOICEMAIL = Manifest.permission.ADD_VOICEMAIL
+        const val USE_SIP = Manifest.permission.USE_SIP
+        const val PROCESS_OUTGOING_CALLS = Manifest.permission.PROCESS_OUTGOING_CALLS
+        const val BODY_SENSORS = Manifest.permission.BODY_SENSORS
+        const val SEND_SMS = Manifest.permission.SEND_SMS
+        const val RECEIVE_SMS = Manifest.permission.RECEIVE_SMS
+        const val READ_SMS = Manifest.permission.READ_SMS
+        const val RECEIVE_WAP_PUSH = Manifest.permission.RECEIVE_WAP_PUSH
+        const val RECEIVE_MMS = Manifest.permission.RECEIVE_MMS
+        const val READ_EXTERNAL_STORAGE = Manifest.permission.READ_EXTERNAL_STORAGE
+        const val WRITE_EXTERNAL_STORAGE = Manifest.permission.WRITE_EXTERNAL_STORAGE
 
         fun with(activity: FragmentActivity): Builder
         {
