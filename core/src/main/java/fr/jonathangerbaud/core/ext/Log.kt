@@ -59,6 +59,7 @@ inline fun i(t: Throwable?) = Timber.i(t)
 
 /** Log a warning exception and a message that will be evaluated lazily when the message is printed */
 inline fun w(t: Throwable? = null, message: () -> String) = log { Timber.w(t, message()) }
+inline fun w(t: Throwable? = null, message: String) = log { Timber.w(t, message) }
 inline fun w(t: Throwable?) = Timber.w(t)
 
 /** Log an error exception and a message that will be evaluated lazily when the message is printed */
