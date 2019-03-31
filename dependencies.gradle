@@ -124,6 +124,7 @@ def libraries = [:]
     def ui = [:]
         ui.core             = ":ui-core"
         ui.constraintlayout = ":ui-constraintlayout"
+        ui.image            = ":ui-image"
         ui.listitems        = ":ui-listitems"
         ui.permissions      = ":ui-permissions"
         ui.recyclerview     = ":ui-recyclerview"

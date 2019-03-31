@@ -1,12 +1,16 @@
 package fr.jonathangerbaud.sample
 
+import android.graphics.Paint
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import fr.jonathangerbaud.core.util.ResUtils
 import fr.jonathangerbaud.ui.core.MaterialColor
 import fr.jonathangerbaud.ui.core.text.TextAppearance
+import fr.jonathangerbaud.ui.image.MaskedImageView
+import fr.jonathangerbaud.ui.image.PathHelper
 import fr.jonathangerbaud.ui.listitems.Row
 import fr.jonathangerbaud.ui.listitems.widgets.*
 
@@ -15,6 +19,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val image = findViewById<MaskedImageView>(R.id.image)
+        image.setMaskPath(PathHelper.star(ResUtils.getDpInPx(192).toFloat(),5))
+        image.setMaskBorderColor(0xFFFF0000.toInt())
+        image.setMaskBorderWidth(ResUtils.getDpInPx(15).toFloat())
+//        image.setMaskBorderJoin(Paint.Join.ROUND)
 
         val layout = findViewById<LinearLayout>(R.id.layout)
         layout.setBackgroundColor(0xffcccccc.toInt())
