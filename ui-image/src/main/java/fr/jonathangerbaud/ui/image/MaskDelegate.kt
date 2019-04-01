@@ -5,6 +5,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.annotation.ColorInt
+import fr.jonathangerbaud.core.ext.d
 
 
 class MaskDelegate(view: View)
@@ -89,7 +90,7 @@ class MaskDelegate(view: View)
         shapePath = path
 
         val rect = RectF()
-        shapePath!!.computeBounds(rect, true)
+        shapePath!!.computeBounds(rect, false)
         shapePathWidth = rect.width()
         shapePathHeight = rect.height()
     }
@@ -127,7 +128,7 @@ class MaskDelegate(view: View)
 
     private fun calculateDrawableSizes(): Bitmap?
     {
-        val bitmap = bitmap
+        val bitmap = this.bitmap
         if (bitmap != null)
         {
             val bitmapWidth = bitmap.width
@@ -169,7 +170,7 @@ class MaskDelegate(view: View)
                 shapePath!!.transform(pathMatrix, path)
                 path.offset(borderWidth, borderWidth)
 
-                if (borderWidth > 0)
+                if (borderWidth > 0f)
                 {
                     pathMatrix.reset()
                     val newWidth: Float = viewWidth - borderWidth

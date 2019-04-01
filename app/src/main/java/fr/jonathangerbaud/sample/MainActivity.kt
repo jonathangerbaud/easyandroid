@@ -21,15 +21,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val image = findViewById<MaskedImageView>(R.id.image)
-        image.setMaskPath(PathHelper.star(ResUtils.getDpInPx(192).toFloat(),5))
-        image.setMaskBorderColor(0xFFFF0000.toInt())
-        image.setMaskBorderWidth(ResUtils.getDpInPx(15).toFloat())
+        image.setMaskPath(PathHelper.roundedRect(ResUtils.getDpInPx(256).toFloat(), ResUtils.getDpInPx(256).toFloat(), 0f, ResUtils.getDpInPx(40).toFloat() , 0f, ResUtils.getDpInPx(80).toFloat()))
+//        image.setMaskBorderColor(0xFFFF0000.toInt())
+//        image.setMaskBorderWidth(ResUtils.getDpInPx(15).toFloat())
 //        image.setMaskBorderJoin(Paint.Join.ROUND)
 
         val layout = findViewById<LinearLayout>(R.id.layout)
         layout.setBackgroundColor(0xffcccccc.toInt())
 
-        var customText = findViewById<TextView>(R.id.customText)
+        val customText = findViewById<TextView>(R.id.customText)
         TextAppearance.fromStyle(this, R.style.CustomTextAppearance).apply(customText)
         /*val v1 = SingleLineItem(this)
         val v2 = SingleLineItem(this)

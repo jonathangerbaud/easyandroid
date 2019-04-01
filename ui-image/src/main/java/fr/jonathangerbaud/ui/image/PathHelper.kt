@@ -1,10 +1,7 @@
 package fr.jonathangerbaud.ui.image
 
 import android.graphics.Path
-import android.graphics.Path.FillType
-import android.R.attr.y
-import android.R.attr.x
-import android.graphics.Point
+import fr.jonathangerbaud.core.ext.d
 
 
 object PathHelper
@@ -13,6 +10,26 @@ object PathHelper
     fun circle(size: Float): Path = Path().apply { addOval(0f, 0f, size, size, Path.Direction.CW) }
     fun rect(width: Float, height: Float): Path = Path().apply { addRect(0f, 0f, width, height, Path.Direction.CW) }
     fun square(size: Float): Path = Path().apply { addRect(0f, 0f, size, size, Path.Direction.CW) }
+    fun roundedRect(
+        width: Float,
+        height: Float,
+        topLeftRadius: Float,
+        topRightRadius: Float,
+        bottomLeftRadius: Float,
+        bottomRightRadius: Float
+    ) = Path().apply {
+        addRoundRect(
+            0f,
+            0f,
+            width,
+            height,
+            floatArrayOf(topLeftRadius, topLeftRadius, topRightRadius, topRightRadius, bottomLeftRadius, bottomLeftRadius, bottomRightRadius, bottomRightRadius),
+            Path.Direction.CW
+        )
+    }
+
+    fun roundedRect(width: Float, height: Float, radius: Float) =
+        PathHelper.roundedRect(width, height, radius, radius, radius, radius)
 
     fun diamond(width: Float, height: Float): Path = Path().apply {
         moveTo(width / 2, 0f)
@@ -22,23 +39,72 @@ object PathHelper
         close()
     }
 
-    fun star(width: Float, steps: Int = 5): Path = Path().apply {
-        val hMargin = width / 9
-        val vMargin = width / 3
+    fun star(size: Float): Path = star(size, 0.45f)
 
-        val half = width / 2
+    fun star(size: Float, innerRadiusRatio: Float, heads: Int = 5): Path = Path().apply {
+        val outerRadius = size / 2f
+        val innerRadius = (size * innerRadiusRatio) / 2f
 
-        moveTo(half, 0.719f * width)
-        lineTo(0.7575f * width, 0.875f * width)
-        lineTo(0.689f * width, 0.582f * width)
-        lineTo(0.954f * width, 0.385f * width)
-        lineTo(0.617f * width, 0.359f * width)
-        lineTo(half, 0.083f * width)
-        lineTo(0.382f * width, 0.359f * width)
-        lineTo(0.083f * width, 0.385f * width)
-        lineTo(0.310f * width, 0.582f * width)
-        lineTo(0.2425f * width, 0.875f * width)
+        val center = size / 2f
+
+        var dx = 0f
+        var dy = 0f
+
+        for (i in 0..(heads * 2))
+        {
+            val angle = (2 * Math.PI / heads) * i / 2
+            val r: Float = if (i % 2 == 0) innerRadius else outerRadius
+
+            val x = (center + r * Math.sin(angle)).toFloat()
+            val y = (center + r * Math.cos(angle)).toFloat()
+
+            if (i == 0)
+            {
+                moveTo(x, y)
+                dx = x
+                dy = y
+            }
+            else
+            {
+                lineTo(x, y)
+                dx = Math.min(x, dx)
+                dy = Math.min(y, dy)
+            }
+        }
+
         close()
+        offset(-dx, -dy)
+    }
+
+    fun polygon(size: Float, sides: Int = 5): Path = Path().apply {
+        val radius = size / 2f
+        val center = size / 2f
+
+        var dx = 0f
+        var dy = 0f
+
+        for (i in 0..sides)
+        {
+            val angle = (2 * Math.PI / sides) * i
+            val x = (center + radius * Math.sin(angle)).toFloat()
+            val y = (center + radius * Math.cos(angle)).toFloat()
+
+            if (i == 0)
+            {
+                moveTo(x, y)
+                dx = x
+                dy = y
+            }
+            else
+            {
+                lineTo(x, y)
+                dx = Math.min(x, dx)
+                dy = Math.min(y, dy)
+            }
+        }
+
+        close()
+        offset(-dx, -dy)
     }
 
     fun heart(width: Float, height: Float): Path = Path().apply {
