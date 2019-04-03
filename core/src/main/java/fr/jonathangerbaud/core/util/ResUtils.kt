@@ -73,12 +73,8 @@ object ResUtils {
         return context.resources.getIntArray(resId)
     }
 
-    fun getColor(@ColorRes resId: Int): Int {
-        return ContextCompat.getColor(context, resId)
-    }
-
-    fun getColor(context: Context, @ColorRes resId: Int): Int {
-        return ContextCompat.getColor(context, resId)
+    fun getColor(@ColorRes resId: Int, context:Context? = null): Int {
+        return ContextCompat.getColor(context ?: ResUtils.context, resId)
     }
 
     fun getColorStateList(@ColorRes resId: Int): ColorStateList? {

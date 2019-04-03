@@ -35,7 +35,7 @@ open class ImageBuilder<T : ImageBuilder<T>> : WidgetBuilder<T>()
         drawableRes?.let { view.setImageResource(it) }
         drawable?.let { view.setImageDrawable(it) }
         tint?.let { view.imageTintList = ColorStateList.valueOf(it) }
-        tint?.let { view.imageTintList = ColorStateList.valueOf(ResUtils.getColor(it)) }
+        tint?.let { view.imageTintList = ColorStateList.valueOf(ResUtils.getColor(it, view.context)) }
         scaleType?.let { view.scaleType = scaleType }
     }
 

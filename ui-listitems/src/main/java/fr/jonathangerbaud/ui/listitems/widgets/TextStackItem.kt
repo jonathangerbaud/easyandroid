@@ -19,7 +19,7 @@ class TextStackItem : WidgetBuilder<TextStackItem>(), RowItem
         view.orientation = LinearLayoutCompat.VERTICAL
 
         for (textItem in stack)
-            view.addView(textItem.buildView(context))
+            view.addView(textItem.build(context))
 
         view.setPadding(0, 0, 0, DefaultRowItemSpec.SIZE_16)
 

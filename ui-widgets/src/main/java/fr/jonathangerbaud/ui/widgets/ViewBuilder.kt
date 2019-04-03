@@ -6,5 +6,5 @@ import android.view.View
 
 interface ViewBuilder
 {
-    fun buildView(context: Context): View
+    fun build(context: Context): View
 }

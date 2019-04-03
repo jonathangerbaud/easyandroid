@@ -95,14 +95,9 @@ class Divider(orientation: Int = VERTICAL, private var drawable: Drawable? = nul
         }
     }
 
-    fun setColorRes(@ColorRes colorRes:Int)
+    fun setColorRes(@ColorRes colorRes:Int, context:Context? = null)
     {
-        drawable?.setTint(ResUtils.getColor(colorRes))
-    }
-
-    fun setColorRes(context: Context, @ColorRes colorRes:Int)
-    {
-        drawable?.setTint(ResUtils.getColor(context, colorRes))
+        drawable?.setTint(ResUtils.getColor(colorRes, context))
     }
 
     fun setMargins(marginInPx: Int)

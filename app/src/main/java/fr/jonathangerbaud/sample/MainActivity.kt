@@ -27,27 +27,30 @@ class MainActivity : AppCompatActivity() {
         divider.setColor(0xFFFF0000.toInt())
         divider.setMarginsRes(R.dimen.dp_16)
         //divider.showOnlyBetweenViewsOfType(Row::class)
-        divider.showOnlyBetweenDataOfType(BasicItem::class)
-        recyclerView.addItemDecoration(divider)
+        //divider.showOnlyBetweenDataOfType(BasicItem::class)
+        //recyclerView.addItemDecoration(divider)
 
         val adapter = RendererAdapter()
         adapter.addView(BasicItem::class) { parent:ViewGroup -> BasicRowRenderer(parent)}
         adapter.addView(BasicItem2::class) { parent:ViewGroup -> BasicRowRenderer2(parent)}
+        adapter.addView(HeaderItem::class) { parent:ViewGroup -> HeaderRenderer(parent)}
         recyclerView.adapter = adapter
 
         val data = arrayListOf<Any>()
+        data.add(HeaderItem("My super header"))
         data.add(BasicItem("Hello there"))
         data.add(BasicItem("How are you doing?"))
         data.add(BasicItem("01234567489"))
-        data.add(BasicItem2("Hello there"))
+        data.add(BasicItem("Hello there"))
+        data.add(BasicItem("How are you doing?"))
+        data.add(BasicItem("01234567489"))
+        data.add(BasicItem("Hello there"))
+        data.add(HeaderItem("Another category"))
         data.add(BasicItem("How are you doing?"))
         data.add(BasicItem("01234567489"))
         data.add(BasicItem("Hello there"))
         data.add(BasicItem("How are you doing?"))
-        data.add(BasicItem2("01234567489"))
-        data.add(BasicItem("Hello there"))
-        data.add(BasicItem2("How are you doing?"))
-        data.add(BasicItem2("01234567489"))
+        data.add(BasicItem("01234567489"))
         data.add(BasicItem("Hello there"))
         data.add(BasicItem("How are you doing?"))
         data.add(BasicItem("01234567489"))
@@ -62,6 +65,7 @@ class MainActivity : AppCompatActivity() {
 
     class BasicItem(val name:String)
     class BasicItem2(val name:String)
+    class HeaderItem(val title:String)
 
 
     class BasicRow(context: Context) : Row(context)
@@ -71,6 +75,19 @@ class MainActivity : AppCompatActivity() {
         init {
             Builder()
                 .mainItem(TitleItem().text("Initial text"))
+                .build(context, this)
+
+            title = mainContent as TextView
+        }
+    }
+
+    class HeaderRow(context: Context) : Row(context)
+    {
+        val title:TextView
+
+        init {
+            Builder()
+                .mainItem(InsetSubheaderItem().text("Initial text"))
                 .build(context, this)
 
             title = mainContent as TextView
@@ -97,6 +114,14 @@ class MainActivity : AppCompatActivity() {
         override fun bind(data: BasicItem2, position: Int)
         {
             textView.text = data.name
+        }
+    }
+
+    class HeaderRenderer(parent:ViewGroup) : ViewRenderer<HeaderItem, HeaderRow>(HeaderRow(parent.context))
+    {
+        override fun bind(data: HeaderItem, position: Int)
+        {
+            view.title.text = data.title
         }
     }
 }

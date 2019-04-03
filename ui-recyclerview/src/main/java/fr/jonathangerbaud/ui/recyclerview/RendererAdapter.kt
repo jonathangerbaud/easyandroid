@@ -1,14 +1,16 @@
 package fr.jonathangerbaud.ui.recyclerview
 
+import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import fr.jonathangerbaud.core.ext.w
 import kotlin.reflect.KClass
 
 
 open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter
 {
-    protected val DEFAULT_TYPE = 0
+    protected val DEFAULT_TYPE = -1
 
     private val viewHolderMap: MutableList<(parent:ViewGroup) -> Renderer<*>> = mutableListOf()
     private val typeMap: MutableMap<KClass<*>, Int> = HashMap()
@@ -41,7 +43,13 @@ open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Renderer<Any>
     {
-        return viewHolderMap[viewType](parent) as Renderer<Any>
+        return if (viewType == DEFAULT_TYPE)
+        {
+            w(null, "A rendered is missing in adapter, cannot render view for some type of data")
+            DummyRenderer(parent)
+        }
+        else
+            viewHolderMap[viewType](parent) as Renderer<Any>
     }
 
     override fun onBindViewHolder(holder: Renderer<Any>, position: Int) {
@@ -55,5 +63,17 @@ open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter
     override fun getDataForPosition(position: Int): Any
     {
         return data[position]
+    }
+
+    class DummyRenderer(parent:ViewGroup) : ViewRenderer<Any, View>(View(parent.context))
+    {
+        init
+        {
+            itemView.setBackgroundColor(0xFFFF0000.toInt())
+        }
+        override fun bind(data: Any, position: Int)
+        {
+            // Do nothing
+        }
     }
 }

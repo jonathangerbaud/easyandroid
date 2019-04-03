@@ -46,7 +46,7 @@ open class TextBuilder<T : TextBuilder<T>> : WidgetBuilder<T>()
         stringRes?.let { view.setText(it) }
         string?.let { view.text = it }
         textColor?.let { view.setTextColor(it) }
-        textColorRes?.let { view.setTextColor(ResUtils.getColor(it)) }
+        textColorRes?.let { view.setTextColor(ResUtils.getColor(it, view.context)) }
         textColorStateList?.let { view.setTextColor(it) }
         textSize?.let { view.textSize = it }
         textSizeRes?.let { view.setTextSize(TypedValue.COMPLEX_UNIT_PX, ResUtils.getDimension(it)) }

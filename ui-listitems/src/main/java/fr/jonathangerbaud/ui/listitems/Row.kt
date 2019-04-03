@@ -14,6 +14,7 @@ import fr.jonathangerbaud.core.util.ResUtils
 import fr.jonathangerbaud.ui.constraintlayout.ext.*
 import fr.jonathangerbaud.ui.listitems.widgets.TextItem
 import fr.jonathangerbaud.ui.listitems.widgets.TextStackItem
+import fr.jonathangerbaud.ui.widgets.WidgetBuilder
 
 open class Row : ConstraintLayout
 {
@@ -31,7 +32,7 @@ open class Row : ConstraintLayout
     var mainContent: View? = null
     var endContent: View? = null
 
-    class Builder
+    class Builder : WidgetBuilder<Row.Builder>()
     {
         private var startItem: RowItem? = null
         private var mainItem: RowItem? = null
@@ -55,17 +56,18 @@ open class Row : ConstraintLayout
             return this
         }
 
-        fun build(context: Context): Row
+        override fun createView(context: Context): View
         {
-            return build(context, Row(context))
+            return Row(context)
         }
 
         fun build(context: Context, view: Row): Row
         {
-            view.setBackgroundColor(0xffffffff.toInt())
-            val startView: View? = startItem?.buildView(context)
-            val mainView: View? = mainItem?.buildView(context)
-            val endView: View? = endItem?.buildView(context)
+            applyViewAttributes(view)
+
+            val startView: View? = startItem?.build(context)
+            val mainView: View? = mainItem?.build(context)
+            val endView: View? = endItem?.build(context)
 
             val startSpecs = startItem?.getRowItemSpecs()
             val mainSpecs = mainItem?.getRowItemSpecs()
@@ -106,7 +108,7 @@ open class Row : ConstraintLayout
                 if (startView != null)
                     cs.alignStartToEnd(startView, it, startSpecs!!.getEndMargin())
                 else
-                    cs.alignStartParentStart(it, ResUtils.getDpInPx(16)) // ToDo set constant for default padding
+                    cs.alignStartParentStart(it, mainSpecs.getStartMarginIfStartComponent())
 
                 if (endView != null)
                     cs.alignEndToStart(it, endView, mainSpecs.getEndMargin())
@@ -145,6 +147,8 @@ open class Row : ConstraintLayout
             view.startContent = startView
             view.mainContent = mainView
             view.endContent = endView
+
+            backgroundColor?.let { view.setBackgroundColor(it) }
 
             return view
         }
