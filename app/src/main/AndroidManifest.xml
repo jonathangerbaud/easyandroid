@@ -10,7 +10,7 @@
             android:supportsRtl="true"
             android:name=".MainApp"
             android:theme="@style/AppTheme">
-        <activity android:name="fr.jonathangerbaud.sample.MainActivity">
+        <activity android:name="fr.jonathangerbaud.sample.MainActivity2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

@@ -3,16 +3,12 @@ package fr.jonathangerbaud.ui.image
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Path
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.ImageView
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import fr.jonathangerbaud.core.util.ResUtils
+import fr.jonathangerbaud.ui.core.view.RatioDelegate
 
-class MaskedImageView : ImageView
+class SuperImageView : ImageView
 {
     // Nullable type since it's initialized after super constructor
     // which might call setImageDrawable and crash on null reference
@@ -22,7 +18,8 @@ class MaskedImageView : ImageView
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle)
 
-    init {
+    init
+    {
         maskDelegate?.onImageDrawableReset(drawable)
     }
 
@@ -56,38 +53,32 @@ class MaskedImageView : ImageView
             super.onDraw(canvas)
     }
 
-    fun setMaskPath(path: Path)
+    fun setMaskOptions(options:MaskOptions)
     {
-        maskDelegate?.setPath(path)
+        maskDelegate?.maskOptions = options
     }
 
-    fun setMaskBorderWidth(width:Float)
+    // ### Ratio dimensions stuff
+    private val ratioDelegate: RatioDelegate = RatioDelegate()
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int)
     {
-        maskDelegate?.borderWidth = width
+        super.onMeasure(ratioDelegate.getWidthSpec(widthMeasureSpec, heightMeasureSpec),
+            ratioDelegate.getHeightSpec(widthMeasureSpec, heightMeasureSpec))
+
+        setMeasuredDimension(ratioDelegate.getWidthDimension(measuredWidth, measuredHeight),
+            ratioDelegate.getHeightDimension(measuredWidth, measuredHeight))
     }
 
-    fun setMaskBorderColor(@ColorInt color:Int)
+    /**
+     * Sets the view aspect.
+     * @param ratio A ratio of 1 means the view will display as a square.
+     * A ratio > 1 means the view will be larger than tall. A ratio < 1 means a view taller than large
+     * You can use the <code>AspectRatio</code> constants or a custom value
+     * @see fr.jonathangerbaud.ui.core.view.AspectRatio
+     */
+    fun setAspectRatio(ratio:Float)
     {
-        maskDelegate?.borderColor = color
-    }
-
-    fun setMaskBorderColorRes(@ColorRes colorResId:Int)
-    {
-        maskDelegate?.borderColor = ResUtils.getColor(colorResId)
-    }
-
-    fun setMaskBorderCap(cap: Paint.Cap)
-    {
-        maskDelegate?.borderCap = cap
-    }
-
-    fun setMaskBorderJoin(join: Paint.Join)
-    {
-        maskDelegate?.borderJoin = join
-    }
-
-    fun setMaskBorderMiter(miter: Float)
-    {
-        maskDelegate?.borderMiter = miter
+        ratioDelegate.ratio = ratio
     }
 }

@@ -4,7 +4,6 @@ import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.view.View
-import androidx.annotation.ColorInt
 
 
 class MaskDelegate(view: View)
@@ -12,38 +11,29 @@ class MaskDelegate(view: View)
     private var viewWidth: Int = view.width
     private var viewHeight: Int = view.height
 
-    @ColorInt
-    var borderColor = Color.BLACK
+    private var borderWidth = 0f
+
+    var maskOptions:MaskOptions? = null
         set(value)
         {
-            field = value
-            borderPaint.color = value
-        }
+            value?.let {
+                shapePath = it.path
 
-    var borderWidth = 0f
-        set(value)
-        {
-            field = value
-            borderPaint.strokeWidth = value
-        }
+                val rect = RectF()
+                shapePath!!.computeBounds(rect, false)
+                shapePathWidth = rect.width()
+                shapePathHeight = rect.height()
 
-    var borderJoin:Paint.Join = Paint.Join.MITER
-        set(value) {
+                it.borderColor?.let { borderPaint.color = it }
+                it.borderJoin?.let { borderPaint.strokeJoin = it }
+                it.borderCap?.let { borderPaint.strokeCap = it }
+                it.borderMiter?.let { borderPaint.strokeMiter = it }
+                it.borderWidth?.let {
+                    borderPaint.strokeWidth = it
+                    borderWidth = it
+                }
+            }
             field = value
-            borderPaint.strokeJoin = value
-        }
-
-    var borderCap:Paint.Cap = Paint.Cap.BUTT
-        set(value) {
-            field = value
-            borderPaint.strokeCap = value
-        }
-
-    var borderMiter:Float = 0f
-        set(value)
-        {
-            field = value
-            borderPaint.strokeMiter = value
         }
 
     private val borderPaint: Paint = Paint()
@@ -82,16 +72,6 @@ class MaskDelegate(view: View)
         borderPaint.isAntiAlias = true
 
         imagePaint.isAntiAlias = true
-    }
-
-    fun setPath(path:Path)
-    {
-        shapePath = path
-
-        val rect = RectF()
-        shapePath!!.computeBounds(rect, false)
-        shapePathWidth = rect.width()
-        shapePathHeight = rect.height()
     }
 
     fun onDraw(canvas: Canvas): Boolean
