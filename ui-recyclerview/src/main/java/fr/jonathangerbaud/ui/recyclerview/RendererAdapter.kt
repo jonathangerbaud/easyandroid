@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import kotlin.reflect.KClass
 
 
-open class BaseRecyclerViewAdapter : Adapter<BaseViewHolder>()
+open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter
 {
     protected val DEFAULT_TYPE = 0
 
-    private val viewHolderMap: MutableList<ViewHolderFactory> = mutableListOf()
+    private val viewHolderMap: MutableList<(parent:ViewGroup) -> Renderer<*>> = mutableListOf()
     private val typeMap: MutableMap<KClass<*>, Int> = HashMap()
 
     var data: MutableList<Any> = mutableListOf()
@@ -22,7 +22,7 @@ open class BaseRecyclerViewAdapter : Adapter<BaseViewHolder>()
 
     val liveData: MutableLiveData<List<Any>> = MutableLiveData()
 
-    fun addView(type: KClass<*>, factory: ViewHolderFactory)
+    fun addView(type: KClass<*>, factory: (parent:ViewGroup) -> Renderer<*>)
     {
         viewHolderMap.add(factory)
         typeMap[type] = viewHolderMap.size - 1
@@ -39,16 +39,21 @@ open class BaseRecyclerViewAdapter : Adapter<BaseViewHolder>()
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Renderer<Any>
     {
-        return viewHolderMap[viewType].build(parent)
+        return viewHolderMap[viewType](parent) as Renderer<Any>
+    }
+
+    override fun onBindViewHolder(holder: Renderer<Any>, position: Int) {
+        holder.bind(data[position], position)
     }
 
     override fun getItemCount(): Int {
         return data.size
     }
 
-    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        viewHolderMap[getItemViewType(position)].bind(holder, data[position], position)
+    override fun getDataForPosition(position: Int): Any
+    {
+        return data[position]
     }
 }

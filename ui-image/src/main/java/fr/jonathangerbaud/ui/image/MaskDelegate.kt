@@ -5,7 +5,6 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.annotation.ColorInt
-import fr.jonathangerbaud.core.ext.d
 
 
 class MaskDelegate(view: View)

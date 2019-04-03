@@ -1,18 +1,16 @@
 package fr.jonathangerbaud.sample
 
-import android.graphics.Paint
+import android.content.Context
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.LinearLayout
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import fr.jonathangerbaud.core.util.ResUtils
-import fr.jonathangerbaud.ui.core.MaterialColor
-import fr.jonathangerbaud.ui.core.text.TextAppearance
-import fr.jonathangerbaud.ui.image.MaskedImageView
-import fr.jonathangerbaud.ui.image.PathHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import fr.jonathangerbaud.ui.listitems.Row
 import fr.jonathangerbaud.ui.listitems.widgets.*
+import fr.jonathangerbaud.ui.recyclerview.*
+import fr.jonathangerbaud.ui.recyclerview.decoration.Divider
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,83 +18,85 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val image = findViewById<MaskedImageView>(R.id.image)
-        image.setMaskPath(PathHelper.roundedRect(ResUtils.getDpInPx(256).toFloat(), ResUtils.getDpInPx(256).toFloat(), 0f, ResUtils.getDpInPx(40).toFloat() , 0f, ResUtils.getDpInPx(80).toFloat()))
-//        image.setMaskBorderColor(0xFFFF0000.toInt())
-//        image.setMaskBorderWidth(ResUtils.getDpInPx(15).toFloat())
-//        image.setMaskBorderJoin(Paint.Join.ROUND)
+        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val layout = findViewById<LinearLayout>(R.id.layout)
-        layout.setBackgroundColor(0xffcccccc.toInt())
+        val divider = Divider()
+        divider.setDividerSizeDp(8)
+        divider.range = IntRange(0, 10)
+        divider.setColor(0xFFFF0000.toInt())
+        divider.setMarginsRes(R.dimen.dp_16)
+        //divider.showOnlyBetweenViewsOfType(Row::class)
+        divider.showOnlyBetweenDataOfType(BasicItem::class)
+        recyclerView.addItemDecoration(divider)
 
-        val customText = findViewById<TextView>(R.id.customText)
-        TextAppearance.fromStyle(this, R.style.CustomTextAppearance).apply(customText)
-        /*val v1 = SingleLineItem(this)
-        val v2 = SingleLineItem(this)
+        val adapter = RendererAdapter()
+        adapter.addView(BasicItem::class) { parent:ViewGroup -> BasicRowRenderer(parent)}
+        adapter.addView(BasicItem2::class) { parent:ViewGroup -> BasicRowRenderer2(parent)}
+        recyclerView.adapter = adapter
 
-        v1.setBackgroundColor(0xff00ff00.toInt())
-        v1.setBackgroundColor(0xff0000ff.toInt())
+        val data = arrayListOf<Any>()
+        data.add(BasicItem("Hello there"))
+        data.add(BasicItem("How are you doing?"))
+        data.add(BasicItem("01234567489"))
+        data.add(BasicItem2("Hello there"))
+        data.add(BasicItem("How are you doing?"))
+        data.add(BasicItem("01234567489"))
+        data.add(BasicItem("Hello there"))
+        data.add(BasicItem("How are you doing?"))
+        data.add(BasicItem2("01234567489"))
+        data.add(BasicItem("Hello there"))
+        data.add(BasicItem2("How are you doing?"))
+        data.add(BasicItem2("01234567489"))
+        data.add(BasicItem("Hello there"))
+        data.add(BasicItem("How are you doing?"))
+        data.add(BasicItem("01234567489"))
+        data.add(BasicItem("Hello there"))
+        data.add(BasicItem("How are you doing?"))
+        data.add(BasicItem("01234567489"))
+        data.add(BasicItem2("Hello there"))
+        data.add(BasicItem("How are you doing?"))
+        data.add(BasicItem("01234567489"))
+        adapter.data = data
+    }
 
-        layout.addView(v1)
-        layout.addView(v2)*/
+    class BasicItem(val name:String)
+    class BasicItem2(val name:String)
 
-        layout.addView(
-            Row.Builder()
-                .mainItem(HeadlineItem().text("Headline"))
-                .build(this))
 
-        layout.addView(
-            Row.Builder()
-                .startItem(SmallIconItem().drawable(R.drawable.abc_ic_go_search_api_material))
-                .mainItem(TitleItem().text("Title"))
-                .endItem(CheckboxItem())
-                .build(this))
+    class BasicRow(context: Context) : Row(context)
+    {
+        val title:TextView
 
-        layout.addView(
-            Row.Builder()
-                .startItem(SmallIconItem().drawable(R.drawable.abc_ic_go_search_api_material))
-                .mainItem(TextBodyItem().text("Text Body"))
-                .endItem(SwitchItem())
-                .build(this))
+        init {
+            Builder()
+                .mainItem(TitleItem().text("Initial text"))
+                .build(context, this)
 
-        layout.addView(
-            Row.Builder()
-                .startItem(IconItem().drawable(R.drawable.jg_ic_arrow_left).background(R.color.md_green400))
-                .mainItem(OverlineItem().text("Overline"))
-                .endItem(SwitchItem())
-                .build(this))
+            title = mainContent as TextView
+        }
+    }
 
-        layout.addView(
-            Row.Builder()
-                .startItem(SmallIconItem().drawable(R.drawable.ic_launcher_foreground).backgroundRes(R.color.colorPrimary))
-                .mainItem(CaptionItem().text("My super caption"))
-                .endItem(CheckboxItem())
-                .build(this))
+    class BasicRowRenderer(parent:ViewGroup) : ViewRenderer<BasicItem, BasicRow>(BasicRow(parent.context))
+    {
+        init {
+            // do initilazing stuff on view
+//            view.title
+        }
 
-        layout.addView(
-            Row.Builder()
-                .startItem(SmallIconItem().drawable(R.drawable.ic_launcher_foreground).backgroundRes(R.color.colorPrimary))
-                .mainItem(MetaTextItem().text("Meta text"))
-                .endItem(CheckboxItem())
-                .build(this))
+        override fun bind(data: BasicItem, position: Int)
+        {
+            view.title.text = data.name
+        }
+    }
 
-        layout.addView(
-            Row.Builder()
-                .startItem(SmallIconItem().drawable(R.drawable.ic_launcher_foreground).backgroundRes(R.color.colorPrimary))
-                .mainItem(TextStackItem()
-                    .addText(TitleItem().text("Three-line text"))
-                    .addText(TextBodyItem().text("Secondary line text. Lorem ipsum dolor sit amet")))
-                .endItem(CheckboxItem())
-                .build(this))
+    class BasicRowRenderer2(parent:ViewGroup) : Renderer<BasicItem2>(parent, R.layout.item_simple)
+    {
+        val textView:TextView = itemView.findViewById(R.id.title)
 
-        layout.addView(
-            Row.Builder()
-                .startItem(SmallIconItem().drawable(R.drawable.ic_launcher_foreground).backgroundRes(R.color.colorPrimary))
-                .mainItem(TextStackItem()
-                            .addText(OverlineItem().text("Overline"))
-                            .addText(TitleItem().text("Three-line text"))
-                            .addText(TextBodyItem().text("Secondary line text. Lorem ipsum")))
-                .endItem(CheckboxItem())
-                .build(this))
+        override fun bind(data: BasicItem2, position: Int)
+        {
+            textView.text = data.name
+        }
     }
 }
