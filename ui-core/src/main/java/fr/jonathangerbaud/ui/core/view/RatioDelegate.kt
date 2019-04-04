@@ -4,7 +4,7 @@ import fr.jonathangerbaud.ui.core.AspectRatio
 
 class RatioDelegate
 {
-    var ratio:Float = -1f
+    var ratio:Float = AspectRatio.NONE
 
     fun getWidthSpec(widthMeasureSpec:Int, heightMeasureSpec:Int): Int
     {

@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import fr.jonathangerbaud.core.CoreDevice
+import fr.jonathangerbaud.core.ext.d
 import fr.jonathangerbaud.core.util.ResUtils
 import fr.jonathangerbaud.ui.core.text.TextAppearance
 import fr.jonathangerbaud.ui.image.MaskOptions
@@ -19,6 +21,8 @@ class MainActivity2 : AppCompatActivity()
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
+
+        d(CoreDevice.toString())
 
         val image = findViewById<SuperImageView>(R.id.image)
 
