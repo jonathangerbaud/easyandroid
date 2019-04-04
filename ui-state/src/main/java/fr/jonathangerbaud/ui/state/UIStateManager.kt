@@ -2,9 +2,10 @@ package fr.jonathangerbaud.ui.state
 
 import android.view.View
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import fr.jonathangerbaud.core.ext.d
+import fr.jonathangerbaud.ui.core.ext.hide
+import fr.jonathangerbaud.ui.core.ext.show
 import fr.jonathangerbaud.ui.state.widget.DataStateView
-import fr.jonathangerbaud.ui.core.ext.ViewVisibility.Companion.hide
-import fr.jonathangerbaud.ui.core.ext.ViewVisibility.Companion.show
 
 import java.lang.ref.WeakReference
 
@@ -29,28 +30,31 @@ class UIStateManager @JvmOverloads constructor(dataView: View?, dataStateView: D
 
     fun setState(state: State)
     {
+        d("setState $state")
         dataView.get()?.let {
             if (state == State.DATA || state == State.LOADING && isSRL)
             {
-                show()
+                d("show recyclerview")
+                it.show()
 
                 if (isSRL)
                     (it as SwipeRefreshLayout).isRefreshing = state == State.LOADING
             }
             else
             {
-                hide()
+                it.hide()
             }
         }
 
        dataStateView.get()?.let {
             if (state == State.DATA || state == State.EXTRA || state == State.LOADING && isSRL)
             {
-                hide()
+                d("hide datastateview")
+                it.hide()
             }
             else
             {
-                show()
+                it.show()
 
                 if (state == State.LOADING || state == State.LOADING_FIRST)
                     it.setStateLoading()
@@ -62,7 +66,7 @@ class UIStateManager @JvmOverloads constructor(dataView: View?, dataStateView: D
         }
 
         extraView.get()?.let {
-            if (state == State.EXTRA) show() else hide()
+            if (state == State.EXTRA) it.show() else it.hide()
         }
     }
 

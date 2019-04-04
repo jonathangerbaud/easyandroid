@@ -20,7 +20,8 @@ class SuperImageView : ImageView
 
     init
     {
-        maskDelegate?.onImageDrawableReset(drawable)
+        if (drawable != null)
+            maskDelegate?.onImageDrawableReset(drawable)
     }
 
     override fun setImageBitmap(bm: Bitmap)

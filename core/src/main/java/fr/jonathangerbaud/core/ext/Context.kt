@@ -40,7 +40,7 @@ fun Context.getDimensionPixelsSize(dimenResId: Int): Int =
     resources().getDimensionPixelSize(dimenResId)
 
 fun Context.getDisplayMetrics(): DisplayMetrics =
-    resources().getDisplayMetrics()
+    resources().displayMetrics
 
 fun Context.getIntArray(id: Int): IntArray =
     resources().getIntArray(id)
@@ -208,14 +208,14 @@ inline fun <reified T: Any> Fragment.intentFor(vararg params: Pair<String, Any?>
  *
  * @return the same intent with the flag applied.
  */
-inline fun Intent.clearTask(): Intent = apply { addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK) }
+fun Intent.clearTask(): Intent = apply { addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK) }
 
 /**
  * Add the [Intent.FLAG_ACTIVITY_CLEAR_TOP] flag to the [Intent].
  *
  * @return the same intent with the flag applied.
  */
-inline fun Intent.clearTop(): Intent = apply { addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) }
+fun Intent.clearTop(): Intent = apply { addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) }
 
 /**
  * Add the [Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET] flag to the [Intent].
@@ -223,14 +223,14 @@ inline fun Intent.clearTop(): Intent = apply { addFlags(Intent.FLAG_ACTIVITY_CLE
  * @return the same intent with the flag applied.
  */
 @Deprecated(message = "Deprecated in Android", replaceWith = ReplaceWith("org.jetbrains.anko.newDocument"))
-inline fun Intent.clearWhenTaskReset(): Intent = apply { addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET) }
+fun Intent.clearWhenTaskReset(): Intent = apply { addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET) }
 
 /**
  * Add the [Intent.FLAG_ACTIVITY_NEW_DOCUMENT] flag to the [Intent].
  *
  * @return the same intent with the flag applied.
  */
-inline fun Intent.newDocument(): Intent = apply {
+fun Intent.newDocument(): Intent = apply {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
     } else {
@@ -244,42 +244,42 @@ inline fun Intent.newDocument(): Intent = apply {
  *
  * @return the same intent with the flag applied.
  */
-inline fun Intent.excludeFromRecents(): Intent = apply { addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS) }
+fun Intent.excludeFromRecents(): Intent = apply { addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS) }
 
 /**
  * Add the [Intent.FLAG_ACTIVITY_MULTIPLE_TASK] flag to the [Intent].
  *
  * @return the same intent with the flag applied.
  */
-inline fun Intent.multipleTask(): Intent = apply { addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK) }
+fun Intent.multipleTask(): Intent = apply { addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK) }
 
 /**
  * Add the [Intent.FLAG_ACTIVITY_NEW_TASK] flag to the [Intent].
  *
  * @return the same intent with the flag applied.
  */
-inline fun Intent.newTask(): Intent = apply { addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) }
+fun Intent.newTask(): Intent = apply { addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) }
 
 /**
  * Add the [Intent.FLAG_ACTIVITY_NO_ANIMATION] flag to the [Intent].
  *
  * @return the same intent with the flag applied.
  */
-inline fun Intent.noAnimation(): Intent = apply { addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION) }
+fun Intent.noAnimation(): Intent = apply { addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION) }
 
 /**
  * Add the [Intent.FLAG_ACTIVITY_NO_HISTORY] flag to the [Intent].
  *
  * @return the same intent with the flag applied.
  */
-inline fun Intent.noHistory(): Intent = apply { addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY) }
+fun Intent.noHistory(): Intent = apply { addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY) }
 
 /**
  * Add the [Intent.FLAG_ACTIVITY_SINGLE_TOP] flag to the [Intent].
  *
  * @return the same intent with the flag applied.
  */
-inline fun Intent.singleTop(): Intent = apply { addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP) }
+fun Intent.singleTop(): Intent = apply { addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP) }
 
 
 

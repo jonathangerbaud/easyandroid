@@ -10,7 +10,7 @@ import java.lang.Exception
 
 
 class CallHandler<RESPONSE : Any, DATA: Any> {
-    private lateinit var client: Deferred<Response<RESPONSE>>
+    lateinit var client: Deferred<Response<RESPONSE>>
 
     fun makeCall() : MutableLiveData<Resource<DATA>>
     {

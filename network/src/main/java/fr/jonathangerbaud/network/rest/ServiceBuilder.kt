@@ -13,7 +13,7 @@ import java.io.File
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
-class ServiceBuilder(private val server: String)
+open class ServiceBuilder(private val server: String)
 {
 
     private var cacheDuration: Int = 0
@@ -148,7 +148,7 @@ class ServiceBuilder(private val server: String)
      *
      * @param retrofitBuilder
      */
-    protected fun configureRetrofit(retrofitBuilder: Retrofit.Builder)
+    protected open fun configureRetrofit(retrofitBuilder: Retrofit.Builder)
     {
 
     }
@@ -198,7 +198,7 @@ class ServiceBuilder(private val server: String)
      *
      * @param okHttpBuilder
      */
-    protected fun configureOkHttpClient(okHttpBuilder: OkHttpClient.Builder)
+    protected open fun configureOkHttpClient(okHttpBuilder: OkHttpClient.Builder)
     {
 
     }
@@ -209,7 +209,7 @@ class ServiceBuilder(private val server: String)
      * @param request
      * @return
      */
-    protected fun alterRequest(request: Request): Request
+    protected open fun alterRequest(request: Request): Request
     {
         return request
     }
@@ -219,7 +219,7 @@ class ServiceBuilder(private val server: String)
      *
      * @param builder
      */
-    protected fun addHeaders(builder: Request.Builder)
+    protected open fun addHeaders(builder: Request.Builder)
     {
         /**
          * Example
@@ -233,13 +233,13 @@ class ServiceBuilder(private val server: String)
 
     companion object
     {
-        var SECOND = 1
-        var MINUTE = 60
-        var HOUR = 60 * MINUTE
-        var DAY = 24 * HOUR
+        const val SECOND = 1
+        const val MINUTE = 60
+        const val HOUR = 60 * MINUTE
+        const val DAY = 24 * HOUR
 
-        var KB = 1024
-        var MB = 1024 * KB
+        const val KB = 1024
+        const val MB = 1024 * KB
 
         private val DEFAULT_CACHE_DURATION = 10 * MINUTE
         private val DEFAULT_CACHE_SIZE = 10 * MB

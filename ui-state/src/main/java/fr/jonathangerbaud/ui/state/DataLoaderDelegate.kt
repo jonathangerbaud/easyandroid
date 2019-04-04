@@ -5,6 +5,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import fr.jonathangerbaud.core.ext.d
 import fr.jonathangerbaud.network.Resource
 import java.lang.ref.WeakReference
 
@@ -69,12 +70,15 @@ class DataLoaderDelegate<T>(
 
     override fun onChanged(resource: Resource<T>)
     {
+        d("onChanged ${resource.status}")
         when (resource.status)
         {
             Resource.SUCCESS ->
             {
+                d("onChanged success 0")
                 if (callback.get() != null)
                 {
+                    d("onChanged success 1")
                     if (resource.data is Collection<*> && (resource.data as Collection<*>).isEmpty())
                         stateManager.setState(UIStateManager.State.EMPTY)
                     else
@@ -87,10 +91,11 @@ class DataLoaderDelegate<T>(
             }
             Resource.LOADING ->
             {
-
+                d("onChanged loading")
             }
             Resource.ERROR   ->
             {
+                d("onChanged error")
                 stateManager.setState(UIStateManager.State.ERROR)
             }
         }

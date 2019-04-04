@@ -3,13 +3,13 @@ dependencies {
 
     api deps.androidx.lifecycle.livedata
 
-    implementation deps.retrofit2.retrofit
-    implementation deps.retrofit2.converter_gson
+    api deps.retrofit2.retrofit
+    api deps.retrofit2.converter_gson
     implementation deps.retrofit2.kotlin_coroutines_adapter
     implementation deps.okhttp3.logging_interceptor
 
-    implementation deps.kotlinx.coroutines.core
-    implementation deps.kotlinx.coroutines.android
+    api deps.kotlinx.coroutines.core
+    api deps.kotlinx.coroutines.android
 
     implementation deps.merlin
 }

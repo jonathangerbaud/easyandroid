@@ -1,5 +1,6 @@
 package fr.jonathangerbaud.ui.recyclerview
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
@@ -39,7 +40,6 @@ open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter
 
         return DEFAULT_TYPE
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Renderer<Any>
     {
