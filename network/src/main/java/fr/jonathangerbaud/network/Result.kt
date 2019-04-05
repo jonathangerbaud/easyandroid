@@ -12,11 +12,11 @@ sealed class Result<out T : Any> {
     /**
      * Successful result of request without errors
      */
-    class Ok<out T : Any>(
+    class Success<out T : Any>(
             val value: T,
             override val response: Response
                          ) : Result<T>(), ResponseResult {
-        override fun toString() = "Result.Ok{value=$value, response=$response}"
+        override fun toString() = "Result.Success{value=$value, response=$response}"
     }
 
     /**
@@ -42,7 +42,7 @@ sealed class Result<out T : Any> {
 }
 
 /**
- * Interface for [Result] classes with [okhttp3.Response]: [Result.Ok] and [Result.Error]
+ * Interface for [Result] classes with [okhttp3.Response]: [Result.Success] and [Result.Error]
  */
 interface ResponseResult {
     val response: Response
@@ -56,23 +56,23 @@ interface ErrorResult {
 }
 
 /**
- * Returns [Result.Ok.value] or `null`
+ * Returns [Result.Success.value] or `null`
  */
 fun <T : Any> Result<T>.getOrNull(): T? =
-        (this as? Result.Ok)?.value
+        (this as? Result.Success)?.value
 
 /**
- * Returns [Result.Ok.value] or [default]
+ * Returns [Result.Success.value] or [default]
  */
 fun <T : Any> Result<T>.getOrDefault(default: T): T =
         getOrNull() ?: default
 
 /**
- * Returns [Result.Ok.value] or throw [throwable] or [ErrorResult.exception]
+ * Returns [Result.Success.value] or throw [throwable] or [ErrorResult.exception]
  */
 fun <T : Any> Result<T>.getOrThrow(throwable: Throwable? = null): T {
     return when (this) {
-        is Result.Ok -> value
+        is Result.Success -> value
         is Result.Error -> throw throwable ?: exception
         is Result.Exception -> throw throwable ?: exception
     }

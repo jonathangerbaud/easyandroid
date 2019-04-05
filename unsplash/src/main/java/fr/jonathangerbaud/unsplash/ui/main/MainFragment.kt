@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import fr.jonathangerbaud.core.CoreDevice
-import fr.jonathangerbaud.core.ext.d
 import fr.jonathangerbaud.core.ext.getViewModel
 import fr.jonathangerbaud.ui.core.AspectRatio
 import fr.jonathangerbaud.ui.core.ToolbarDelegate
@@ -74,7 +73,6 @@ class MainFragment : Fragment(), DataLoaderDelegate.DataLoaderCallback<List<Phot
 
     override fun onDataLoaded(data: List<Photo>?)
     {
-//        d("onDataLoaded $data")
         (recyclerView.adapter as RendererAdapter).data.addAll(data!!)
     }
 

@@ -1,19 +1,16 @@
 package fr.jonathangerbaud.network.ext
 
 import fr.jonathangerbaud.network.Result
-import kotlinx.coroutines.CancellableContinuation
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.*
 import retrofit2.HttpException
 import retrofit2.Response
 import kotlin.coroutines.resume
 
-
 suspend fun <T : Any> Deferred<Response<T>>.awaitResult(): Result<T>
 {
     return suspendCancellableCoroutine { continuation ->
-        launch {
+
+        GlobalScope.launch {
             try
             {
                 val response = await()
@@ -22,7 +19,7 @@ suspend fun <T : Any> Deferred<Response<T>>.awaitResult(): Result<T>
                     {
                         val body = response.body()
                         body?.let {
-                            Result.Ok(it, response.raw())
+                            Result.Success(it, response.raw())
                         } ?: "error".let {
                             if (response.code() == 200)
                                 Result.Exception(Exception("body is empty"))
@@ -45,24 +42,17 @@ suspend fun <T : Any> Deferred<Response<T>>.awaitResult(): Result<T>
 
         }
 
-        registerOnCompletion(continuation)
+        continuation.invokeOnCancellation {
+            if (continuation.isCancelled)
+                try
+                {
+                    cancel()
+                }
+                catch (ex: Throwable)
+                {
+                    //Ignore cancel exception
+                    ex.printStackTrace()
+                }
+        }
     }
 }
-
-
-private fun Deferred<Response<*>>.registerOnCompletion(continuation: CancellableContinuation<*>)
-{
-    continuation.invokeOnCancellation {
-        if (continuation.isCancelled)
-            try
-            {
-                cancel()
-            }
-            catch (ex: Throwable)
-            {
-                //Ignore cancel exception
-                ex.printStackTrace()
-            }
-    }
-}
-

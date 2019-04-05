@@ -67,6 +67,13 @@ public class Resource<T>
         this.message = msg;
     }
 
+    public Resource(int status, @Nullable Integer errorType, String msg, Object miscInfo) {
+        this.status = status;
+        this.errorType = errorType;
+        this.message = msg;
+        this.miscInfo = miscInfo;
+    }
+
     public Resource(int status, @Nullable Object miscInfo) {
         this.status = status;
         this.miscInfo = miscInfo;
@@ -82,6 +89,10 @@ public class Resource<T>
 
     public static <T> Resource<T> error(String msg, @Nullable Integer errorType) {
         return new Resource<>(ERROR, errorType, msg);
+    }
+
+    public static <T> Resource<T> error(String msg, @Nullable Integer errorType, @Nullable Object miscInfo) {
+        return new Resource<>(ERROR, errorType, msg, miscInfo);
     }
 
     public static <T> Resource<T> errorWithMisc(@Nullable Object miscInfo) {
