@@ -1,6 +1,9 @@
 package fr.jonathangerbaud.ui.image
 
 import android.graphics.Path
+import android.graphics.Matrix
+import android.graphics.RectF
+import androidx.core.graphics.transform
 import fr.jonathangerbaud.core.ext.d
 
 
@@ -120,5 +123,36 @@ object PathHelper
         cubicTo(4 * width / 7, 5 * height / 6, 13 * width / 14, 2 * height / 3, 27 * width / 28, 2 * height / 5);
         // Upper right path
         cubicTo(width, height / 15, 9 * width / 14, 0f, width / 2, height / 5)
+    }
+
+    /**
+     * Rotate a path from the center of the path
+     */
+    fun rotate(srcPath:Path, angleInDegrees:Float):Path
+    {
+        val bounds = RectF()
+        srcPath.computeBounds(bounds, true)
+        return rotateFromPoint(srcPath, angleInDegrees, bounds.centerX(), bounds.centerY())
+    }
+
+    /**
+     * Rotate a path from a defined point
+     */
+    fun rotateFromPoint(srcPath:Path, angleInDegrees: Float, rotationX:Float, rotationY:Float):Path
+    {
+        val bounds = RectF()
+        srcPath.computeBounds(bounds, true)
+
+        val outPath = Path(srcPath)
+        val matrix = Matrix()
+        matrix.postRotate(angleInDegrees, rotationX, rotationY)
+
+        outPath.transform(matrix)
+        bounds.transform(matrix)
+
+        d("rect $bounds ${bounds.top} ${bounds.bottom} ")
+        outPath.offset(-bounds.left, -bounds.top)
+
+        return outPath
     }
 }

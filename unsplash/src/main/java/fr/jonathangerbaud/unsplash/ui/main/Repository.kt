@@ -13,7 +13,10 @@ class Repository
         client = ServiceBuilder()
             .defaultCache()
             .cacheDuration(fr.jonathangerbaud.network.rest.ServiceBuilder.DAY)
-            //.enableLogs()
+            .forceCache()
+//            .noCacheIfConnection()
+//            .enableLogs()
+            .reportResult()
             .build(UnsplashApi::class.java).getCuratedPhotos(page)
     }
 

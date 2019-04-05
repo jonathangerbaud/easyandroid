@@ -20,6 +20,8 @@ import okhttp3.internal.http.HttpHeaders;
 import okio.Buffer;
 import okio.BufferedSource;
 
+import static fr.jonathangerbaud.core.ext.LogKt.d;
+
 class ErrorLoggerInterceptor implements Interceptor
 {
     private static final String TAG = "ErrorLoggerInterceptor";
@@ -71,8 +73,10 @@ class ErrorLoggerInterceptor implements Interceptor
                 message += "\n" + name + ": " + headers.value(i);
             }
         }
-
-        if (bodyEncoded(request.headers()))
+        if (!hasRequestBody) {
+            message += "--> END " + request.method();
+        }
+        else if (bodyEncoded(request.headers()))
         {
             message += "\n--> END " + request.method() + " (encoded body omitted)";
         }
@@ -118,10 +122,12 @@ class ErrorLoggerInterceptor implements Interceptor
         long tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs);
 
         ResponseBody responseBody  = response.body();
+
         long         contentLength = responseBody.contentLength();
         String       bodySize      = contentLength != -1 ? contentLength + "-byte" : "unknown-length";
         message += "\n<-- " + response.code() + ' ' + response.message() + ' '
                    + response.request().url() + " (" + tookMs + "ms" + ", " + bodySize + " body" + ')';
+        message += " " + (response.networkResponse() != null ? "NETWORK" : "CACHE");
 
         headers = response.headers();
         for (int i = 0, count = headers.size(); i < count; i++)
@@ -221,7 +227,7 @@ class ErrorLoggerInterceptor implements Interceptor
 
     private void reportRequest(String message)
     {
-//        Log.d(TAG, "would have reported: " + message);
+        d("would have reported: " + message);
         try
         {
             throw new Exception(message);

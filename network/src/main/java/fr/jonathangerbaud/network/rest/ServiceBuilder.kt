@@ -8,7 +8,6 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-
 import java.io.File
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -20,6 +19,7 @@ open class ServiceBuilder(private val server: String)
     private var cacheSize = DEFAULT_CACHE_SIZE.toLong()
     private var useCacheIfNoConnection: Boolean = false
     private var useCacheIfConnection = true
+    private var forceCache = false
 
     private var enableLogging = false
     private var loggingLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BODY
@@ -68,6 +68,15 @@ open class ServiceBuilder(private val server: String)
         cacheDuration = DEFAULT_CACHE_DURATION
         cacheSize = DEFAULT_CACHE_SIZE.toLong()
         useCacheIfNoConnection = true
+        return this
+    }
+
+    /**
+     * Ignore server cache headers and force caching the request's response in the app
+     */
+    fun forceCache(): ServiceBuilder
+    {
+        forceCache = true
         return this
     }
 
@@ -180,6 +189,9 @@ open class ServiceBuilder(private val server: String)
                     useCacheIfNoConnection
                 )
             )
+
+        if ((useCacheIfConnection || useCacheIfNoConnection) && forceCache)
+            okHttpBuilder.addNetworkInterceptor(ForceCacheControlInterceptor(cacheDuration))
 
         if (enableLogging && BuildConfig.DEBUG)
             okHttpBuilder.addInterceptor(HttpLoggingInterceptor().setLevel(loggingLevel))

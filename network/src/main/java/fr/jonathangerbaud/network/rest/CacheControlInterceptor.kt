@@ -22,6 +22,7 @@ class CacheControlInterceptor internal constructor(
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response?
     {
+        d("intercept")
         var request = chain.request()
 
         // Add Cache Control only for GET methods
@@ -52,6 +53,7 @@ class CacheControlInterceptor internal constructor(
                 {
                     val cacheControl = CacheControl.Builder()
                         .maxStale(cacheDuration, TimeUnit.SECONDS)
+//                        .maxAge(cacheDuration, TimeUnit.SECONDS)
                         .onlyIfCached()
                         .build()
 

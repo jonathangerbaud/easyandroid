@@ -13,11 +13,13 @@ class MaskDelegate(view: View)
 
     private var borderWidth = 0f
 
-    var maskOptions:MaskOptions? = null
+    var maskOptions: MaskOptions? = null
         set(value)
         {
             value?.let {
-                shapePath = it.path
+                shapePath = Path(it.path)
+
+                it.rotationAngle?.let { angle -> shapePath = PathHelper.rotate(shapePath!!, angle) }
 
                 val rect = RectF()
                 shapePath!!.computeBounds(rect, false)
@@ -46,10 +48,10 @@ class MaskDelegate(view: View)
     private val borderPath = Path()
     private val pathMatrix = Matrix()
 
-    private var shapePathWidth:Float = 0f
-    private var shapePathHeight:Float = 0f
+    private var shapePathWidth: Float = 0f
+    private var shapePathHeight: Float = 0f
 
-    private var shapePath:Path? = null
+    private var shapePath: Path? = null
 
     private val bitmap: Bitmap?
         get()
@@ -141,26 +143,35 @@ class MaskDelegate(view: View)
                 borderPath.reset()
                 pathMatrix.reset()
 
-                scale = Math.min(width / shapePathWidth, height / shapePathHeight)
-                translateX = Math.round((width - shapePathWidth * scale) * 0.5f).toFloat()
-                translateY = Math.round((height - shapePathHeight * scale) * 0.5f).toFloat()
-                pathMatrix.setScale(scale, scale)
-                pathMatrix.postTranslate(translateX, translateY)
+                if (maskOptions!!.scaleEnabled)
+                {
+                    scale = Math.min(width / (shapePathWidth - borderWidth), height / (shapePathHeight - borderWidth))
+                    translateX = Math.round((width - shapePathWidth * scale) * 0.5f).toFloat()
+                    translateY = Math.round((height - shapePathHeight * scale) * 0.5f).toFloat()
+                    pathMatrix.setScale(scale, scale)
+                    pathMatrix.postTranslate(translateX, translateY)
+                }
                 shapePath!!.transform(pathMatrix, path)
+
                 path.offset(borderWidth, borderWidth)
 
                 if (borderWidth > 0f)
                 {
                     pathMatrix.reset()
-                    val newWidth: Float = viewWidth - borderWidth
-                    val newHeight: Float = viewHeight - borderWidth
-                    val delta = borderWidth / 2f
 
-                    scale = Math.min(newWidth / shapePathWidth, newHeight / shapePathHeight)
-                    translateX = Math.round((newWidth - shapePathWidth * scale) * 0.5f + delta).toFloat()
-                    translateY = Math.round((newHeight - shapePathHeight * scale) * 0.5f + delta).toFloat()
-                    pathMatrix.setScale(scale, scale)
-                    pathMatrix.postTranslate(translateX, translateY)
+                    if (maskOptions!!.scaleEnabled)
+                    {
+                        val newWidth: Float = viewWidth - borderWidth
+                        val newHeight: Float = viewHeight - borderWidth
+                        val delta = borderWidth / 2f
+
+                        scale = Math.min(newWidth / shapePathWidth, newHeight / shapePathHeight)
+                        translateX = Math.round((newWidth - shapePathWidth * scale) * 0.5f + delta).toFloat()
+                        translateY = Math.round((newHeight - shapePathHeight * scale) * 0.5f + delta).toFloat()
+                        pathMatrix.setScale(scale, scale)
+                        pathMatrix.postTranslate(translateX, translateY)
+                    }
+
                     shapePath!!.transform(pathMatrix, borderPath)
                 }
 

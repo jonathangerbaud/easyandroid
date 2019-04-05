@@ -9,7 +9,6 @@ import android.util.TypedValue
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.StyleRes
-import fr.jonathangerbaud.core.ext.d
 import fr.jonathangerbaud.core.util.AndroidUtil
 import fr.jonathangerbaud.core.util.ResUtils
 import fr.jonathangerbaud.ui.core.R
@@ -148,7 +147,6 @@ open class TextAppearance
             for (i in 0 until n)
             {
                 val attr = appearance.getIndex(i)
-                d("$i $attr")
                 when (attr)
                 {
                     R.styleable.EasyAndroidTextAppearance_android_textColorHighlight ->

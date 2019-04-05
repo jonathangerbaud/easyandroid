@@ -13,16 +13,20 @@ class MaskOptions private constructor(
     val borderColor: Int?,
     val borderCap: Paint.Cap?,
     val borderJoin: Paint.Join?,
-    val borderMiter: Float?
+    val borderMiter: Float?,
+    val rotationAngle: Float?,
+    val scaleEnabled:Boolean = true
 )
 {
     class Builder(val path: Path)
     {
-        var borderWidth: Float? = null
-        var borderColor: Int? = null
-        var borderCap: Paint.Cap? = null
-        var borderJoin: Paint.Join? = null
-        var borderMiter: Float? = null
+        private var borderWidth: Float? = null
+        private var borderColor: Int? = null
+        private var borderCap: Paint.Cap? = null
+        private var borderJoin: Paint.Join? = null
+        private var borderMiter: Float? = null
+        private var angle: Float? = null
+        private var scaleEnabled:Boolean = true
 
         fun borderWidth(width: Float): Builder
         {
@@ -60,9 +64,21 @@ class MaskOptions private constructor(
             return this
         }
 
+        fun rotate(angleInDegrees:Float): Builder
+        {
+            this.angle = angleInDegrees
+            return this
+        }
+
+        fun disableScaling():Builder
+        {
+            scaleEnabled = false
+            return this
+        }
+
         fun build(): MaskOptions
         {
-            return MaskOptions(path, borderWidth, borderColor, borderCap, borderJoin, borderMiter)
+            return MaskOptions(path, borderWidth, borderColor, borderCap, borderJoin, borderMiter, angle, scaleEnabled)
         }
     }
 }
