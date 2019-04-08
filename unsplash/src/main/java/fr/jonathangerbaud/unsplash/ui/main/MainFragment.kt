@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -64,9 +66,11 @@ class MainFragment : Fragment(), DataLoaderDelegate.DataLoaderCallback<List<Phot
         viewModel = getViewModel()
         ToolbarDelegate(activity as AppCompatActivity?, view!!.findViewById(R.id.toolbar)).title("Hello")
 
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-        val divider = Divider().apply { setDividerSizeDp(8) }
-        recyclerView.addItemDecoration(divider)
+//        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.layoutManager = GridLayoutManager(activity, 2)
+//        recyclerView.addItemDecoration(Divider().apply { setDividerSizeDp(8) })
+//        recyclerView.addItemDecoration(Divider(Divider.HORIZONTAL).apply { setDividerSizeDp(8) })
+//        recyclerView.addItemDecoration(GridDividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         val adapter = RendererAdapter()
         adapter.addView(Photo::class) { parent: ViewGroup -> PhotoRenderer(parent) }
         recyclerView.adapter = adapter

@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.StyleRes
 import fr.jonathangerbaud.core.util.AndroidUtil
+import fr.jonathangerbaud.core.util.Dimens
 import fr.jonathangerbaud.core.util.ResUtils
 import fr.jonathangerbaud.ui.core.R
 
@@ -64,7 +65,7 @@ open class TextAppearance
 
     fun sizeSp(sizeInSp: Int)
     {
-        size = ResUtils.getSpInPx(sizeInSp)
+        size = Dimens.sp(sizeInSp)
     }
 
     fun apply(textView: TextView)

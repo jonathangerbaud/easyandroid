@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import fr.jonathangerbaud.core.CoreDevice
 import fr.jonathangerbaud.core.ext.d
+import fr.jonathangerbaud.core.util.Dimens
 import fr.jonathangerbaud.core.util.ResUtils
 import fr.jonathangerbaud.ui.core.text.TextAppearance
 import fr.jonathangerbaud.ui.image.MaskOptions
@@ -29,12 +30,12 @@ class MainActivity2 : AppCompatActivity()
         image.setMaskOptions(
             MaskOptions.Builder(
                 PathHelper.roundedRect(
-                    ResUtils.getDpInPx(256).toFloat(),
-                    ResUtils.getDpInPx(256).toFloat(),
+                   Dimens.dpF(256),
+                   Dimens.dpF(256),
                     0f,
-                    ResUtils.getDpInPx(40).toFloat(),
+                   Dimens.dpF(40),
                     0f,
-                    ResUtils.getDpInPx(80).toFloat()
+                   Dimens.dpF(80)
                 )
             ).build()
         )

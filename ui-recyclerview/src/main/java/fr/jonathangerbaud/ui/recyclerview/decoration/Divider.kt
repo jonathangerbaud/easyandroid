@@ -13,6 +13,7 @@ import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import fr.jonathangerbaud.core.util.Dimens
 import fr.jonathangerbaud.core.util.ResUtils
 import fr.jonathangerbaud.ui.recyclerview.DataAdapter
 import kotlin.reflect.KClass
@@ -77,7 +78,7 @@ class Divider(orientation: Int = VERTICAL, private var drawable: Drawable? = nul
 
     fun setDividerSizeDp(sizeInDp: Int)
     {
-        setDividerSize(ResUtils.getDpInPx(sizeInDp))
+        setDividerSize(Dimens.dp(sizeInDp))
     }
 
     fun setDividerSizeRes(@DimenRes dimenRes: Int)
