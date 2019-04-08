@@ -33,4 +33,5 @@ dependencies {
     implementation project(libraries.ui.recyclerview)
     implementation project(libraries.ui.state)
     implementation deps.images.picasso
+    implementation deps.material_components
 }

@@ -16,12 +16,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.squareup.picasso.Picasso
 import fr.jonathangerbaud.core.CoreDevice
 import fr.jonathangerbaud.core.ext.getViewModel
+import fr.jonathangerbaud.core.util.Dimens
 import fr.jonathangerbaud.ui.core.AspectRatio
 import fr.jonathangerbaud.ui.core.ToolbarDelegate
 import fr.jonathangerbaud.ui.image.SuperImageView
 import fr.jonathangerbaud.ui.recyclerview.RendererAdapter
 import fr.jonathangerbaud.ui.recyclerview.ViewRenderer
-import fr.jonathangerbaud.ui.recyclerview.decoration.Divider
+import fr.jonathangerbaud.ui.recyclerview.decoration.*
 import fr.jonathangerbaud.ui.state.DataLoaderDelegate
 import fr.jonathangerbaud.ui.state.UIStateManager
 import fr.jonathangerbaud.ui.state.widget.DataStateView
@@ -67,7 +68,17 @@ class MainFragment : Fragment(), DataLoaderDelegate.DataLoaderCallback<List<Phot
         ToolbarDelegate(activity as AppCompatActivity?, view!!.findViewById(R.id.toolbar)).title("Hello")
 
 //        recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.layoutManager = GridLayoutManager(activity, 2)
+        recyclerView.layoutManager = GridLayoutManager(activity, 3)/*.apply {
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup()
+            {
+                override fun getSpanSize(position: Int): Int
+                {
+                    return if (position % 2 == 0) 1 else 2
+                }
+            }
+        }*/
+        recyclerView.addItemDecoration(GridDivider4(Dimens.dp(8), 3, false))
+//        recyclerView.addItemDecoration(GridDivider3(Dimens.dp(8)))
 //        recyclerView.addItemDecoration(Divider().apply { setDividerSizeDp(8) })
 //        recyclerView.addItemDecoration(Divider(Divider.HORIZONTAL).apply { setDividerSizeDp(8) })
 //        recyclerView.addItemDecoration(GridDividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
