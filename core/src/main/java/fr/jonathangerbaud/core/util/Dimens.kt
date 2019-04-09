@@ -56,4 +56,10 @@ object Dimens
      * @Return the converted value in pixels, casted to Float
      */
     fun spF(value: Int): Float = convert(TypedValue.COMPLEX_UNIT_SP, value.toFloat())
+
+    fun pxToDp(value: Int): Int = (value / res.displayMetrics.density).toInt()
+    fun pxToDpF(value: Int): Float = value / res.displayMetrics.density
+
+    fun pxToSp(value: Int): Int = (value / res.displayMetrics.scaledDensity).toInt()
+    fun pxToSpF(value: Int): Float = value / res.displayMetrics.scaledDensity
 }

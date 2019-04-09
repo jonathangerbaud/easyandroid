@@ -11,7 +11,7 @@ import retrofit2.http.Query
 interface UnsplashApi
 {
     @GET("/photos/curated")
-    fun getCuratedPhotos(@Query("page") page:Int = 1): Deferred<Response<PhotoResponse>>
+    fun getCuratedPhotos(@Query("page") page:Int = 1, @Query("per_page") perPage:Int = 10): Deferred<Response<PhotoResponse>>
 
     @GET("/photos/curated")
     fun getCuratedPhotos2(@Query("page") page:Int = 1): Deferred<Response<List<Photo>>>

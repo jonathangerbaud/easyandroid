@@ -200,7 +200,7 @@ class MaskDelegate(view: View)
             calculateDrawableSizes()
     }
 
-    fun onImageDrawableReset(drawable: Drawable)
+    fun onImageDrawableReset(drawable: Drawable?)
     {
         this.drawable = drawable
         shader = null

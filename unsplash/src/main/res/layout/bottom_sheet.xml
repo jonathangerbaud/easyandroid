@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="@dimen/dp_16">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:text="Options"
+            android:layout_marginBottom="@dimen/dp_32"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Columns"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_marginBottom="@dimen/dp_8"/>
+    <com.warkiz.tickseekbar.TickSeekBar
+            android:id="@+id/column_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tsb_tick_marks_color="@color/md_black_100"
+            app:tsb_thumb_color="@color/md_black_100"
+            app:tsb_min="1"
+            app:tsb_max="5"
+            app:tsb_show_tick_marks_type="oval"
+            app:tsb_ticks_count="5"
+            app:tsb_show_tick_texts="below"
+            app:tsb_tick_texts_color="@color/md_black_100"
+            app:tsb_track_progress_color="@color/md_black_100"
+            android:layout_marginBottom="@dimen/dp_16"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recyclerview padding (dp)"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_marginBottom="@dimen/dp_8"/>
+    <com.warkiz.tickseekbar.TickSeekBar
+            android:id="@+id/padding_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tsb_tick_marks_color="@color/md_black_100"
+            app:tsb_thumb_color="@color/md_black_100"
+            app:tsb_min="0"
+            app:tsb_max="32"
+            app:tsb_show_tick_marks_type="oval"
+            app:tsb_ticks_count="9"
+            app:tsb_show_tick_texts="below"
+            app:tsb_tick_texts_color="@color/md_black_100"
+            app:tsb_track_progress_color="@color/md_black_100"
+            android:layout_marginBottom="@dimen/dp_16"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Grid spacing (dp)"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_marginBottom="@dimen/dp_8"/>
+
+    <com.warkiz.tickseekbar.TickSeekBar
+            android:id="@+id/spacing_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tsb_tick_marks_color="@color/md_black_100"
+            app:tsb_thumb_color="@color/md_black_100"
+            app:tsb_min="0"
+            app:tsb_max="32"
+            app:tsb_show_tick_marks_type="oval"
+            app:tsb_show_tick_texts="below"
+            app:tsb_tick_texts_color="@color/md_black_100"
+            app:tsb_track_progress_color="@color/md_black_100"
+            app:tsb_ticks_count="9"
+            android:layout_marginBottom="@dimen/dp_16"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Image aspect"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_marginBottom="@dimen/dp_8"/>
+
+    <RadioGroup
+            android:id="@+id/aspect_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <RadioButton
+                android:id="@+id/aspect_square"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Square"/>
+
+        <RadioButton
+                android:id="@+id/aspect_16_9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:text="16:9"/>
+
+        <RadioButton
+                android:id="@+id/aspect_9_16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:text="9:16"/>
+
+        <RadioButton
+                android:id="@+id/aspect_4_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:text="4:3"/>
+
+        <RadioButton
+                android:id="@+id/aspect_3_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:text="3:2"/>
+
+
+    </RadioGroup>
+</LinearLayout>

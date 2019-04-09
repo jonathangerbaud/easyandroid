@@ -64,11 +64,14 @@ class SuperImageView : ImageView
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int)
     {
-        super.onMeasure(ratioDelegate.getWidthSpec(widthMeasureSpec, heightMeasureSpec),
-            ratioDelegate.getHeightSpec(widthMeasureSpec, heightMeasureSpec))
+//        super.onMeasure(ratioDelegate.getWidthSpec(widthMeasureSpec, heightMeasureSpec),
+//            ratioDelegate.getHeightSpec(widthMeasureSpec, heightMeasureSpec))
+//
+//        setMeasuredDimension(ratioDelegate.getWidthDimension(measuredWidth, measuredHeight),
+//            ratioDelegate.getHeightDimension(measuredWidth, measuredHeight))
 
-        setMeasuredDimension(ratioDelegate.getWidthDimension(measuredWidth, measuredHeight),
-            ratioDelegate.getHeightDimension(measuredWidth, measuredHeight))
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        setMeasuredDimension(measuredWidth, (measuredWidth / ratioDelegate.ratio).toInt())
     }
 
     /**

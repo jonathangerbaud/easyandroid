@@ -9,15 +9,15 @@ import fr.jonathangerbaud.unsplash.ui.main.rest.UnsplashApi
 
 class Repository
 {
-    fun getCuratedPhotos(page:Int = 1) = networkApiCall<List<Photo>, UnsplashApi.PhotoResponse> {
+    fun getCuratedPhotos(page:Int = 1, perPage:Int = 10) = networkApiCall<List<Photo>, UnsplashApi.PhotoResponse> {
         client = ServiceBuilder()
             .defaultCache()
             .cacheDuration(fr.jonathangerbaud.network.rest.ServiceBuilder.DAY)
             .forceCache()
 //            .noCacheIfConnection()
 //            .enableLogs()
-            .reportResult()
-            .build(UnsplashApi::class.java).getCuratedPhotos(page)
+//            .reportResult()
+            .build(UnsplashApi::class.java).getCuratedPhotos(page, perPage)
     }
 
     fun getCuratedPhotos2(page:Int = 1) = networkCall<List<Photo>> {

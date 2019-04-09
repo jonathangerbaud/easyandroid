@@ -34,4 +34,5 @@ dependencies {
     implementation project(libraries.ui.state)
     implementation deps.images.picasso
     implementation deps.material_components
+    implementation 'com.github.warkiz.tickseekbar:tickseekbar:0.1.4'
 }
