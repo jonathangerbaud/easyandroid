@@ -10,9 +10,10 @@ interface IPaginationAdapter
     fun setLoadingView(@LayoutRes layoutRes: Int) {}
     fun setErrorView(view: View) {}
     fun setErrorView(@LayoutRes layoutRes: Int) {}
+    fun setErrorRetryCallback(callback:() -> Unit)
 
     fun setPaginationDelegate(paginationDelegate: PaginationDelegate) {}
 
-    fun setLoading(loading:Boolean = true)
-    fun setError()
+    fun showLoading(loading:Boolean = true)
+    fun showError()
 }

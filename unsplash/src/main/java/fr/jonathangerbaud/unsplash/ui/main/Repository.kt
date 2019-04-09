@@ -11,11 +11,12 @@ class Repository
 {
     fun getCuratedPhotos(page:Int = 1, perPage:Int = 10) = networkApiCall<List<Photo>, UnsplashApi.PhotoResponse> {
         client = ServiceBuilder()
-            .defaultCache()
-            .cacheDuration(fr.jonathangerbaud.network.rest.ServiceBuilder.DAY)
-            .forceCache()
+            .noCacheIfConnection()
+//            .defaultCache()
+//            .cacheDuration(fr.jonathangerbaud.network.rest.ServiceBuilder.DAY)
+//            .forceCache()
 //            .noCacheIfConnection()
-//            .enableLogs()
+            .enableLogs()
 //            .reportResult()
             .build(UnsplashApi::class.java).getCuratedPhotos(page, perPage)
     }

@@ -17,7 +17,6 @@ import fr.jonathangerbaud.ui.core.AspectRatio
 import fr.jonathangerbaud.ui.core.ToolbarDelegate
 import fr.jonathangerbaud.ui.core.ext.setPadding
 import fr.jonathangerbaud.ui.image.SuperImageView
-import fr.jonathangerbaud.ui.recyclerview.PaginationDataLoaderDelegate
 import fr.jonathangerbaud.ui.recyclerview.PaginationDelegate
 import fr.jonathangerbaud.ui.recyclerview.RendererAdapter
 import fr.jonathangerbaud.ui.recyclerview.ViewRenderer
@@ -28,11 +27,11 @@ import fr.jonathangerbaud.ui.state.widget.DataStateView
 import fr.jonathangerbaud.unsplash.R
 import fr.jonathangerbaud.unsplash.ui.main.model.Photo
 
-class MainFragment : Fragment(), PaginationDataLoaderDelegate.PaginationDataLoaderCallback<List<Photo>>
+class MainFragment2 : Fragment(), DataLoaderDelegate.DataLoaderCallback<List<Photo>>
 {
     companion object
     {
-        fun newInstance() = MainFragment()
+        fun newInstance() = MainFragment2()
         var aspectRatio = AspectRatio.SQUARE
     }
 
@@ -83,7 +82,27 @@ class MainFragment : Fragment(), PaginationDataLoaderDelegate.PaginationDataLoad
         recyclerView.addItemDecoration(divider)
         recyclerView.adapter = adapter
 
-        PaginationDataLoaderDelegate(this, UIStateManager(srl, dataStateView), adapter) { nextPageData ->  Repository().getCuratedPhotos(nextPageData.page + 1, 20) }
+        val observer = Observer<Resource<List<Photo>>> {
+            when (it.status)
+            {
+                Resource.LOADING -> adapter.showLoading()
+                Resource.ERROR -> adapter.showError()
+                Resource.SUCCESS ->
+                {
+                    adapter.showLoading(false)
+                    adapter.addAll(it.data!!)
+                }
+            }
+        }
+
+        // page starts at 0 while API starts at 1
+        val paginationDelegate = PaginationDelegate(recyclerView) { page ->
+            Repository().getCuratedPhotos(page + 1, 20).observe(this, observer)
+        }
+
+        adapter.setErrorRetryCallback { Repository().getCuratedPhotos(paginationDelegate.currentPage + 1, 20).observe(this, observer) }
+
+        DataLoaderDelegate(this, UIStateManager(srl, dataStateView)) { Repository().getCuratedPhotos(1, 20) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?)
@@ -131,11 +150,8 @@ class MainFragment : Fragment(), PaginationDataLoaderDelegate.PaginationDataLoad
         fragment.show(activity!!.supportFragmentManager, "BottomSheetDialog")
     }
 
-    override fun onDataLoaded(data: List<Photo>?, isReset:Boolean)
+    override fun onDataLoaded(data: List<Photo>?)
     {
-        if (isReset)
-            (recyclerView.adapter as RendererAdapter).clear()
-
         (recyclerView.adapter as RendererAdapter).addAll(data!!)
     }
 

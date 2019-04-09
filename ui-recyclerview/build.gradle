@@ -1,5 +1,7 @@
 dependencies {
     api project(libraries.ui.core)
+    api project(libraries.ui.state)
+    api project(libraries.network)
     api deps.androidx.recyclerview
     api deps.androidx.constraintlayout
     api deps.androidx.constraintlayout_solver

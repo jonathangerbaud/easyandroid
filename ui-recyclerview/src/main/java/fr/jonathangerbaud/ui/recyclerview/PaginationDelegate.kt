@@ -115,7 +115,7 @@ class PaginationDelegate(recyclerView: RecyclerView, callback: ((page: Int) -> U
         callbacks.remove(callback)
     }
 
-    private fun reset()
+    fun reset()
     {
         loading = false
         currentPage = 0

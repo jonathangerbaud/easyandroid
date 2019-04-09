@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import fr.jonathangerbaud.core.ext.d
 import fr.jonathangerbaud.core.ext.w
@@ -18,17 +20,22 @@ open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter, IPaginationA
     private val viewHolderList: MutableList<(parent: ViewGroup) -> Renderer<*>> = mutableListOf()
     private val typeMap: MutableMap<KClass<*>, Int> = HashMap()
 
-    var data: MutableList<Any> = mutableListOf()
-        set(value)
+    private val data: MutableList<Any> = mutableListOf()
+        /*set(value)
         {
             field = value
             notifyDataSetChanged()
             liveData.value = value
-        }
+        }*/
 
     val liveData: MutableLiveData<List<Any>> = MutableLiveData()
 
-    fun add(element:Any, notify:Boolean = true)
+    init
+    {
+        liveData.value = data
+    }
+
+    fun add(element: Any, notify: Boolean = true)
     {
         data.add(element)
 
@@ -36,7 +43,7 @@ open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter, IPaginationA
             notifyItemInserted(data.size - 1)
     }
 
-    fun addAll(elements:Collection<Any>, notify:Boolean = true)
+    fun addAll(elements: Collection<Any>, notify: Boolean = true)
     {
         val start = data.size
 
@@ -46,7 +53,7 @@ open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter, IPaginationA
             notifyItemRangeInserted(start, elements.size)
     }
 
-    fun remove(element:Any, notify:Boolean = true)
+    fun remove(element: Any, notify: Boolean = true)
     {
         val position = data.indexOf(element)
         if (position != -1)
@@ -57,17 +64,26 @@ open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter, IPaginationA
         }
     }
 
-    fun removeAll(elements:Collection<Any>, notify:Boolean = true)
+    fun removeAll(elements: Collection<Any>, notify: Boolean = true)
     {
         elements.forEach { remove(it, notify) }
     }
 
-    fun remove(from:Int, count:Int, notify: Boolean = true)
+    fun remove(from: Int, count: Int, notify: Boolean = true)
     {
-        data = data.slice(0 until from).toMutableList()
+        val max = Math.min(from + count, data.size)
+
+        for (i in 0 until max)
+            data.removeAt(from)
 
         if (notify)
-            notifyItemRangeRemoved(from, count)
+            notifyItemRangeRemoved(from, max)
+    }
+
+    fun clear()
+    {
+        data.clear()
+        notifyDataSetChanged()
     }
 
     fun addView(type: KClass<*>, factory: (parent: ViewGroup) -> Renderer<*>)
@@ -90,7 +106,7 @@ open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter, IPaginationA
     {
         return if (viewType == DEFAULT_TYPE)
         {
-            w(null, "A rendered is missing in adapter, cannot render view for some type of data")
+            w(null, "A renderer is missing in adapter, cannot render view for some type of data")
             DummyRenderer(parent)
         }
         else
@@ -113,6 +129,31 @@ open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter, IPaginationA
     override fun getDataForPosition(position: Int): Any
     {
         return data[position]
+    }
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView)
+    {
+        super.onAttachedToRecyclerView(recyclerView)
+
+        recyclerView.layoutManager?.let {
+            if (it is GridLayoutManager/* || it is StaggeredGridLayoutManager*/)
+            {
+                val currentSpanSizeLookup: GridLayoutManager.SpanSizeLookup = it.spanSizeLookup
+
+                it.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup()
+                {
+                    override fun getSpanSize(position: Int): Int
+                    {
+                        if (data[position] is LoadingItem || data[position] is ErrorItem)
+                        {
+                            return it.spanCount
+                        }
+
+                        return currentSpanSizeLookup.getSpanSize(position)
+                    }
+                }
+            }
+        }
     }
 
     class DummyRenderer(parent: ViewGroup) : ViewRenderer<Any, View>(View(parent.context))
@@ -148,7 +189,8 @@ open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter, IPaginationA
     {
         paginationDelegate.addCallback { page ->
             d("pagination says next page")
-            setLoading(true) }
+            showLoading(true)
+        }
     }
 
     override fun setLoadingView(view: View)
@@ -171,43 +213,43 @@ open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter, IPaginationA
 
     }
 
-    override fun setLoading(loading: Boolean)
+    override fun setErrorRetryCallback(callback: () -> Unit)
+    {
+        errorCallback = callback
+    }
+
+    override fun showLoading(loading: Boolean)
     {
         var position = data.indexOf(errorItem)
         if (position != -1)
         {
-            d("remove error item")
             data.remove(errorItem)
             notifyItemRemoved(position)
         }
 
         if (loading)
         {
-            d("add loading item 0")
             if (!data.contains(loadingItem))
             {
-                d("add loading item 1")
                 data.add(loadingItem)
                 notifyItemInserted(data.size - 1)
             }
         }
         else
         {
-            d("remove loading item 0")
             position = data.indexOf(loadingItem)
             if (position != -1)
             {
-                d("remove loading item 1")
                 data.removeAt(position)
                 notifyItemRemoved(position)
 
-        }
+            }
         }
     }
 
-    override fun setError()
+    override fun showError()
     {
-        setLoading(false)
+        showLoading(false)
 
         errorItem = ErrorItem(errorText, errorCallback)
         d("add error item")
@@ -238,5 +280,7 @@ private class ErrorRenderer(parent: ViewGroup) : Renderer<ErrorItem>(parent, R.l
     {
         data.errorText?.let { text.text = it }
         data.callback?.let { button.setOnClickListener { it() } }
+
+
     }
 }

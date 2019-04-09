@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         data.add(BasicItem2("Hello there"))
         data.add(BasicItem("How are you doing?"))
         data.add(BasicItem("01234567489"))
-        adapter.data = data
+        adapter.addAll(data)
     }
 
     class BasicItem(val name:String)
