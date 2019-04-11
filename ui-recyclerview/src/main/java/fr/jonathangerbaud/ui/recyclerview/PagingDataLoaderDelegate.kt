@@ -13,7 +13,7 @@ import fr.jonathangerbaud.ui.state.UIStateManager
 import java.lang.ref.WeakReference
 
 
-class PaginationDataLoaderDelegate<T>(
+class PagingDataLoaderDelegate<T>(
     callback: PaginationDataLoaderCallback<T>,
     private var stateManager: UIStateManager,
     private val adapter: IPaginationAdapter,
@@ -26,7 +26,7 @@ class PaginationDataLoaderDelegate<T>(
 
     private var dataLoaded: Boolean = false
 
-    private val nextPageData = NextPageData(0)
+    val nextPageData = NextPageData(0)
 
     private lateinit var paginationDelegate:PaginationDelegate
 
@@ -60,7 +60,7 @@ class PaginationDataLoaderDelegate<T>(
             }
 
             if (recyclerView == null)
-                throw IllegalStateException("PaginationDataLoaderDelegate : Couldn't find any RecyclerView in StateManager's data view")
+                throw IllegalStateException("PagingDataLoaderDelegate : Couldn't find any RecyclerView in StateManager's data view")
 
 
             if (it is SwipeRefreshLayout)

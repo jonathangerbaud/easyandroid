@@ -56,9 +56,14 @@ open class Row : ConstraintLayout
             return this
         }
 
-        override fun createView(context: Context): View
+        override fun createView(context: Context): Row
         {
             return Row(context)
+        }
+
+        fun build(parent:ViewGroup) : Row
+        {
+            return build(parent.context, Row(parent.context))
         }
 
         fun build(context: Context, view: Row): Row

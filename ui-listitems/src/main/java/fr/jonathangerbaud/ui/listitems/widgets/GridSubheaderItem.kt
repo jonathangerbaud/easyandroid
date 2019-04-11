@@ -4,7 +4,7 @@ import fr.jonathangerbaud.ui.listitems.RowItemSpec
 import fr.jonathangerbaud.ui.listitems.style.MaterialListSubheaderStyle
 import fr.jonathangerbaud.ui.listitems.style.MaterialListTitleStyle
 
-open class SubheaderItem : TextItem()
+open class GridSubheaderItem : TextItem()
 {
     init
     {
@@ -13,11 +13,21 @@ open class SubheaderItem : TextItem()
 
     override fun getRowItemSpecs(): RowItemSpec
     {
-        return SubheaderItemSpec()
+        return GridSubheaderItemSpec()
     }
 
-    open protected class SubheaderItemSpec : CustomRowItemSpec()
+    protected open class GridSubheaderItemSpec : CustomRowItemSpec()
     {
+        override fun getStartMarginIfStartComponent(): Int
+        {
+            return 0
+        }
+
+        override fun getEndMarginIfEndComponent(): Int
+        {
+            return 0
+        }
+
         override fun getTextBaseline(minHeight: Int, position: Int, count: Int): Int
         {
             return SIZE_32

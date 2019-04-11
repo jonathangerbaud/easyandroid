@@ -126,9 +126,12 @@ open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter, IPaginationA
         return data.size
     }
 
-    override fun getDataForPosition(position: Int): Any
+    override fun getDataAtPosition(position: Int): Any?
     {
-        return data[position]
+        if (position >= 0 && position < data.size)
+            return data[position]
+
+        return null
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView)
@@ -144,7 +147,7 @@ open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter, IPaginationA
                 {
                     override fun getSpanSize(position: Int): Int
                     {
-                        if (data[position] is LoadingItem || data[position] is ErrorItem)
+                        if (position >= 0 && (data[position] is LoadingItem || data[position] is ErrorItem))
                         {
                             return it.spanCount
                         }

@@ -128,6 +128,7 @@ class Divider(orientation: Int = VERTICAL, private var drawable: Drawable? = nul
     {
         if (parent.layoutManager == null || drawable == null)
             return
+
         if (orientation == VERTICAL)
             drawVertical(c, parent)
         else
@@ -249,13 +250,13 @@ class Divider(orientation: Int = VERTICAL, private var drawable: Drawable? = nul
             if (it is DataAdapter)
             {
                 dataType?.let { type ->
-                    val data = it.getDataForPosition(position)
+                    val data = it.getDataAtPosition(position)
 
                     shouldDraw = shouldDraw && type.java.isInstance(data)
 
                     if (shouldDraw && position < adapter.itemCount - 1)
                     {
-                        val nextData = it.getDataForPosition(position + 1)
+                        val nextData = it.getDataAtPosition(position + 1)
                         shouldDraw = shouldDraw && type.java.isInstance(nextData)
 
                     }

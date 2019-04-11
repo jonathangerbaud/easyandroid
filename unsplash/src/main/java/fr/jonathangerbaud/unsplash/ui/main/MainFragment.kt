@@ -4,31 +4,31 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
 import android.view.ViewGroup.LayoutParams
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.doOnNextLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.squareup.picasso.Picasso
 import fr.jonathangerbaud.core.util.Dimens
-import fr.jonathangerbaud.network.Resource
 import fr.jonathangerbaud.ui.core.AspectRatio
 import fr.jonathangerbaud.ui.core.ToolbarDelegate
 import fr.jonathangerbaud.ui.core.ext.setPadding
 import fr.jonathangerbaud.ui.image.SuperImageView
-import fr.jonathangerbaud.ui.recyclerview.PaginationDataLoaderDelegate
-import fr.jonathangerbaud.ui.recyclerview.PaginationDelegate
+import fr.jonathangerbaud.ui.listitems.Row
+import fr.jonathangerbaud.ui.listitems.widgets.GridSubheaderItem
+import fr.jonathangerbaud.ui.recyclerview.PagingDataLoaderDelegate
 import fr.jonathangerbaud.ui.recyclerview.RendererAdapter
 import fr.jonathangerbaud.ui.recyclerview.ViewRenderer
 import fr.jonathangerbaud.ui.recyclerview.decoration.*
-import fr.jonathangerbaud.ui.state.DataLoaderDelegate
 import fr.jonathangerbaud.ui.state.UIStateManager
 import fr.jonathangerbaud.ui.state.widget.DataStateView
 import fr.jonathangerbaud.unsplash.R
 import fr.jonathangerbaud.unsplash.ui.main.model.Photo
 
-class MainFragment : Fragment(), PaginationDataLoaderDelegate.PaginationDataLoaderCallback<List<Photo>>
+class MainFragment : Fragment(), PagingDataLoaderDelegate.PaginationDataLoaderCallback<List<Photo>>
 {
     companion object
     {
@@ -42,6 +42,9 @@ class MainFragment : Fragment(), PaginationDataLoaderDelegate.PaginationDataLoad
 
     private lateinit var layoutManager: GridLayoutManager
     private lateinit var divider: GridDivider
+
+    private lateinit var adapter:RendererAdapter
+    private lateinit var loaderDelegate: PagingDataLoaderDelegate<List<Photo>>
 
     init
     {
@@ -74,16 +77,33 @@ class MainFragment : Fragment(), PaginationDataLoaderDelegate.PaginationDataLoad
         ToolbarDelegate(activity as AppCompatActivity?, view!!.findViewById(R.id.toolbar)).title("Hello")
 
         layoutManager = GridLayoutManager(activity, 2)
-        divider = GridDivider(Dimens.dp(4), 2, false)
+        divider = GridDivider(Dimens.dp(4), false)
+        divider.excludeViewItemsOfType(Row::class)
 
-        val adapter = RendererAdapter()
+            //layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int
+            {
+                val data = adapter.getDataAtPosition(position)
+
+                data?.let {
+                    if (it is Subheader)
+                        return layoutManager.spanCount
+                }
+
+                return 1
+            }
+        }
+
+        adapter = RendererAdapter()
         adapter.addView(Photo::class, ::PhotoRenderer)
+        adapter.addView(Subheader::class, ::SubheaderRenderer)
 
         recyclerView.layoutManager = layoutManager
         recyclerView.addItemDecoration(divider)
         recyclerView.adapter = adapter
 
-        PaginationDataLoaderDelegate(this, UIStateManager(srl, dataStateView), adapter) { nextPageData ->  Repository().getCuratedPhotos(nextPageData.page + 1, 20) }
+        loaderDelegate = PagingDataLoaderDelegate(this, UIStateManager(srl, dataStateView), adapter) { nextPageData ->  Repository().getCuratedPhotos(nextPageData.page + 1, 20) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?)
@@ -118,7 +138,8 @@ class MainFragment : Fragment(), PaginationDataLoaderDelegate.PaginationDataLoad
             recyclerView.setPadding(Dimens.dp(padding))
 
             recyclerView.removeItemDecoration(divider)
-            divider = GridDivider(Dimens.dp(spacing), columns, false)
+            divider = GridDivider(Dimens.dp(spacing), false)
+            //divider.excludeViewItemsOfType(Row::class)
             recyclerView.addItemDecoration(divider)
 
             if (MainFragment.aspectRatio != aspectRatio)
@@ -136,7 +157,28 @@ class MainFragment : Fragment(), PaginationDataLoaderDelegate.PaginationDataLoad
         if (isReset)
             (recyclerView.adapter as RendererAdapter).clear()
 
-        (recyclerView.adapter as RendererAdapter).addAll(data!!)
+        adapter.add(Subheader("Unsplash Page ${loaderDelegate.nextPageData.page}"))
+        adapter.addAll(data!!)
+    }
+
+    data class Subheader(val title:String)
+
+    class SubheaderRenderer(parent: ViewGroup) : ViewRenderer<Subheader, Row>(Row(parent.context))
+    {
+        val title: TextView
+        init {
+            Row.Builder()
+                .mainItem(GridSubheaderItem())
+                .build(parent.context, view)
+
+            title = view.mainContent as TextView
+            (view.layoutParams as ViewGroup.MarginLayoutParams).topMargin  = Dimens.dp(16)
+//            view.setPaddingTop(Dimens.dp(16))
+        }
+        override fun bind(data: Subheader, position: Int)
+        {
+            title.text = data.title
+        }
     }
 
     class PhotoRenderer(parent: ViewGroup) : ViewRenderer<Photo, SuperImageView>(SuperImageView(parent.context))
@@ -161,10 +203,10 @@ class MainFragment : Fragment(), PaginationDataLoaderDelegate.PaginationDataLoad
             else if (view.width > 0)
                 loadPhoto(data)
             else
-                view.post { loadPhoto(data) }
+                view.doOnNextLayout { loadPhoto(data) }
         }
 
-        fun loadPhoto(data: Photo)
+        private fun loadPhoto(data: Photo)
         {
             Picasso.with(view.context)
                 .cancelRequest(view)

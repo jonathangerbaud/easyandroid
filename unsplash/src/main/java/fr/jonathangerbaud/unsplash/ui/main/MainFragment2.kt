@@ -73,7 +73,7 @@ class MainFragment2 : Fragment(), DataLoaderDelegate.DataLoaderCallback<List<Pho
         ToolbarDelegate(activity as AppCompatActivity?, view!!.findViewById(R.id.toolbar)).title("Hello")
 
         layoutManager = GridLayoutManager(activity, 2)
-        divider = GridDivider(Dimens.dp(4), 2, false)
+        divider = GridDivider(Dimens.dp(4), false)
 
         val adapter = RendererAdapter()
         adapter.addView(Photo::class, ::PhotoRenderer)
@@ -137,7 +137,7 @@ class MainFragment2 : Fragment(), DataLoaderDelegate.DataLoaderCallback<List<Pho
             recyclerView.setPadding(Dimens.dp(padding))
 
             recyclerView.removeItemDecoration(divider)
-            divider = GridDivider(Dimens.dp(spacing), columns, false)
+            divider = GridDivider(Dimens.dp(spacing), false)
             recyclerView.addItemDecoration(divider)
 
             if (MainFragment.aspectRatio != aspectRatio)

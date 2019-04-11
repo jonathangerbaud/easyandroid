@@ -10,7 +10,7 @@ class MaterialListSubheaderStyle : TextStyler
 {
     override fun applyDefaultStyle(textView: TextView)
     {
-        MaterialTypography.TypeScale.SUBTITLE2.apply(textView)
+        MaterialTypography.TypeScale.SUBTITLE1.apply(textView)
         textView.setTextColor(AttrUtil.getColor(textView.context, android.R.attr.textColorSecondary))
     }
 }
