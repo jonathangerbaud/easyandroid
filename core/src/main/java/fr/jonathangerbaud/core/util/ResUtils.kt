@@ -93,7 +93,7 @@ object ResUtils {
         return ContextCompat.getDrawable(context, resId)
     }
 
-    fun getAssetManager(@ArrayRes resId: Int): AssetManager {
+    fun getAssetManager(): AssetManager {
         return res.assets
     }
 

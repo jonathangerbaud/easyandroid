@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="company_suffix">
+        <item>Inc</item>
+        <item>and Sons</item>
+        <item>LLC</item>
+        <item>Group</item>
+    </string-array>
+
+    <string-array name="company_buzzwords_1">
+        <item>Adaptive</item>
+        <item>Advanced</item>
+        <item>Ameliorated</item>
+        <item>Assimilated</item>
+        <item>Automated</item>
+        <item>Balanced</item>
+        <item>Business-focused</item>
+        <item>Centralized</item>
+        <item>Cloned</item>
+        <item>Compatible</item>
+        <item>Configurable</item>
+        <item>Cross-group</item>
+        <item>Cross-platform</item>
+        <item>Customer-focused</item>
+        <item>Customizable</item>
+        <item>Decentralized</item>
+        <item>De-engineered</item>
+        <item>Devolved</item>
+        <item>Digitized</item>
+        <item>Distributed</item>
+        <item>Diverse</item>
+        <item>Down-sized</item>
+        <item>Enhanced</item>
+        <item>Enterprise-wide</item>
+        <item>Ergonomic</item>
+        <item>Exclusive</item>
+        <item>Expanded</item>
+        <item>Extended</item>
+        <item>Face to face</item>
+        <item>Focused</item>
+        <item>Front-line</item>
+        <item>Fully-configurable</item>
+        <item>Function-based</item>
+        <item>Fundamental</item>
+        <item>Future-proofed</item>
+        <item>Grass-roots</item>
+        <item>Horizontal</item>
+        <item>Implemented</item>
+        <item>Innovative</item>
+        <item>Integrated</item>
+        <item>Intuitive</item>
+        <item>Inverse</item>
+        <item>Managed</item>
+        <item>Mandatory</item>
+        <item>Monitored</item>
+        <item>Multi-channelled</item>
+        <item>Multi-lateral</item>
+        <item>Multi-layered</item>
+        <item>Multi-tiered</item>
+        <item>Networked</item>
+        <item>Object-based</item>
+        <item>Open-architected</item>
+        <item>Open-source</item>
+        <item>Operative</item>
+        <item>Optimized</item>
+        <item>Optional</item>
+        <item>Organic</item>
+        <item>Organized</item>
+        <item>Persevering</item>
+        <item>Persistent</item>
+        <item>Phased</item>
+        <item>Polarised</item>
+        <item>Pre-emptive</item>
+        <item>Proactive</item>
+        <item>Profit-focused</item>
+        <item>Profound</item>
+        <item>Programmable</item>
+        <item>Progressive</item>
+        <item>Public-key</item>
+        <item>Quality-focused</item>
+        <item>Reactive</item>
+        <item>Realigned</item>
+        <item>Re-contextualized</item>
+        <item>Re-engineered</item>
+        <item>Reduced</item>
+        <item>Reverse-engineered</item>
+        <item>Right-sized</item>
+        <item>Robust</item>
+        <item>Seamless</item>
+        <item>Secured</item>
+        <item>Self-enabling</item>
+        <item>Sharable</item>
+        <item>Stand-alone</item>
+        <item>Streamlined</item>
+        <item>Switchable</item>
+        <item>Synchronised</item>
+        <item>Synergistic</item>
+        <item>Synergized</item>
+        <item>Team-oriented</item>
+        <item>Total</item>
+        <item>Triple-buffered</item>
+        <item>Universal</item>
+        <item>Up-sized</item>
+        <item>Upgradable</item>
+        <item>User-centric</item>
+        <item>User-friendly</item>
+        <item>Versatile</item>
+        <item>Virtual</item>
+        <item>Visionary</item>
+        <item>Vision-oriented</item>
+    </string-array>
+
+    <string-array name="company_buzzwords_2">
+        <item>24 hour</item>
+        <item>24/7</item>
+        <item>3rd generation</item>
+        <item>4th generation</item>
+        <item>5th generation</item>
+        <item>6th generation</item>
+        <item>actuating</item>
+        <item>analyzing</item>
+        <item>asymmetric</item>
+        <item>asynchronous</item>
+        <item>attitude-oriented</item>
+        <item>background</item>
+        <item>bandwidth-monitored</item>
+        <item>bi-directional</item>
+        <item>bifurcated</item>
+        <item>bottom-line</item>
+        <item>clear-thinking</item>
+        <item>client-driven</item>
+        <item>client-server</item>
+        <item>coherent</item>
+        <item>cohesive</item>
+        <item>composite</item>
+        <item>context-sensitive</item>
+        <item>contextually-based</item>
+        <item>content-based</item>
+        <item>dedicated</item>
+        <item>demand-driven</item>
+        <item>didactic</item>
+        <item>directional</item>
+        <item>discrete</item>
+        <item>disintermediate</item>
+        <item>dynamic</item>
+        <item>eco-centric</item>
+        <item>empowering</item>
+        <item>encompassing</item>
+        <item>even-keeled</item>
+        <item>executive</item>
+        <item>explicit</item>
+        <item>exuding</item>
+        <item>fault-tolerant</item>
+        <item>foreground</item>
+        <item>fresh-thinking</item>
+        <item>full-range</item>
+        <item>global</item>
+        <item>grid-enabled</item>
+        <item>heuristic</item>
+        <item>high-level</item>
+        <item>holistic</item>
+        <item>homogeneous</item>
+        <item>human-resource</item>
+        <item>hybrid</item>
+        <item>impactful</item>
+        <item>incremental</item>
+        <item>intangible</item>
+        <item>interactive</item>
+        <item>intermediate</item>
+        <item>leading edge</item>
+        <item>local</item>
+        <item>logistical</item>
+        <item>maximized</item>
+        <item>methodical</item>
+        <item>mission-critical</item>
+        <item>mobile</item>
+        <item>modular</item>
+        <item>motivating</item>
+        <item>multimedia</item>
+        <item>multi-state</item>
+        <item>multi-tasking</item>
+        <item>national</item>
+        <item>needs-based</item>
+        <item>neutral</item>
+        <item>next generation</item>
+        <item>non-volatile</item>
+        <item>object-oriented</item>
+        <item>optimal</item>
+        <item>optimizing</item>
+        <item>radical</item>
+        <item>real-time</item>
+        <item>reciprocal</item>
+        <item>regional</item>
+        <item>responsive</item>
+        <item>scalable</item>
+        <item>secondary</item>
+        <item>solution-oriented</item>
+        <item>stable</item>
+        <item>static</item>
+        <item>systematic</item>
+        <item>systemic</item>
+        <item>system-worthy</item>
+        <item>tangible</item>
+        <item>tertiary</item>
+        <item>transitional</item>
+        <item>uniform</item>
+        <item>upward-trending</item>
+        <item>user-facing</item>
+        <item>value-added</item>
+        <item>web-enabled</item>
+        <item>well-modulated</item>
+        <item>zero administration</item>
+        <item>zero defect</item>
+        <item>zero tolerance</item>
+    </string-array>
+
+    <string-array name="company_buzzwords_3">
+        <item>ability</item>
+        <item>access</item>
+        <item>adapter</item>
+        <item>algorithm</item>
+        <item>alliance</item>
+        <item>analyzer</item>
+        <item>application</item>
+        <item>approach</item>
+        <item>architecture</item>
+        <item>archive</item>
+        <item>artificial intelligence</item>
+        <item>array</item>
+        <item>attitude</item>
+        <item>benchmark</item>
+        <item>budgetary management</item>
+        <item>capability</item>
+        <item>capacity</item>
+        <item>challenge</item>
+        <item>circuit</item>
+        <item>collaboration</item>
+        <item>complexity</item>
+        <item>concept</item>
+        <item>conglomeration</item>
+        <item>contingency</item>
+        <item>core</item>
+        <item>customer loyalty</item>
+        <item>database</item>
+        <item>data-warehouse</item>
+        <item>definition</item>
+        <item>emulation</item>
+        <item>encoding</item>
+        <item>encryption</item>
+        <item>extranet</item>
+        <item>firmware</item>
+        <item>flexibility</item>
+        <item>focus group</item>
+        <item>forecast</item>
+        <item>frame</item>
+        <item>framework</item>
+        <item>function</item>
+        <item>functionalities</item>
+        <item>Graphic Interface</item>
+        <item>groupware</item>
+        <item>Graphical User Interface</item>
+        <item>hardware</item>
+        <item>help-desk</item>
+        <item>hierarchy</item>
+        <item>hub</item>
+        <item>implementation</item>
+        <item>info-mediaries</item>
+        <item>infrastructure</item>
+        <item>initiative</item>
+        <item>installation</item>
+        <item>instruction set</item>
+        <item>interface</item>
+        <item>internet solution</item>
+        <item>intranet</item>
+        <item>knowledge user</item>
+        <item>knowledge base</item>
+        <item>local area network</item>
+        <item>leverage</item>
+        <item>matrices</item>
+        <item>matrix</item>
+        <item>methodology</item>
+        <item>middleware</item>
+        <item>migration</item>
+        <item>model</item>
+        <item>moderator</item>
+        <item>monitoring</item>
+        <item>moratorium</item>
+        <item>neural-net</item>
+        <item>open architecture</item>
+        <item>open system</item>
+        <item>orchestration</item>
+        <item>paradigm</item>
+        <item>parallelism</item>
+        <item>policy</item>
+        <item>portal</item>
+        <item>pricing structure</item>
+        <item>process improvement</item>
+        <item>product</item>
+        <item>productivity</item>
+        <item>project</item>
+        <item>projection</item>
+        <item>protocol</item>
+        <item>secured line</item>
+        <item>service-desk</item>
+        <item>software</item>
+        <item>solution</item>
+        <item>standardization</item>
+        <item>strategy</item>
+        <item>structure</item>
+        <item>success</item>
+        <item>superstructure</item>
+        <item>support</item>
+        <item>synergy</item>
+        <item>system engine</item>
+        <item>task-force</item>
+        <item>throughput</item>
+        <item>time-frame</item>
+        <item>toolset</item>
+        <item>utilisation</item>
+        <item>website</item>
+        <item>workforce</item>
+    </string-array>
+
+    <string-array name="company_bs_1">
+        <item>implement</item>
+        <item>utilize</item>
+        <item>integrate</item>
+        <item>streamline</item>
+        <item>optimize</item>
+        <item>evolve</item>
+        <item>transform</item>
+        <item>embrace</item>
+        <item>enable</item>
+        <item>orchestrate</item>
+        <item>leverage</item>
+        <item>reinvent</item>
+        <item>aggregate</item>
+        <item>architect</item>
+        <item>enhance</item>
+        <item>incentivize</item>
+        <item>morph</item>
+        <item>empower</item>
+        <item>envisioneer</item>
+        <item>monetize</item>
+        <item>harness</item>
+        <item>facilitate</item>
+        <item>seize</item>
+        <item>disintermediate</item>
+        <item>synergize</item>
+        <item>strategize</item>
+        <item>deploy</item>
+        <item>brand</item>
+        <item>grow</item>
+        <item>target</item>
+        <item>syndicate</item>
+        <item>synthesize</item>
+        <item>deliver</item>
+        <item>mesh</item>
+        <item>incubate</item>
+        <item>engage</item>
+        <item>maximize</item>
+        <item>benchmark</item>
+        <item>expedite</item>
+        <item>reintermediate</item>
+        <item>whiteboard</item>
+        <item>visualize</item>
+        <item>repurpose</item>
+        <item>innovate</item>
+        <item>scale</item>
+        <item>unleash</item>
+        <item>drive</item>
+        <item>extend</item>
+        <item>engineer</item>
+        <item>revolutionize</item>
+        <item>generate</item>
+        <item>exploit</item>
+        <item>transition</item>
+        <item>e-enable</item>
+        <item>iterate</item>
+        <item>cultivate</item>
+        <item>matrix</item>
+        <item>productize</item>
+        <item>redefine</item>
+        <item>recontextualize</item>
+    </string-array>
+
+    <string-array name="company_bs_2">
+        <item>clicks-and-mortar</item>
+        <item>value-added</item>
+        <item>vertical</item>
+        <item>proactive</item>
+        <item>robust</item>
+        <item>revolutionary</item>
+        <item>scalable</item>
+        <item>leading-edge</item>
+        <item>innovative</item>
+        <item>intuitive</item>
+        <item>strategic</item>
+        <item>e-business</item>
+        <item>mission-critical</item>
+        <item>sticky</item>
+        <item>one-to-one</item>
+        <item>24/7</item>
+        <item>end-to-end</item>
+        <item>global</item>
+        <item>B2B</item>
+        <item>B2C</item>
+        <item>granular</item>
+        <item>frictionless</item>
+        <item>virtual</item>
+        <item>viral</item>
+        <item>dynamic</item>
+        <item>24/365</item>
+        <item>best-of-breed</item>
+        <item>killer</item>
+        <item>magnetic</item>
+        <item>bleeding-edge</item>
+        <item>web-enabled</item>
+        <item>interactive</item>
+        <item>dot-com</item>
+        <item>sexy</item>
+        <item>back-end</item>
+        <item>real-time</item>
+        <item>efficient</item>
+        <item>front-end</item>
+        <item>distributed</item>
+        <item>seamless</item>
+        <item>extensible</item>
+        <item>turn-key</item>
+        <item>world-class</item>
+        <item>open-source</item>
+        <item>cross-platform</item>
+        <item>cross-media</item>
+        <item>synergistic</item>
+        <item>bricks-and-clicks</item>
+        <item>out-of-the-box</item>
+        <item>enterprise</item>
+        <item>integrated</item>
+        <item>impactful</item>
+        <item>wireless</item>
+        <item>transparent</item>
+        <item>next-generation</item>
+        <item>cutting-edge</item>
+        <item>user-centric</item>
+        <item>visionary</item>
+        <item>customized</item>
+        <item>ubiquitous</item>
+        <item>plug-and-play</item>
+        <item>collaborative</item>
+        <item>compelling</item>
+        <item>holistic</item>
+        <item>rich</item>
+    </string-array>
+
+    <string-array name="company_bs_3">
+        <item>synergies</item>
+        <item>web-readiness</item>
+        <item>paradigms</item>
+        <item>markets</item>
+        <item>partnerships</item>
+        <item>infrastructures</item>
+        <item>platforms</item>
+        <item>initiatives</item>
+        <item>channels</item>
+        <item>eyeballs</item>
+        <item>communities</item>
+        <item>ROI</item>
+        <item>solutions</item>
+        <item>e-tailers</item>
+        <item>e-services</item>
+        <item>action-items</item>
+        <item>portals</item>
+        <item>niches</item>
+        <item>technologies</item>
+        <item>content</item>
+        <item>vortals</item>
+        <item>supply-chains</item>
+        <item>convergence</item>
+        <item>relationships</item>
+        <item>architectures</item>
+        <item>interfaces</item>
+        <item>e-markets</item>
+        <item>e-commerce</item>
+        <item>systems</item>
+        <item>bandwidth</item>
+        <item>infomediaries</item>
+        <item>models</item>
+        <item>mindshare</item>
+        <item>deliverables</item>
+        <item>users</item>
+        <item>schemas</item>
+        <item>networks</item>
+        <item>applications</item>
+        <item>metrics</item>
+        <item>e-business</item>
+        <item>functionalities</item>
+        <item>experiences</item>
+        <item>web services</item>
+        <item>methodologies</item>
+    </string-array>
+
+    <string-array name="company_name">
+        <item>#{Name.last_name} #{suffix}</item>
+        <item>#{Name.last_name}-#{Name.last_name}</item>
+        <item>#{Name.last_name}, #{Name.last_name} and #{Name.last_name}</item>
+    </string-array>
+
+    <string-array name="company_industry">
+        <item>Defense &amp; Space</item>
+        <item>Computer Hardware</item>
+        <item>Computer Software</item>
+        <item>Computer Networking</item>
+        <item>Internet</item>
+        <item>Semiconductors</item>
+        <item>Telecommunications</item>
+        <item>Law Practice</item>
+        <item>Legal Services</item>
+        <item>Management Consulting</item>
+        <item>Biotechnology</item>
+        <item>Medical Practice</item>
+        <item>Hospital &amp; Health Care</item>
+        <item>Pharmaceuticals</item>
+        <item>Veterinary</item>
+        <item>Medical Devices</item>
+        <item>Cosmetics</item>
+        <item>Apparel &amp; Fashion</item>
+        <item>Sporting Goods</item>
+        <item>Tobacco</item>
+        <item>Supermarkets</item>
+        <item>Food Production</item>
+        <item>Consumer Electronics</item>
+        <item>Consumer Goods</item>
+        <item>Furniture</item>
+        <item>Retail</item>
+        <item>Entertainment</item>
+        <item>Gambling &amp; Casinos</item>
+        <item>Leisure, Travel &amp; Tourism</item>
+        <item>Hospitality</item>
+        <item>Restaurants</item>
+        <item>Sports</item>
+        <item>Food &amp; Beverages</item>
+        <item>Motion Pictures and Film</item>
+        <item>Broadcast Media</item>
+        <item>Museums and Institutions</item>
+        <item>Fine Art</item>
+        <item>Performing Arts</item>
+        <item>Recreational Facilities and Services</item>
+        <item>Banking</item>
+        <item>Insurance</item>
+        <item>Financial Services</item>
+        <item>Real Estate</item>
+        <item>Investment Banking</item>
+        <item>Investment Management</item>
+        <item>Accounting</item>
+        <item>Construction</item>
+        <item>Building Materials</item>
+        <item>Architecture &amp; Planning</item>
+        <item>Civil Engineering</item>
+        <item>Aviation &amp; Aerospace</item>
+        <item>Automotive</item>
+        <item>Chemicals</item>
+        <item>Machinery</item>
+        <item>Mining &amp; Metals</item>
+        <item>Oil &amp; Energy</item>
+        <item>Shipbuilding</item>
+        <item>Utilities</item>
+        <item>Textiles</item>
+        <item>Paper &amp; Forest Products</item>
+        <item>Railroad Manufacture</item>
+        <item>Farming</item>
+        <item>Ranching</item>
+        <item>Dairy</item>
+        <item>Fishery</item>
+        <item>Primary / Secondary Education</item>
+        <item>Higher Education</item>
+        <item>Education Management</item>
+        <item>Research</item>
+        <item>Military</item>
+        <item>Legislative Office</item>
+        <item>Judiciary</item>
+        <item>International Affairs</item>
+        <item>Government Administration</item>
+        <item>Executive Office</item>
+        <item>Law Enforcement</item>
+        <item>Public Safety</item>
+        <item>Public Policy</item>
+        <item>Marketing and Advertising</item>
+        <item>Newspapers</item>
+        <item>Publishing</item>
+        <item>Printing</item>
+        <item>Information Services</item>
+        <item>Libraries</item>
+        <item>Environmental Services</item>
+        <item>Package / Freight Delivery</item>
+        <item>Individual &amp; Family Services</item>
+        <item>Religious Institutions</item>
+        <item>Civic &amp; Social Organization</item>
+        <item>Consumer Services</item>
+        <item>Transportationg / Trucking / Railroad</item>
+        <item>Warehousing</item>
+        <item>Airlines / Aviation</item>
+        <item>Maritime</item>
+        <item>Information Technology and Services</item>
+        <item>Market Research</item>
+        <item>Public Relations and Communications</item>
+        <item>Design</item>
+        <item>Nonprofit Organization Management</item>
+        <item>Fund-Raising</item>
+        <item>Program Development</item>
+        <item>Writing and Editing</item>
+        <item>Staffing and Recruiting</item>
+        <item>Professional Training &amp; Coaching</item>
+        <item>Venture Capital &amp; Private Equity</item>
+        <item>Political Organization</item>
+        <item>Translation and Localization</item>
+        <item>Computer Games</item>
+        <item>Events Services</item>
+        <item>Arts and Crafts</item>
+        <item>Electrical / Electronic Manufacturing</item>
+        <item>Online Media</item>
+        <item>Nanotechnology</item>
+        <item>Music</item>
+        <item>Logistics and Supply Chain</item>
+        <item>Plastics</item>
+        <item>Computer &amp; Network Security</item>
+        <item>Wireless</item>
+        <item>Alternative Dispute Resolution</item>
+        <item>Security and Investigations</item>
+        <item>Facilities Services</item>
+        <item>Outsourcing / Offshoring</item>
+        <item>Health, Wellness and Fitness</item>
+        <item>Alternative Medicine</item>
+        <item>Media Production</item>
+        <item>Animation</item>
+        <item>Commercial Real Estate</item>
+        <item>Capital Markets</item>
+        <item>Think Tanks</item>
+        <item>Philanthropy</item>
+        <item>E-Learning</item>
+        <item>Wholesale</item>
+        <item>Import and Export</item>
+        <item>Mechanical or Industrial Engineering</item>
+        <item>Photography</item>
+        <item>Human Resources</item>
+        <item>Business Supplies and Equipment</item>
+        <item>Mental Health Care</item>
+        <item>Graphic Design</item>
+        <item>International Trade and Development</item>
+        <item>Wine and Spirits</item>
+        <item>Luxury Goods &amp; Jewelry</item>
+        <item>Renewables &amp; Environment</item>
+        <item>Glass, Ceramics &amp; Concrete</item>
+        <item>Packaging and Containers</item>
+        <item>Industrial Automation</item>
+        <item>Government Relations</item>
+    </string-array>
+
+    <string-array name="company_profession">
+        <item>teacher</item>
+        <item>actor</item>
+        <item>musician</item>
+        <item>philosopher</item>
+        <item>writer</item>
+        <item>doctor</item>
+        <item>accountant</item>
+        <item>agriculturist</item>
+        <item>architect</item>
+        <item>economist</item>
+        <item>engineer</item>
+        <item>interpreter</item>
+        <item>attorney at law</item>
+        <item>advocate</item>
+        <item>librarian</item>
+        <item>statistician</item>
+        <item>human resources</item>
+        <item>firefighter</item>
+        <item>judge</item>
+        <item>police officer</item>
+        <item>astronomer</item>
+        <item>biologist</item>
+        <item>chemist</item>
+        <item>physicist</item>
+        <item>programmer</item>
+        <item>web developer</item>
+        <item>designer</item>
+        <item>actress</item>
+        <item>air traffic controller</item>
+        <item>artist</item>
+        <item>attorney</item>
+        <item>banker</item>
+        <item>bartender</item>
+        <item>barber</item>
+        <item>bookkeeper</item>
+        <item>builder</item>
+        <item>businessman</item>
+        <item>butcher</item>
+        <item>carpenter</item>
+        <item>cashier</item>
+        <item>chef</item>
+        <item>coach</item>
+        <item>dentist</item>
+        <item>dental hygienist</item>
+        <item>developer</item>
+        <item>dietician</item>
+        <item>editor</item>
+        <item>electrician</item>
+        <item>factory worker</item>
+        <item>farmer</item>
+        <item>fiherman</item>
+        <item>gardener</item>
+        <item>hairdresser</item>
+        <item>journalist</item>
+        <item>lawyer</item>
+        <item>lecturer</item>
+        <item>lifeguard</item>
+        <item>mechanic</item>
+        <item>model</item>
+        <item>newsreader</item>
+        <item>nurse</item>
+        <item>optician</item>
+        <item>painter</item>
+        <item>pharmacist</item>
+        <item>photographer</item>
+        <item>pilot</item>
+        <item>plumber</item>
+        <item>politician</item>
+        <item>postman</item>
+        <item>receptionist</item>
+        <item>scientist</item>
+        <item>secretary</item>
+        <item>shop assistant</item>
+        <item>soldier</item>
+        <item>tailor</item>
+        <item>taxi driver</item>
+        <item>translator</item>
+        <item>traffic warden</item>
+        <item>travel agent</item>
+        <item>veterinary doctor</item>
+        <item>waiter</item>
+        <item>window cleaner</item>
+    </string-array>
+
+    <string-array name="company_type">
+        <item>Public Company</item>
+        <item>Educational Institution</item>
+        <item>Self-Employed</item>
+        <item>Government Agency</item>
+        <item>Nonprofit</item>
+        <item>Sole Proprietorship</item>
+        <item>Privately Held</item>
+        <item>Partnership</item>
+    </string-array>
+</resources>

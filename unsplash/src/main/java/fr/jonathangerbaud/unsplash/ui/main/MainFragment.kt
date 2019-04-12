@@ -21,6 +21,7 @@ import fr.jonathangerbaud.ui.listitems.Row
 import fr.jonathangerbaud.ui.listitems.widgets.GridSubheaderItem
 import fr.jonathangerbaud.ui.recyclerview.PagingDataLoaderDelegate
 import fr.jonathangerbaud.ui.recyclerview.RendererAdapter
+import fr.jonathangerbaud.ui.recyclerview.RowRenderer
 import fr.jonathangerbaud.ui.recyclerview.ViewRenderer
 import fr.jonathangerbaud.ui.recyclerview.decoration.*
 import fr.jonathangerbaud.ui.state.UIStateManager
@@ -163,9 +164,10 @@ class MainFragment : Fragment(), PagingDataLoaderDelegate.PaginationDataLoaderCa
 
     data class Subheader(val title:String)
 
-    class SubheaderRenderer(parent: ViewGroup) : ViewRenderer<Subheader, Row>(Row(parent.context))
+    class SubheaderRenderer(parent: ViewGroup) : RowRenderer<Subheader>(parent)
     {
-        val title: TextView
+        private val title: TextView
+
         init {
             Row.Builder()
                 .mainItem(GridSubheaderItem())
@@ -175,6 +177,7 @@ class MainFragment : Fragment(), PagingDataLoaderDelegate.PaginationDataLoaderCa
             (view.layoutParams as ViewGroup.MarginLayoutParams).topMargin  = Dimens.dp(16)
 //            view.setPaddingTop(Dimens.dp(16))
         }
+
         override fun bind(data: Subheader, position: Int)
         {
             title.text = data.title

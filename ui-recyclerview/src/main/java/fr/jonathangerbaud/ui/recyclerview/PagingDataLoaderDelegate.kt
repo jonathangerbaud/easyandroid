@@ -1,10 +1,7 @@
 package fr.jonathangerbaud.ui.recyclerview
 
 import android.view.ViewGroup
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
+import androidx.lifecycle.*
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import fr.jonathangerbaud.core.ext.d
@@ -17,12 +14,12 @@ class PagingDataLoaderDelegate<T>(
     callback: PaginationDataLoaderCallback<T>,
     private var stateManager: UIStateManager,
     private val adapter: IPaginationAdapter,
-    private val factory: (nextPageData: NextPageData) -> MutableLiveData<Resource<T>>
+    private val factory: (nextPageData: NextPageData) -> LiveData<Resource<T>>
 ) : DefaultLifecycleObserver
 {
     private val callback: WeakReference<PaginationDataLoaderCallback<T>> = WeakReference(callback)
 
-    private var data: MutableLiveData<Resource<T>>? = null
+    private var data: LiveData<Resource<T>>? = null
 
     private var dataLoaded: Boolean = false
 

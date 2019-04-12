@@ -1,1 +1,1 @@
-include ':app', ':core', ':ui-core', ':network', ':gms-location', ':ui-recyclerview', ':inappbilling', ':gms-maps', ':ui-state', ':ui-widgets', ':ui-listitems', ':ui-constraintlayout', ':firebase-analytics', ':ui-permissions', ':ui-image', ':unsplash'
+include ':app', ':core', ':ui-core', ':network', ':gms-location', ':ui-recyclerview', ':inappbilling', ':gms-maps', ':ui-state', ':ui-widgets', ':ui-listitems', ':ui-constraintlayout', ':firebase-analytics', ':ui-permissions', ':ui-image', ':unsplash', ':mockdata'

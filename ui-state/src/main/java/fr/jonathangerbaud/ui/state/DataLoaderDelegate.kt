@@ -1,9 +1,6 @@
 package fr.jonathangerbaud.ui.state
 
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
+import androidx.lifecycle.*
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import fr.jonathangerbaud.core.ext.d
 import fr.jonathangerbaud.network.Resource
@@ -12,12 +9,12 @@ import java.lang.ref.WeakReference
 class DataLoaderDelegate<T>(
     callback: DataLoaderCallback<T>,
     private var stateManager: UIStateManager,
-    private val factory: () -> MutableLiveData<Resource<T>>
+    private val factory: () -> LiveData<Resource<T>>
 ) : DefaultLifecycleObserver, Observer<Resource<T>>
 {
     private val callback: WeakReference<DataLoaderCallback<T>> = WeakReference(callback)
 
-    private var data: MutableLiveData<Resource<T>>? = null
+    private var data: LiveData<Resource<T>>? = null
 
     private var dataLoaded: Boolean = false
 

@@ -112,6 +112,7 @@ def libraries = [:]
     libraries.core          = ":core"
     libraries.inappbilling  = ":inappbilling"
     libraries.network       = ":network"
+    libraries.mockdata      = ":mockdata"
 
     def gms2 = [:]
         gms2.location       = ":gms-location"

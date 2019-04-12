@@ -6,6 +6,7 @@ import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.ImageView
+import fr.jonathangerbaud.ui.core.AspectRatio
 import fr.jonathangerbaud.ui.core.view.RatioDelegate
 
 class SuperImageView : ImageView
@@ -71,7 +72,11 @@ class SuperImageView : ImageView
 //            ratioDelegate.getHeightDimension(measuredWidth, measuredHeight))
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        setMeasuredDimension(measuredWidth, (measuredWidth / ratioDelegate.ratio).toInt())
+
+        if (ratioDelegate.ratio == AspectRatio.NONE)
+            setMeasuredDimension(measuredWidth, measuredHeight)
+        else
+            setMeasuredDimension(measuredWidth, (measuredWidth / ratioDelegate.ratio).toInt())
     }
 
     /**
