@@ -1,5 +1,6 @@
 dependencies {
     api deps.kotlin
     api project(libraries.network)
-    implementation 'com.github.javafaker:javafaker:0.17.2'
+    implementation 'com.github.DiUS:java-faker:06ece70248'
+//    implementation 'com.github.javafaker:javafaker:0.17.2'
 }

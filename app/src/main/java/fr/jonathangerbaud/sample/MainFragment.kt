@@ -97,8 +97,6 @@ class MainFragment : Fragment(), DataLoaderDelegate.DataLoaderCallback<List<Empl
                 .load(data.avatarImageUrl)
                 .into(avatar)
 
-            d("${data.firstName}")
-
             name.text = "${data.firstName} ${data.lastName}"
             job.text = data.jobTitle
 

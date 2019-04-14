@@ -52,7 +52,6 @@ object MockData
 
     fun employee(generator: MockGenerator): Employee
     {
-        d("create employee")
         return Employee(
             generator.name().firstName(),
             generator.name().lastName(),
@@ -67,7 +66,6 @@ object MockData
 
     fun address(generator: MockGenerator): Address
     {
-        d("create address")
         return Address(
             generator.address().streetName(),
             generator.address().streetAddressNumber(),
@@ -84,7 +82,6 @@ object MockData
 
     fun company(generator: MockGenerator): Company
     {
-        d("create company")
         return Company(
             generator.company().name(),
             address(generator),
