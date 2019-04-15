@@ -1,31 +1,29 @@
 package fr.jonathangerbaud.ui.listitems.widgets
 
 import android.view.Gravity
-import fr.jonathangerbaud.ui.listitems.DefaultRowItemSpec
-import fr.jonathangerbaud.ui.listitems.RowItem
-import fr.jonathangerbaud.ui.listitems.RowItemSpec
-import fr.jonathangerbaud.ui.widgets.CheckboxBuilder
+import android.widget.CheckBox
+import fr.jonathangerbaud.ui.listitems.DefaultListItem
 
-class CheckboxItem : CheckboxBuilder<CheckboxItem>(), RowItem
+
+open class CheckboxItem(initView: CheckBox.() -> Unit = {}) : DefaultListItem<CheckBox>(::CheckBox, initView)
 {
-    override fun getRowItemSpecs(): RowItemSpec
+    constructor(checked: Boolean, initView: CheckBox.() -> Unit = {}) : this({
+        this.isChecked = checked
+        initView(this)
+    })
+
+    override fun getMinListItemHeight(): Int
     {
-        return CustomRowItemSpec()
+        return SIZE_56
     }
 
-    private class CustomRowItemSpec : DefaultRowItemSpec()
+    override fun getVerticalGravity(): Int
     {
-        override fun getMinListItemHeight():Int
-        {
-            return SIZE_56
-        }
+        return Gravity.CENTER_VERTICAL
+    }
 
-        override fun getVerticalGravity(): Int {
-            return Gravity.CENTER_VERTICAL
-        }
-
-        override fun getEndMargin(): Int {
-            return SIZE_32
-        }
+    override fun getEndMargin(): Int
+    {
+        return SIZE_32
     }
 }

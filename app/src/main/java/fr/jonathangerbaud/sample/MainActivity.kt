@@ -31,9 +31,9 @@ class MainActivity : AppCompatActivity() {
         //recyclerView.addItemDecoration(divider)
 
         val adapter = RendererAdapter()
-        adapter.addView(BasicItem::class) { parent:ViewGroup -> BasicRowRenderer(parent)}
-        adapter.addView(BasicItem2::class) { parent:ViewGroup -> BasicRowRenderer2(parent)}
-        adapter.addView(HeaderItem::class) { parent:ViewGroup -> HeaderRenderer(parent)}
+        adapter.addRenderer(::BasicRowRenderer)
+        adapter.addRenderer(::BasicRowRenderer2)
+        adapter.addRenderer(::HeaderRenderer)
         recyclerView.adapter = adapter
 
         val data = arrayListOf<Any>()
@@ -67,43 +67,21 @@ class MainActivity : AppCompatActivity() {
     class BasicItem2(val name:String)
     class HeaderItem(val title:String)
 
-
-    class BasicRow(context: Context) : Row(context)
+    class BasicRowRenderer(parent:ViewGroup) : RowRenderer<BasicItem>(parent)
     {
         val title:TextView
 
         init {
-            Builder()
-                .mainItem(TitleItem().text("Initial text"))
-                .build(context, this)
+            Row.Composer()
+                .mainItem(TitleItem { text = "Initial text" })
+                .build(view)
 
-            title = mainContent as TextView
-        }
-    }
-
-    class HeaderRow(context: Context) : Row(context)
-    {
-        val title:TextView
-
-        init {
-            Builder()
-                .mainItem(InsetSubheaderItem().text("Initial text"))
-                .build(context, this)
-
-            title = mainContent as TextView
-        }
-    }
-
-    class BasicRowRenderer(parent:ViewGroup) : ViewRenderer<BasicItem, BasicRow>(BasicRow(parent.context))
-    {
-        init {
-            // do initilazing stuff on view
-//            view.title
+            title = view.mainContent as TextView
         }
 
         override fun bind(data: BasicItem, position: Int)
         {
-            view.title.text = data.name
+
         }
     }
 
@@ -117,11 +95,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    class HeaderRenderer(parent:ViewGroup) : ViewRenderer<HeaderItem, HeaderRow>(HeaderRow(parent.context))
+    class HeaderRenderer(parent:ViewGroup) : RowRenderer<HeaderItem>(parent)
     {
+        val title:TextView
+
+        init {
+            Row.Composer()
+                .mainItem(SubheaderItem { text = "Initial text" })
+                .build(view)
+
+            title = view.mainContent as TextView
+        }
+
         override fun bind(data: HeaderItem, position: Int)
         {
-            view.title.text = data.title
+            title.text = data.title
         }
     }
 }

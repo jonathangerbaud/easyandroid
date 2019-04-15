@@ -1,61 +1,72 @@
 package fr.jonathangerbaud.ui.listitems.widgets
 
-import android.view.View
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import androidx.annotation.Dimension
-import androidx.annotation.Dimension.DP
+import androidx.annotation.DrawableRes
 import fr.jonathangerbaud.core.util.Dimens
 import fr.jonathangerbaud.ui.image.MaskOptions
 import fr.jonathangerbaud.ui.image.PathHelper
 import fr.jonathangerbaud.ui.image.SuperImageView
-import fr.jonathangerbaud.ui.listitems.DefaultRowItemSpec
-import fr.jonathangerbaud.ui.listitems.RowItem
-import fr.jonathangerbaud.ui.listitems.RowItemSpec
-import fr.jonathangerbaud.ui.widgets.SuperImageBuilder
 
-class AvatarItem : SuperImageBuilder<AvatarItem>(), RowItem
+
+open class AvatarItem(initView: SuperImageView.() -> Unit = {}) : IconItem(initView)
 {
-    private var maskOptions:MaskOptions? = null
+    constructor(@DrawableRes drawableRes: Int, initView: SuperImageView.() -> Unit = {}) : this({
+        this.setImageResource(drawableRes)
+        initView(this)
+    })
 
-    override fun applyViewAttributes(view: View)
+    constructor(
+        drawable: Drawable,
+        initView: SuperImageView.() -> Unit = {}
+    ) : this({
+        this.setImageDrawable(drawable)
+        initView(this)
+    })
+
+    constructor(bitmap: Bitmap, initView: SuperImageView.() -> Unit = {}) : this({
+        this.setImageBitmap(bitmap)
+        initView(this)
+    })
+
+    private var maskOptions: MaskOptions? = null
+
+    override fun beforeApplyingInit(view: SuperImageView)
     {
-        super.applyViewAttributes(view)
-        val view = view as SuperImageView
-
         maskOptions?.let { view.setMaskOptions(it) }
     }
 
-    fun circle() = applySelf { maskOptions = MaskOptions.Builder(PathHelper.circle(Dimens.dpF(56))).build()}
+    fun circle(): AvatarItem
+    {
+        maskOptions = MaskOptions.Builder(PathHelper.circle(Dimens.dpF(56))).build()
+        return this
+    }
 
-    fun roundSquare(@Dimension(unit = DP) angleInDp:Int) = applySelf {
+    fun roundSquare(@Dimension(unit = Dimension.DP) angleInDp: Int): AvatarItem
+    {
         val size = Dimens.dpF(56)
         maskOptions = MaskOptions.Builder(PathHelper.roundedRect(size, size, Dimens.dpF(angleInDp))).build()
+        return this
     }
 
-    override fun getRowItemSpecs(): RowItemSpec
+    override fun getMinListItemHeight(): Int
     {
-        return CustomRowItemSpec()
+        return SIZE_56
     }
 
-    private class CustomRowItemSpec : DefaultRowItemSpec()
+    override fun getTopPadding(minHeight: Int): Int
     {
-        override fun getMinListItemHeight():Int
-        {
-            return SIZE_56
-        }
+        return if (minHeight < SIZE_72) SIZE_8 else SIZE_16
+    }
 
-        override fun getTopPadding(minHeight:Int):Int
-        {
-            return if (minHeight < SIZE_72) SIZE_8 else SIZE_16
-        }
+    override fun getConstraintWidth(): Int
+    {
+        return SIZE_40
+    }
 
-        override fun getWidth(): Int
-        {
-            return SIZE_40
-        }
-
-        override fun getHeight(): Int
-        {
-            return SIZE_40
-        }
+    override fun getConstraintHeight(): Int
+    {
+        return SIZE_40
     }
 }

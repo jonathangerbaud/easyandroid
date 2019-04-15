@@ -1,28 +1,33 @@
 package fr.jonathangerbaud.ui.listitems.widgets
 
-import fr.jonathangerbaud.ui.listitems.RowItemSpec
+import android.widget.TextView
+import androidx.annotation.StringRes
+import fr.jonathangerbaud.core.util.ResUtils
 import fr.jonathangerbaud.ui.listitems.style.MaterialListOverlineStyle
 
-class OverlineItem : TextItem()
+
+open class OverlineItem(initView: TextView.() -> Unit = {}) : TextItem(initView)
 {
-    init
+    constructor(text: String, initView: TextView.() -> Unit = {}) : this({
+        this.text = text
+        initView(this)
+    })
+
+    constructor(@StringRes stringRes: Int, initView: TextView.() -> Unit = {}) : this({
+        this.text = ResUtils.getString(stringRes)
+        initView(this)
+    })
+
+    override fun beforeApplyingInit(view: TextView)
     {
-        styler(MaterialListOverlineStyle())
+        MaterialListOverlineStyle().applyDefaultStyle(view)
     }
 
-    override fun getRowItemSpecs(): RowItemSpec
+    override fun getTextBaseline(minHeight: Int, position: Int, count: Int): Int
     {
-        return OverlineRowItemSpec()
-    }
-
-    protected class OverlineRowItemSpec : CustomRowItemSpec()
-    {
-        override fun getTextBaseline(minHeight: Int, position: Int, count: Int): Int
-        {
-            if (minHeight < SIZE_88)
-                return SIZE_24
-            else
-                return SIZE_28
-        }
+        if (minHeight < SIZE_88)
+            return SIZE_24
+        else
+            return SIZE_28
     }
 }

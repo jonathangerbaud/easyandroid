@@ -76,7 +76,7 @@ class MainFragment2 : Fragment(), DataLoaderDelegate.DataLoaderCallback<List<Pho
         divider = GridDivider(Dimens.dp(4), false)
 
         val adapter = RendererAdapter()
-        adapter.addView(Photo::class, ::PhotoRenderer)
+        adapter.addRenderer(::PhotoRenderer)
 
         recyclerView.layoutManager = layoutManager
         recyclerView.addItemDecoration(divider)

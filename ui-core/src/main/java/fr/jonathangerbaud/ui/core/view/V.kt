@@ -20,7 +20,7 @@ object V
 
     fun button(context:Context, initView:Button.() -> Unit = {}): Button =
         view(context, ::Button, initView)
-    fun textview(context:Context, initView:TextView.() -> Unit = {}): TextView =
+    fun textView(context:Context, initView:TextView.() -> Unit = {}): TextView =
         view(context, ::TextView, initView)
     fun checkbox(context:Context, initView:CheckBox.() -> Unit = {}): CheckBox =
         view(context, ::CheckBox, initView)

@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import fr.jonathangerbaud.core.CoreDevice
 import fr.jonathangerbaud.core.ext.d
 import fr.jonathangerbaud.core.util.Dimens
-import fr.jonathangerbaud.core.util.ResUtils
 import fr.jonathangerbaud.ui.core.text.TextAppearance
 import fr.jonathangerbaud.ui.image.MaskOptions
 import fr.jonathangerbaud.ui.image.SuperImageView
@@ -28,16 +27,16 @@ class MainActivity2 : AppCompatActivity()
         val image = findViewById<SuperImageView>(R.id.image)
 
         image.setMaskOptions(
-            MaskOptions.Builder(
-                PathHelper.roundedRect(
-                   Dimens.dpF(256),
-                   Dimens.dpF(256),
-                    0f,
-                   Dimens.dpF(40),
-                    0f,
-                   Dimens.dpF(80)
-                )
-            ).build()
+                MaskOptions.Builder(
+                        PathHelper.roundedRect(
+                                Dimens.dpF(256),
+                                Dimens.dpF(256),
+                                0f,
+                                Dimens.dpF(40),
+                                0f,
+                                Dimens.dpF(80)
+                        )
+                ).build()
         )
 
 //        image.setMaskBorderColor(0xFFFF0000.toInt())
@@ -58,75 +57,71 @@ class MainActivity2 : AppCompatActivity()
         layout.addView(v1)
         layout.addView(v2)*/
 
+        layout.addView(Row.Composer().mainItem(HeadlineItem("Headline")).build(this))
+
         layout.addView(
-            Row.Builder()
-                .mainItem(HeadlineItem().text("Headline"))
-                .build(this)
+                Row.Composer()
+                    .startItem(SmallIconItem(R.drawable.abc_ic_go_search_api_material))
+                    .mainItem(TitleItem("Title"))
+                    .endItem(CheckboxItem())
+                    .build(this)
         )
 
         layout.addView(
-            Row.Builder()
-                .startItem(SmallIconItem().drawable(R.drawable.abc_ic_go_search_api_material))
-                .mainItem(TitleItem().text("Title"))
-                .endItem(CheckboxItem())
-                .build(this)
+                Row.Composer()
+                    .startItem(SmallIconItem(R.drawable.abc_ic_go_search_api_material))
+                    .mainItem(TextBodyItem("Text Body"))
+                    .endItem(SwitchItem())
+                    .build(this)
         )
 
         layout.addView(
-            Row.Builder()
-                .startItem(SmallIconItem().drawable(R.drawable.abc_ic_go_search_api_material))
-                .mainItem(TextBodyItem().text("Text Body"))
-                .endItem(SwitchItem())
-                .build(this)
+                Row.Composer()
+                    .startItem(IconItem(R.drawable.jg_ic_arrow_left) { setBackgroundResource(R.color.md_green400) })
+                    .mainItem(OverlineItem("Overline"))
+                    .endItem(SwitchItem())
+                    .build(this)
         )
 
         layout.addView(
-            Row.Builder()
-                .startItem(IconItem().drawable(R.drawable.jg_ic_arrow_left).background(R.color.md_green400))
-                .mainItem(OverlineItem().text("Overline"))
-                .endItem(SwitchItem())
-                .build(this)
+                Row.Composer()
+                    .startItem(SmallIconItem(R.drawable.ic_launcher_foreground) { setBackgroundResource(R.color.colorPrimary) })
+                    .mainItem(CaptionItem("My super caption"))
+                    .endItem(CheckboxItem())
+                    .build(this)
         )
 
         layout.addView(
-            Row.Builder()
-                .startItem(SmallIconItem().drawable(R.drawable.ic_launcher_foreground).backgroundRes(R.color.colorPrimary))
-                .mainItem(CaptionItem().text("My super caption"))
-                .endItem(CheckboxItem())
-                .build(this)
+                Row.Composer()
+                    .startItem(SmallIconItem(R.drawable.ic_launcher_foreground) { setBackgroundResource(R.color.colorPrimary) })
+                    .mainItem(MetaTextItem("Meta text"))
+                    .endItem(CheckboxItem())
+                    .build(this)
         )
 
         layout.addView(
-            Row.Builder()
-                .startItem(SmallIconItem().drawable(R.drawable.ic_launcher_foreground).backgroundRes(R.color.colorPrimary))
-                .mainItem(MetaTextItem().text("Meta text"))
-                .endItem(CheckboxItem())
-                .build(this)
+                Row.Composer()
+                    .startItem(SmallIconItem(R.drawable.ic_launcher_foreground) { setBackgroundResource(R.color.colorPrimary) })
+                    .mainItem(
+                            TextStackItem()
+                                .addText(TitleItem("Three-line text"))
+                                .addText(TextBodyItem("Secondary line text. Lorem ipsum dolor sit amet"))
+                    )
+                    .endItem(CheckboxItem())
+                    .build(this)
         )
 
         layout.addView(
-            Row.Builder()
-                .startItem(SmallIconItem().drawable(R.drawable.ic_launcher_foreground).backgroundRes(R.color.colorPrimary))
-                .mainItem(
-                    TextStackItem()
-                        .addText(TitleItem().text("Three-line text"))
-                        .addText(TextBodyItem().text("Secondary line text. Lorem ipsum dolor sit amet"))
-                )
-                .endItem(CheckboxItem())
-                .build(this)
-        )
-
-        layout.addView(
-            Row.Builder()
-                .startItem(SmallIconItem().drawable(R.drawable.ic_launcher_foreground).backgroundRes(R.color.colorPrimary))
-                .mainItem(
-                    TextStackItem()
-                        .addText(OverlineItem().text("Overline"))
-                        .addText(TitleItem().text("Three-line text"))
-                        .addText(TextBodyItem().text("Secondary line text. Lorem ipsum"))
-                )
-                .endItem(CheckboxItem())
-                .build(this)
+                Row.Composer()
+                    .startItem(SmallIconItem(R.drawable.ic_launcher_foreground) { setBackgroundResource(R.color.colorPrimary) })
+                    .mainItem(
+                            TextStackItem()
+                                .addText(OverlineItem("Overline"))
+                                .addText(TitleItem("Three-line text"))
+                                .addText(TextBodyItem("Secondary line text. Lorem ipsum"))
+                    )
+                    .endItem(CheckboxItem())
+                    .build(this)
         )
     }
 }

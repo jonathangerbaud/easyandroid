@@ -1,26 +1,30 @@
 package fr.jonathangerbaud.ui.listitems.widgets
 
-import fr.jonathangerbaud.ui.listitems.RowItemSpec
+import android.widget.TextView
+import androidx.annotation.StringRes
+import fr.jonathangerbaud.core.util.ResUtils
 import fr.jonathangerbaud.ui.listitems.style.MaterialListSubheaderStyle
-import fr.jonathangerbaud.ui.listitems.style.MaterialListTitleStyle
 
-open class SubheaderItem : TextItem()
+
+open class SubheaderItem(initView: TextView.() -> Unit = {}) : TextItem(initView)
 {
-    init
+    constructor(text: String, initView: TextView.() -> Unit = {}) : this({
+        this.text = text
+        initView(this)
+    })
+
+    constructor(@StringRes stringRes: Int, initView: TextView.() -> Unit = {}) : this({
+        this.text = ResUtils.getString(stringRes)
+        initView(this)
+    })
+
+    override fun beforeApplyingInit(view: TextView)
     {
-        styler(MaterialListSubheaderStyle())
+        MaterialListSubheaderStyle().applyDefaultStyle(view)
     }
 
-    override fun getRowItemSpecs(): RowItemSpec
+    override fun getTextBaseline(minHeight: Int, position: Int, count: Int): Int
     {
-        return SubheaderItemSpec()
-    }
-
-    open protected class SubheaderItemSpec : CustomRowItemSpec()
-    {
-        override fun getTextBaseline(minHeight: Int, position: Int, count: Int): Int
-        {
-            return SIZE_32
-        }
+        return SIZE_32
     }
 }

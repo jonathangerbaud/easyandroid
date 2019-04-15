@@ -1,36 +1,29 @@
 package fr.jonathangerbaud.ui.listitems.widgets
 
-import fr.jonathangerbaud.ui.listitems.RowItemSpec
-import fr.jonathangerbaud.ui.listitems.style.MaterialListSubheaderStyle
-import fr.jonathangerbaud.ui.listitems.style.MaterialListTitleStyle
+import android.widget.TextView
+import androidx.annotation.StringRes
+import fr.jonathangerbaud.core.util.ResUtils
 
-open class GridSubheaderItem : TextItem()
+
+open class GridSubheaderItem(initView: TextView.() -> Unit = {}) : SubheaderItem(initView)
 {
-    init
+    constructor(text: String, initView: TextView.() -> Unit = {}) : this({
+        this.text = text
+        initView(this)
+    })
+
+    constructor(@StringRes stringRes: Int, initView: TextView.() -> Unit = {}) : this({
+        this.text = ResUtils.getString(stringRes)
+        initView(this)
+    })
+
+    override fun getStartMarginIfStartComponent(): Int
     {
-        styler(MaterialListSubheaderStyle())
+        return 0
     }
 
-    override fun getRowItemSpecs(): RowItemSpec
+    override fun getEndMarginIfEndComponent(): Int
     {
-        return GridSubheaderItemSpec()
-    }
-
-    protected open class GridSubheaderItemSpec : CustomRowItemSpec()
-    {
-        override fun getStartMarginIfStartComponent(): Int
-        {
-            return 0
-        }
-
-        override fun getEndMarginIfEndComponent(): Int
-        {
-            return 0
-        }
-
-        override fun getTextBaseline(minHeight: Int, position: Int, count: Int): Int
-        {
-            return SIZE_32
-        }
+        return 0
     }
 }

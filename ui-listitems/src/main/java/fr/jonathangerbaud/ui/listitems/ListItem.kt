@@ -1,10 +1,13 @@
 package fr.jonathangerbaud.ui.listitems
 
-/**
- * All size measurements are in pixels
- */
-interface RowItemSpec
+import android.content.Context
+import android.view.View
+
+
+interface ListItem<T:View>
 {
+    fun build(context: Context):T
+
     fun getMinListItemHeight():Int
     fun getTopPadding(minHeight:Int):Int
     fun getStartMarginIfStartComponent():Int
@@ -17,9 +20,9 @@ interface RowItemSpec
     /**
      * @return ConstraintSet size constant
      */
-    fun getWidth(): Int
+    fun getConstraintWidth(): Int
     /**
      * @return ConstraintSet size constant
      */
-    fun getHeight(): Int
+    fun getConstraintHeight(): Int
 }

@@ -1,6 +1,8 @@
 package fr.jonathangerbaud.ui.core.ext
 
 import android.view.View
+import fr.jonathangerbaud.core.util.AndroidUtil
+import fr.jonathangerbaud.core.util.AttrUtil
 
 
 fun View.setPaddingLeft(value: Int) = setPadding(value, paddingTop, paddingRight, paddingBottom)
@@ -43,4 +45,9 @@ fun View.resize(width: Int, height: Int) {
         lp.height = height
         layoutParams = lp
     }
+}
+
+fun View.rippleForeground() {
+    if (AndroidUtil.isMinMarshmallow())
+        this.foreground = AttrUtil.getDrawable(context, android.R.attr.selectableItemBackgroundBorderless)
 }

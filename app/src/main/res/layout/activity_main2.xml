@@ -1,41 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity"
-        android:orientation="vertical"
-        android:showDividers="middle"
-        android:divider="@drawable/divider"
-        android:id="@+id/layout">
-
-    <fr.jonathangerbaud.ui.image.SuperImageView
-            android:id="@+id/image"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/dp_16"
-            android:layout_width="256dp"
-            android:layout_height="256dp"
-            android:src="@drawable/landscape"/>
-
-    <TextView
-            android:text="Normal text"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent">
 
-    <TextView
-            android:id="@+id/customText"
-            android:text="Customized text via Text Appearance"
+    <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            tools:context=".MainActivity"
+            android:orientation="vertical"
+            android:showDividers="middle"
+            android:divider="@drawable/divider"
+            android:id="@+id/layout">
 
-    <View
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="#ff999999"
-            android:layout_width="40dp"
-            android:layout_height="40dp"/>
+        <fr.jonathangerbaud.ui.image.SuperImageView
+                android:id="@+id/image"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/dp_16"
+                android:layout_width="256dp"
+                android:layout_height="256dp"
+                android:src="@drawable/landscape"/>
 
-</LinearLayout>
+        <TextView
+                android:text="Normal text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:id="@+id/customText"
+                android:text="Customized text via Text Appearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <View
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="#ff999999"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+    </LinearLayout>
+</ScrollView>

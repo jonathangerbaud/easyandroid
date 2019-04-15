@@ -1,37 +1,50 @@
 package fr.jonathangerbaud.ui.listitems.widgets
 
-import fr.jonathangerbaud.ui.listitems.DefaultRowItemSpec
-import fr.jonathangerbaud.ui.listitems.RowItem
-import fr.jonathangerbaud.ui.listitems.RowItemSpec
-import fr.jonathangerbaud.ui.widgets.ImageBuilder
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
+import androidx.annotation.DrawableRes
+import fr.jonathangerbaud.ui.image.SuperImageView
+import fr.jonathangerbaud.ui.listitems.DefaultListItem
 
-class IconItem : ImageBuilder<IconItem>(), RowItem
+
+open class IconItem(initView: SuperImageView.() -> Unit = {}) :
+    DefaultListItem<SuperImageView>(::SuperImageView, initView)
 {
-    override fun getRowItemSpecs(): RowItemSpec
+    constructor(@DrawableRes drawableRes: Int, initView: SuperImageView.() -> Unit = {}) : this({
+        this.setImageResource(drawableRes)
+        initView(this)
+    })
+
+    constructor(
+        drawable: Drawable,
+        initView: SuperImageView.() -> Unit = {}
+    ) : this({
+        this.setImageDrawable(drawable)
+        initView(this)
+    })
+
+    constructor(bitmap: Bitmap, initView: SuperImageView.() -> Unit = {}) : this({
+        this.setImageBitmap(bitmap)
+        initView(this)
+    })
+
+    override fun getMinListItemHeight(): Int
     {
-        return CustomRowItemSpec()
+        return SIZE_56
     }
 
-    private class CustomRowItemSpec : DefaultRowItemSpec()
+    override fun getTopPadding(minHeight: Int): Int
     {
-        override fun getMinListItemHeight():Int
-        {
-            return SIZE_56
-        }
+        return if (minHeight < SIZE_72) SIZE_8 else SIZE_16
+    }
 
-        override fun getTopPadding(minHeight:Int):Int
-        {
-            return if (minHeight < SIZE_72) SIZE_8 else SIZE_16
-        }
+    override fun getConstraintWidth(): Int
+    {
+        return SIZE_40
+    }
 
-        override fun getWidth(): Int
-        {
-            return SIZE_40
-        }
-
-        override fun getHeight(): Int
-        {
-            return SIZE_40
-        }
+    override fun getConstraintHeight(): Int
+    {
+        return SIZE_40
     }
 }

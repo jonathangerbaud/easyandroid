@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import fr.jonathangerbaud.core.ext.d
 import fr.jonathangerbaud.core.ext.w
 import kotlin.reflect.KClass
+import kotlin.reflect.KProperty
 
 
 open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter, IPaginationAdapter
@@ -86,7 +87,12 @@ open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter, IPaginationA
         notifyDataSetChanged()
     }
 
-    fun addView(type: KClass<*>, factory: (parent: ViewGroup) -> Renderer<*>)
+    inline fun <reified T : Any> addRenderer(noinline factory:(parent:ViewGroup) -> Renderer<T>)
+    {
+        addRenderer(T::class, factory)
+    }
+
+    fun addRenderer(type: KClass<*>, factory: (parent: ViewGroup) -> Renderer<*>)
     {
         viewHolderList.add(factory)
         typeMap[type] = viewHolderList.size - 1
@@ -184,14 +190,13 @@ open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter, IPaginationA
 
     init
     {
-        addView(LoadingItem::class) { parent -> LoadingRenderer(parent) }
-        addView(ErrorItem::class) { parent -> ErrorRenderer(parent) }
+        addRenderer(::LoadingRenderer)
+        addRenderer(::ErrorRenderer)
     }
 
     override fun setPaginationDelegate(paginationDelegate: PaginationDelegate)
     {
         paginationDelegate.addCallback { page ->
-            d("pagination says next page")
             showLoading(true)
         }
     }
@@ -255,7 +260,6 @@ open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter, IPaginationA
         showLoading(false)
 
         errorItem = ErrorItem(errorText, errorCallback)
-        d("add error item")
         data.add(errorItem)
         notifyItemInserted(data.size - 1)
     }

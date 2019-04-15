@@ -2,11 +2,9 @@ package fr.jonathangerbaud.ui.state
 
 import android.view.View
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import fr.jonathangerbaud.core.ext.d
 import fr.jonathangerbaud.ui.core.ext.hide
 import fr.jonathangerbaud.ui.core.ext.show
 import fr.jonathangerbaud.ui.state.widget.DataStateView
-
 import java.lang.ref.WeakReference
 
 class UIStateManager @JvmOverloads constructor(dataView: View?, dataStateView: DataStateView, extraView: View? = null)
@@ -30,11 +28,9 @@ class UIStateManager @JvmOverloads constructor(dataView: View?, dataStateView: D
 
     fun setState(state: State)
     {
-        d("setState $state")
         dataView.get()?.let {
             if (state == State.DATA || state == State.LOADING && isSRL)
             {
-                d("show recyclerview")
                 it.show()
 
                 if (isSRL)
@@ -49,7 +45,6 @@ class UIStateManager @JvmOverloads constructor(dataView: View?, dataStateView: D
        dataStateView.get()?.let {
             if (state == State.DATA || state == State.EXTRA || state == State.LOADING && isSRL)
             {
-                d("hide datastateview")
                 it.hide()
             }
             else

@@ -1,21 +1,24 @@
 package fr.jonathangerbaud.ui.listitems.widgets
 
-import fr.jonathangerbaud.ui.listitems.RowItemSpec
-import fr.jonathangerbaud.ui.listitems.style.MaterialListSubheaderStyle
-import fr.jonathangerbaud.ui.listitems.style.MaterialListTitleStyle
+import android.widget.TextView
+import androidx.annotation.StringRes
+import fr.jonathangerbaud.core.util.ResUtils
 
-open class InsetSubheaderItem : SubheaderItem()
+
+open class InsetSubheaderItem(initView: TextView.() -> Unit = {}) : SubheaderItem(initView)
 {
-    override fun getRowItemSpecs(): RowItemSpec
-    {
-        return InsetSubheaderItemSpec()
-    }
+    constructor(text: String, initView: TextView.() -> Unit = {}) : this({
+        this.text = text
+        initView(this)
+    })
 
-    private class InsetSubheaderItemSpec : SubheaderItemSpec()
+    constructor(@StringRes stringRes: Int, initView: TextView.() -> Unit = {}) : this({
+        this.text = ResUtils.getString(stringRes)
+        initView(this)
+    })
+
+    override fun getStartMarginIfStartComponent(): Int
     {
-        override fun getStartMarginIfStartComponent(): Int
-        {
-            return SIZE_72
-        }
+        return SIZE_72
     }
 }

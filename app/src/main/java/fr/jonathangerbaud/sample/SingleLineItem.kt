@@ -19,11 +19,11 @@ class SingleLineItem(context: Context) : Row(context)
         private set
 
     init {
-        Row.Builder()
-            .startItem(SmallIconItem().drawable(R.drawable.abc_ic_go_search_api_material))
+        Row.Composer()
+            .startItem(SmallIconItem(R.drawable.abc_ic_go_search_api_material))
             .endItem(SwitchItem())
-            .mainItem(TitleItem().text("hello"))
-            .build(context, this)
+            .mainItem(TitleItem("hello"))
+            .build(this)
 
         icon = startContent as ImageView
         title = mainContent as TextView

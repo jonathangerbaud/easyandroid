@@ -1,14 +1,11 @@
 package fr.jonathangerbaud.sample
 
 import android.os.Bundle
-import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import fr.jonathan.mockdata.MockData
 import fr.jonathan.mockdata.MockData.Employee
-import fr.jonathan.mockdata.MockGenerator
 import fr.jonathan.mockdata.MockServer
-import fr.jonathangerbaud.core.ext.d
 import fr.jonathangerbaud.ui.core.ToolbarDelegate
 import fr.jonathangerbaud.ui.listitems.Row
 import fr.jonathangerbaud.ui.listitems.widgets.AvatarItem
@@ -57,33 +52,40 @@ class MainFragment : Fragment(), DataLoaderDelegate.DataLoaderCallback<List<Empl
         val stateView = view.findViewById<DataStateView>(R.id.dataStateView)
 
         adapter = RendererAdapter()
-        adapter.addView(Employee::class, ::EmployeeRenderer)
+        //adapter.addView(Employee::class, ::EmployeeRenderer)
+        adapter.addRenderer(::EmployeeRenderer)
         recyclerView.adapter = adapter
 
-        DataLoaderDelegate(this,
-            UIStateManager(view.findViewById(R.id.swipe_refresh_layout), stateView)) { MockServer().list(MockData::employee)}
+        DataLoaderDelegate(
+                this,
+                UIStateManager(
+                        view.findViewById(R.id.swipe_refresh_layout),
+                        stateView)) { MockServer().list(MockData::employee) }
     }
 
     override fun onDataLoaded(data: List<Employee>?)
     {
-        d("onDataLoaded $data")
         adapter.addAll(data!!)
     }
 
-    class EmployeeRenderer(parent:ViewGroup) : RowRenderer<Employee>(parent)
+    class EmployeeRenderer(parent: ViewGroup) : RowRenderer<Employee>(parent)
     {
-        private val avatar:ImageView
-        private val name:TextView
-        private val job:TextView
+        private val avatar: ImageView
+        private val name: TextView
+        private val job: TextView
 
-        init {
-            // do initilazing stuff on view
+        init
+        {
+            // do initializing stuff on view
 //            view.title
-            Row.Builder()
+            Row.Composer()
                 .startItem(AvatarItem().circle())
-                .mainItem(TextStackItem().addText(TitleItem()).addText(TextBodyItem()))
+                .mainItem(
+                        TextStackItem()
+                            .addText(TitleItem())
+                            .addText(TextBodyItem()))
 //                .mainItem(TitleItem())
-                .build(parent.context, view)
+                .build(view)
 
             avatar = view.startContent as ImageView
             name = (view.mainContent as ViewGroup).getChildAt(0) as TextView

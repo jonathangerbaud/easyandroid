@@ -10,11 +10,10 @@ import androidx.annotation.AttrRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.widget.TextViewCompat
-import fr.jonathangerbaud.core.util.ResUtils
 import fr.jonathangerbaud.ui.constraintlayout.ext.*
 import fr.jonathangerbaud.ui.listitems.widgets.TextItem
 import fr.jonathangerbaud.ui.listitems.widgets.TextStackItem
-import fr.jonathangerbaud.ui.widgets.WidgetBuilder
+
 
 open class Row : ConstraintLayout
 {
@@ -23,129 +22,136 @@ open class Row : ConstraintLayout
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
 
     constructor(context: Context, attrs: AttributeSet?, @AttrRes defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
+            context,
+            attrs,
+            defStyleAttr
     )
 
     var startContent: View? = null
     var mainContent: View? = null
     var endContent: View? = null
 
-    class Builder : WidgetBuilder<Row.Builder>()
+    class Composer
     {
-        private var startItem: RowItem? = null
-        private var mainItem: RowItem? = null
-        private var endItem: RowItem? = null
+        private var startItem: ListItem<*>? = null
+        private var mainItem: ListItem<*>? = null
+        private var endItem: ListItem<*>? = null
 
-        fun startItem(item: RowItem): Builder
+        private var init: Row.() -> Unit = {}
+
+        fun init(init: Row.() -> Unit): Composer
+        {
+            this.init = init
+            return this
+        }
+
+        fun startItem(item: ListItem<*>): Composer
         {
             startItem = item
             return this
         }
 
-        fun mainItem(item: RowItem): Builder
+        fun mainItem(item: ListItem<*>): Composer
         {
             this.mainItem = item
             return this
         }
 
-        fun endItem(item: RowItem): Builder
+        fun endItem(item: ListItem<*>): Composer
         {
             endItem = item
             return this
         }
 
-        override fun createView(context: Context): Row
-        {
-            return Row(context)
-        }
-
         fun build(parent:ViewGroup) : Row
         {
-            return build(parent.context, Row(parent.context))
+            return build(parent.context)
         }
 
-        fun build(context: Context, view: Row): Row
+        fun build(context:Context) : Row
         {
-            applyViewAttributes(view)
+            return build(Row(context))
+        }
 
-            val startView: View? = startItem?.build(context)
-            val mainView: View? = mainItem?.build(context)
-            val endView: View? = endItem?.build(context)
+        fun build(view: Row): Row
+        {
+            view.apply(init)
 
-            val startSpecs = startItem?.getRowItemSpecs()
-            val mainSpecs = mainItem?.getRowItemSpecs()
-            val endSpecs = endItem?.getRowItemSpecs()
+            var startView: View? = null
+            var mainView: View? = null
+            var endView: View? = null
 
             // Define min height
             var height = 0
 
-            startSpecs?.run { height = Math.max(height, getMinListItemHeight()) }
-            mainSpecs?.run { height = Math.max(height, getMinListItemHeight()) }
-            endSpecs?.run { height = Math.max(height, getMinListItemHeight()) }
-
-            startView?.apply { id = R.id.startContent }
-            mainView?.apply { id = R.id.mainContent }
-            endView?.apply { id = R.id.endContent }
+            startItem?.run { height = Math.max(height, getMinListItemHeight()) }
+            mainItem?.run { height = Math.max(height, getMinListItemHeight()) }
+            endItem?.run { height = Math.max(height, getMinListItemHeight()) }
 
             // Define constraints
             val cs = ConstraintSet()
 
-            startView?.let {
-                cs.alignStartParentStart(it, startSpecs!!.getStartMarginIfStartComponent())
+            startItem?.let {
+                startView = it.build(view.context).apply { id = R.id.startContent }
+                view.addView(startView)
+                @Suppress("NAME_SHADOWING") val startView = startView!!
 
-                val gravity = startSpecs.getVerticalGravity()
+                cs.alignStartParentStart(startView, it.getStartMarginIfStartComponent())
+
+                val gravity = it.getVerticalGravity()
                 if (gravity == Gravity.CENTER_VERTICAL || gravity == Gravity.CENTER)
-                    cs.centerInParentVertically(it)
+                    cs.centerInParentVertically(startView)
                 else if (gravity == Gravity.BOTTOM)
-                    cs.alignParentBottom(it, startSpecs.getTopPadding(height))
+                    cs.alignParentBottom(startView, it.getTopPadding(height))
                 else
-                    alignTop(cs, height, it, startItem!!, startSpecs)
+                    alignTop(cs, height, startView, it)
 
-                cs.constrainWidth(it.id, startSpecs.getWidth())
-                cs.constrainHeight(it.id, startSpecs.getHeight())
+                cs.constrainWidth(startView.id, it.getConstraintWidth())
+                cs.constrainHeight(startView.id, it.getConstraintHeight())
             }
 
-            mainView?.let {
-                alignTop(cs, height, it, mainItem!!, mainSpecs!!)
+            endItem?.let {
+                endView = it.build(view.context).apply { id = R.id.endContent }
+                view.addView(endView)
+                @Suppress("NAME_SHADOWING") val endView = endView!!
+
+                cs.alignEndParentEnd(endView, it.getEndMarginIfEndComponent())
+
+                val gravity = it.getVerticalGravity()
+                if (gravity == Gravity.CENTER_VERTICAL || gravity == Gravity.CENTER)
+                    cs.centerInParentVertically(endView)
+                else if (gravity == Gravity.BOTTOM)
+                    cs.alignParentBottom(endView, it.getTopPadding(height))
+                else
+                    alignTop(cs, height, endView, it)
+
+                cs.constrainWidth(endView.id, it.getConstraintWidth())
+                cs.constrainHeight(endView.id, it.getConstraintHeight())
+            }
+
+            mainItem?.let {
+                mainView = it.build(view.context).apply { id = R.id.mainContent }
+                view.addView(mainView)
+                @Suppress("NAME_SHADOWING") val mainView = mainView!!
+
+                alignTop(cs, height, mainView, it)
 
                 if (startView != null)
-                    cs.alignStartToEnd(startView, it, startSpecs!!.getEndMargin())
+                    cs.alignStartToEnd(startView!!, mainView, startItem!!.getEndMargin())
                 else
-                    cs.alignStartParentStart(it, mainSpecs.getStartMarginIfStartComponent())
+                    cs.alignStartParentStart(mainView, it.getStartMarginIfStartComponent())
 
                 if (endView != null)
-                    cs.alignEndToStart(it, endView, mainSpecs.getEndMargin())
+                    cs.alignEndToStart(mainView, endView!!, it.getEndMargin())
                 else
-                    cs.alignEndParentEnd(it, mainSpecs.getEndMarginIfEndComponent())
+                    cs.alignEndParentEnd(mainView, it.getEndMarginIfEndComponent())
 
-                cs.constrainWidth(it.id, mainSpecs.getWidth())
-                cs.constrainHeight(it.id, mainSpecs.getHeight())
-            }
-
-            endView?.let {
-                cs.alignEndParentEnd(it, endSpecs!!.getEndMarginIfEndComponent())
-
-                val gravity = endSpecs.getVerticalGravity()
-                if (gravity == Gravity.CENTER_VERTICAL || gravity == Gravity.CENTER)
-                    cs.centerInParentVertically(it)
-                else if (gravity == Gravity.BOTTOM)
-                    cs.alignParentBottom(it, endSpecs.getTopPadding(height))
-                else
-                    alignTop(cs, height, it, endItem!!, endSpecs)
-
-                cs.constrainWidth(it.id, endSpecs.getWidth())
-                cs.constrainHeight(it.id, endSpecs.getHeight())
+                cs.constrainWidth(mainView.id, it.getConstraintWidth())
+                cs.constrainHeight(mainView.id, it.getConstraintHeight())
             }
 
             view.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
             view.minHeight = height
-
-            // Add children
-            startView?.let { view.addView(startView) }
-            mainView?.let { view.addView(mainView) }
-            endView?.let { view.addView(endView) }
 
             cs.applyTo(view)
 
@@ -153,34 +159,29 @@ open class Row : ConstraintLayout
             view.mainContent = mainView
             view.endContent = endView
 
-            backgroundColor?.let { view.setBackgroundColor(it) }
-
             return view
         }
 
-        private fun alignTop(cs: ConstraintSet, height: Int, view: View, item: RowItem, specs:RowItemSpec)
+        private fun alignTop(cs: ConstraintSet, height: Int, view: View, item: ListItem<*>)
         {
-            if (item is TextItem)
+            when (item)
             {
-                cs.alignParentTop(view)
-                TextViewCompat.setFirstBaselineToTopHeight(
-                    view as TextView,
-                    specs.getTextBaseline(height, 1, 1)
-                )
-            }
-            else if (item is TextStackItem)
-            {
-                cs.alignParentTop(view)
-                item.stack.forEachIndexed { index, textItem ->
-                    TextViewCompat.setFirstBaselineToTopHeight(
-                        (view as ViewGroup).getChildAt(index) as TextView,
-                        textItem.getRowItemSpecs().getTextBaseline(height, index, item.stack.size)
-                    )
+                is TextItem ->
+                {
+                    cs.alignParentTop(view)
+                    TextViewCompat.setFirstBaselineToTopHeight(view as TextView, item.getTextBaseline(height, 1, 1))
                 }
-            }
-            else
-            {
-                cs.alignParentTop(view, specs.getTopPadding(height))
+                is TextStackItem ->
+                {
+                    cs.alignParentTop(view)
+                    item.stack.forEachIndexed { index, textItem ->
+                        TextViewCompat.setFirstBaselineToTopHeight(
+                                (view as ViewGroup).getChildAt(index) as TextView,
+                                textItem.getTextBaseline(height, index, item.stack.size)
+                        )
+                    }
+                }
+                else -> cs.alignParentTop(view, item.getTopPadding(height))
             }
         }
     }

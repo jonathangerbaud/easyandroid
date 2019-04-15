@@ -97,8 +97,8 @@ class MainFragment : Fragment(), PagingDataLoaderDelegate.PaginationDataLoaderCa
         }
 
         adapter = RendererAdapter()
-        adapter.addView(Photo::class, ::PhotoRenderer)
-        adapter.addView(Subheader::class, ::SubheaderRenderer)
+        adapter.addRenderer(::PhotoRenderer)
+        adapter.addRenderer(::SubheaderRenderer)
 
         recyclerView.layoutManager = layoutManager
         recyclerView.addItemDecoration(divider)
@@ -169,9 +169,9 @@ class MainFragment : Fragment(), PagingDataLoaderDelegate.PaginationDataLoaderCa
         private val title: TextView
 
         init {
-            Row.Builder()
+            Row.Composer()
                 .mainItem(GridSubheaderItem())
-                .build(parent.context, view)
+                .build(view)
 
             title = view.mainContent as TextView
             (view.layoutParams as ViewGroup.MarginLayoutParams).topMargin  = Dimens.dp(16)

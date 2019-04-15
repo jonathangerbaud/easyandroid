@@ -3,5 +3,4 @@ dependencies {
     api project(libraries.ui.constraintlayout)
     api project(libraries.ui.image)
     api project(libraries.ui.recyclerview)
-    api project(libraries.ui.widgets)
 }
