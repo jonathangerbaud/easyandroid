@@ -11,7 +11,7 @@ import fr.jonathangerbaud.ui.recyclerview.DataAdapter
 import kotlin.reflect.KClass
 
 
-class GridDivider(val spacingPx: Int, private val includeEdge: Boolean) :
+class GridDivider(val spacingPx: Int, private val includeEdge: Boolean, val color:Int = 0x00000000) :
     RecyclerView.ItemDecoration()
 {
 
@@ -95,7 +95,6 @@ class GridDivider(val spacingPx: Int, private val includeEdge: Boolean) :
 
     private fun shouldDrawDivider(view: View): Boolean
     {
-        d("should draw $view")
         exemptedViewTypes.forEach { if (it.java.isInstance(view)) return false }
 
         return true
@@ -122,7 +121,7 @@ class GridDivider(val spacingPx: Int, private val includeEdge: Boolean) :
     private val drawable = ShapeDrawable().apply {
         intrinsicWidth = spacingPx
         intrinsicHeight = spacingPx
-        paint.color = 0xff000000.toInt()
+        paint.color = color
     }
 
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State)

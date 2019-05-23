@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import fr.jonathangerbaud.core.BaseApp
 
 object ResUtils {
@@ -91,6 +92,24 @@ object ResUtils {
 
     fun getDrawable(context:Context, @DrawableRes resId: Int): Drawable? {
         return ContextCompat.getDrawable(context, resId)
+    }
+
+    fun getTintedDrawable(@DrawableRes resId: Int, @ColorInt color:Int): Drawable? {
+        val drawable = ContextCompat.getDrawable(context, resId)
+
+        if (drawable != null)
+            DrawableCompat.setTint(drawable, color)
+
+        return drawable
+    }
+
+    fun getTintedDrawable(context:Context, @DrawableRes resId: Int, @ColorInt color:Int): Drawable? {
+        val drawable = ContextCompat.getDrawable(context, resId)
+
+        if (drawable != null)
+            DrawableCompat.setTint(drawable, color)
+
+        return drawable
     }
 
     fun getAssetManager(): AssetManager {

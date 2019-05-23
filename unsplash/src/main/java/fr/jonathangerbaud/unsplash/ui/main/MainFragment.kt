@@ -80,6 +80,7 @@ class MainFragment : Fragment(), PagingDataLoaderDelegate.PaginationDataLoaderCa
         layoutManager = GridLayoutManager(activity, 2)
         divider = GridDivider(Dimens.dp(4), false)
         divider.excludeViewItemsOfType(Row::class)
+        divider.excludeDataItemsOfType(Subheader::class)
 
             //layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {

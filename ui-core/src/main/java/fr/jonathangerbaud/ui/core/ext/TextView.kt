@@ -22,6 +22,6 @@ fun TextView.setTextOrHide(text: String?)
 
 fun TextView.styler(styler:TextStyler) = styler.applyDefaultStyle(this)
 fun TextView.setTextColorRes(@ColorRes colorRes:Int) = setTextColor(ResUtils.getColor(colorRes, context))
-fun TextView.setTextSizeSp(sizeInPx:Float) = setTextSize(TypedValue.COMPLEX_UNIT_SP, sizeInPx)
+fun TextView.setTextSizePx(sizeInPx:Float) = setTextSize(TypedValue.COMPLEX_UNIT_PX, sizeInPx)
 fun TextView.setTextSizeRes(@DimenRes dimenRes:Int) { textSize = ResUtils.getDimensionPxSize(context, dimenRes).toFloat() }
 
