@@ -16,6 +16,11 @@ import kotlin.reflect.KProperty
 
 open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter, IPaginationAdapter
 {
+    companion object
+    {
+        const val MODE_TYPE = 0
+        const val MODE_INSTANCE_OF = 1
+    }
     protected val DEFAULT_TYPE = -1
 
     private val viewHolderList: MutableList<(parent: ViewGroup) -> Renderer<*>> = mutableListOf()
@@ -30,6 +35,7 @@ open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter, IPaginationA
         }*/
 
     val liveData: MutableLiveData<List<Any>> = MutableLiveData()
+    var mode = MODE_TYPE
 
     init
     {
@@ -100,10 +106,23 @@ open class RendererAdapter : Adapter<Renderer<Any>>(), DataAdapter, IPaginationA
 
     override fun getItemViewType(position: Int): Int
     {
-        val type: KClass<Any> = data[position].javaClass.kotlin
+        if (mode == MODE_INSTANCE_OF)
+        {
+            val item = data[position]
 
-        if (typeMap.containsKey(type))
-            return typeMap.getValue(type)
+            for (type in typeMap.keys)
+            {
+                if (type.isInstance(item))
+                    return typeMap.getValue(type)
+            }
+        }
+        else
+        {
+            val type: KClass<Any> = data[position].javaClass.kotlin
+
+            if (typeMap.containsKey(type))
+                return typeMap.getValue(type)
+        }
 
         return DEFAULT_TYPE
     }

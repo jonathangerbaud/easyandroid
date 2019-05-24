@@ -6,4 +6,5 @@ dependencies {
     api deps.androidx.recyclerview
     api deps.androidx.constraintlayout
     api deps.androidx.constraintlayout_solver
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.31"
 }
