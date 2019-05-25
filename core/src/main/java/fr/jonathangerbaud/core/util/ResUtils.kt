@@ -9,11 +9,11 @@ import android.util.TypedValue
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import fr.jonathangerbaud.core.BaseApp
+import fr.jonathangerbaud.core.AppInstance
 
 object ResUtils {
     private val context: Context
-        get() = BaseApp.instance
+        get() = AppInstance.get()
 
     private val res: Resources
         get() = context.resources

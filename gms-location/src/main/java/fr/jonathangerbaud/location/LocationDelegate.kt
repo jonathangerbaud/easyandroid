@@ -10,7 +10,7 @@ import androidx.lifecycle.OnLifecycleEvent
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
-import fr.jonathangerbaud.core.BaseApp
+import fr.jonathangerbaud.core.AppInstance
 import java.lang.ref.WeakReference
 
 class LocationDelegate(
@@ -67,7 +67,7 @@ class LocationDelegate(
 
 
             val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
-            val client: SettingsClient = LocationServices.getSettingsClient(BaseApp.instance)
+            val client: SettingsClient = LocationServices.getSettingsClient(AppInstance.get())
             val task: Task<LocationSettingsResponse> = client.checkLocationSettings(builder.build())
 
             task.addOnSuccessListener { response ->

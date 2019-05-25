@@ -3,7 +3,7 @@ package fr.jonathangerbaud.firebase.analytics
 import android.app.Activity
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
-import fr.jonathangerbaud.core.BaseApp
+import fr.jonathangerbaud.core.AppInstance
 
 object AnalyticsDelegate
 {
@@ -13,7 +13,7 @@ object AnalyticsDelegate
         get()
         {
             if (firebase == null)
-                firebase = FirebaseAnalytics.getInstance(BaseApp.instance)
+                firebase = FirebaseAnalytics.getInstance(AppInstance.get())
 
             return firebase!!
         }

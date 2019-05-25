@@ -1,6 +1,6 @@
 package fr.jonathangerbaud.network.rest
 
-import fr.jonathangerbaud.core.BaseApp
+import fr.jonathangerbaud.core.AppInstance
 import fr.jonathangerbaud.core.ext.e
 import fr.jonathangerbaud.network.BuildConfig
 import okhttp3.Cache
@@ -283,7 +283,7 @@ open class ServiceBuilder(private val server: String)
             {
                 try
                 {
-                    cache = Cache(File(BaseApp.instance.cacheDir, "http-cache"), cacheSize)  // 10 MB
+                    cache = Cache(File(AppInstance.get().cacheDir, "http-cache"), cacheSize)  // 10 MB
                 }
                 catch (exception: Exception)
                 {
@@ -325,7 +325,7 @@ open class ServiceBuilder(private val server: String)
         {
             try
             {
-                val dir = File(BaseApp.instance.cacheDir, "http-cache")
+                val dir = File(AppInstance.get().cacheDir, "http-cache")
 
                 for (file in dir.listFiles())
                 {

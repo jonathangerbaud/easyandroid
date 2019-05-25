@@ -1,15 +1,13 @@
 package fr.jonathangerbaud.network.rest
 
 import com.novoda.merlin.MerlinsBeard
-import fr.jonathangerbaud.core.BaseApp
+import fr.jonathangerbaud.core.AppInstance
+import fr.jonathangerbaud.core.ext.d
 import okhttp3.CacheControl
 import okhttp3.Interceptor
 import okhttp3.Response
-
 import java.io.IOException
 import java.util.concurrent.TimeUnit
-
-import fr.jonathangerbaud.core.ext.d
 
 class CacheControlInterceptor internal constructor(
     private val cacheDuration: Int,
@@ -91,6 +89,6 @@ class CacheControlInterceptor internal constructor(
     companion object
     {
         internal val isConnectionAvailable: Boolean
-            get() = MerlinsBeard.from(BaseApp.instance).isConnected
+            get() = MerlinsBeard.from(AppInstance.get()).isConnected
     }
 }

@@ -9,10 +9,10 @@ import android.content.res.Configuration
 object CoreDevice
 {
     private val metrics
-        get() = BaseApp.instance.resources.displayMetrics
+        get() = AppInstance.get().resources.displayMetrics
 
     private val configuration
-        get() = BaseApp.instance.resources.configuration
+        get() = AppInstance.get().resources.configuration
 
     val screenWidthPx
         get() = metrics.widthPixels

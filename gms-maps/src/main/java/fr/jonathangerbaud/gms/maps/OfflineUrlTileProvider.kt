@@ -2,7 +2,7 @@ package fr.jonathangerbaud.gms.maps
 
 import com.google.android.gms.maps.model.Tile
 import com.google.android.gms.maps.model.TileProvider
-import fr.jonathangerbaud.core.BaseApp
+import fr.jonathangerbaud.core.AppInstance
 import java.io.*
 import java.net.URL
 
@@ -10,7 +10,7 @@ abstract class OfflineUrlTileProvider(val width:Int, val height:Int, private val
 {
     companion object
     {
-        private val rootDir:File = BaseApp.instance.filesDir
+        private val rootDir:File = AppInstance.get().filesDir
 
         private fun getCacheDir(key: String): File
         {

@@ -10,7 +10,7 @@ open class BaseApp : Application()
     {
         super.onCreate()
 
-        instance = this
+        AppInstance.attach(this)
 
         if (BuildConfig.DEBUG)
             Timber.plant(Timber.DebugTree())
@@ -18,7 +18,7 @@ open class BaseApp : Application()
 
     companion object
     {
-        lateinit var instance: BaseApp
-            private set
+        val instance: Application
+            get() = AppInstance.get()
     }
 }

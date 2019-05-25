@@ -3,13 +3,13 @@ package fr.jonathangerbaud.core.util
 import android.content.Context
 import android.content.res.Resources
 import android.util.TypedValue
-import fr.jonathangerbaud.core.BaseApp
+import fr.jonathangerbaud.core.AppInstance
 
 
 object Dimens
 {
     private val context: Context
-        get() = BaseApp.instance
+        get() = AppInstance.get()
 
     private val res: Resources
         get() = context.resources
