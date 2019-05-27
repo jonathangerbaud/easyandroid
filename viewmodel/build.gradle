@@ -1,0 +1,5 @@
+dependencies {
+    implementation  deps.kotlin
+    implementation deps.androidx.lifecycle.extensions
+    implementation deps.androidx.appcompat
+}

@@ -12,7 +12,7 @@ class AppInstance private constructor(){
 
         fun get():Application = ref.get()!!
 
-        internal fun attach(app:Application)
+        fun attach(app:Application)
         {
             ref = WeakReference(app)
         }

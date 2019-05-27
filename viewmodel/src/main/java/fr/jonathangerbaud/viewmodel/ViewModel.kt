@@ -1,4 +1,4 @@
-package fr.jonathangerbaud.core.ext
+package fr.jonathangerbaud.viewmodel
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

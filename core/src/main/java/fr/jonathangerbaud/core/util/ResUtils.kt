@@ -5,10 +5,8 @@ import android.content.res.AssetManager
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.util.TypedValue
-import androidx.annotation.*
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import fr.jonathangerbaud.core.AppInstance
 
 object ResUtils {
@@ -18,96 +16,162 @@ object ResUtils {
     private val res: Resources
         get() = context.resources
 
-    fun getDimension(@DimenRes resId: Int): Float {
+    /**
+     * @param resId @DimenRes
+     */
+    fun getDimension(/*@DimenRes*/ resId: Int): Float {
         return res.getDimension(resId)
     }
 
-    fun getDimension(context:Context, @DimenRes resId: Int): Float {
+    /**
+     * @param resId @DimenRes
+     */
+    fun getDimension(context:Context, /*@DimenRes*/ resId: Int): Float {
         return context.resources.getDimension(resId)
     }
 
-    fun getDimensionPxSize(@DimenRes resId: Int): Int {
+    /**
+     * @param resId @DimenRes
+     */
+    fun getDimensionPxSize(/*@DimenRes*/ resId: Int): Int {
         return res.getDimensionPixelSize(resId)
     }
 
-    fun getDimensionPxSize(context:Context, @DimenRes resId: Int): Int {
+    /**
+     * @param resId @DimenRes
+     */
+    fun getDimensionPxSize(context:Context, /*@DimenRes*/ resId: Int): Int {
         return context.resources.getDimensionPixelSize(resId)
     }
 
-    fun getBoolean(@BoolRes resId: Int): Boolean {
+    /**
+     * @param resId @BoolRes
+     */
+    fun getBoolean(/*@BoolRes*/ resId: Int): Boolean {
         return res.getBoolean(resId)
     }
 
-    fun getBoolean(context:Context, @BoolRes resId: Int): Boolean {
+    fun getBoolean(context:Context, /*@BoolRes*/ resId: Int): Boolean {
         return context.resources.getBoolean(resId)
     }
 
-    fun getString(@StringRes resId: Int): String {
+    /**
+     * @param resId @BoolRes
+     */
+    fun getString(/*@StringRes*/ resId: Int): String {
         return res.getString(resId)
     }
 
-    fun getString(context:Context, @StringRes resId: Int): String {
+    /**
+     * @param resId @StringRes
+     */
+    fun getString(context:Context, /*@StringRes*/ resId: Int): String {
         return context.resources.getString(resId)
     }
 
-    fun getString(@StringRes resId: Int, vararg args: Any): String {
+    /**
+     * @param resId @StringRes
+     */
+    fun getString(/*@StringRes*/ resId: Int, vararg args: Any): String {
         return res.getString(resId, *args)
     }
 
-    fun getString(context:Context, @StringRes resId: Int, vararg args: Any): String {
+    /**
+     * @param resId @StringRes
+     */
+    fun getString(context:Context, /*@StringRes*/ resId: Int, vararg args: Any): String {
         return context.resources.getString(resId, *args)
     }
 
-    fun getStringArray(@ArrayRes resId: Int): Array<String> {
+    /**
+     * @param resId @ArrayRes
+     */
+    fun getStringArray(/*@ArrayRes*/ resId: Int): Array<String> {
         return res.getStringArray(resId)
     }
 
-    fun getStringArray(context:Context, @ArrayRes resId: Int): Array<String> {
+    /**
+     * @param resId @ArrayRes
+     */
+    fun getStringArray(context:Context, /*@ArrayRes*/ resId: Int): Array<String> {
         return context.resources.getStringArray(resId)
     }
 
-    fun getIntArray(@ArrayRes resId: Int): IntArray {
+    /**
+     * @param resId @ArrayRes
+     */
+    fun getIntArray(/*@ArrayRes*/ resId: Int): IntArray {
         return res.getIntArray(resId)
     }
 
-    fun getIntArray(context:Context, @ArrayRes resId: Int): IntArray {
+    /**
+     * @param resId @ArrayRes
+     */
+    fun getIntArray(context:Context, /*@ArrayRes*/ resId: Int): IntArray {
         return context.resources.getIntArray(resId)
     }
 
-    fun getColor(@ColorRes resId: Int, context:Context? = null): Int {
-        return ContextCompat.getColor(context ?: ResUtils.context, resId)
+    /**
+     * @param resId @ColorRes
+     */
+    fun getColor(/*@ColorRes*/ resId: Int, context:Context? = null): Int {
+        return if (Build.VERSION.SDK_INT >= 23)
+            (context ?: ResUtils.context).getColor(resId)
+        else
+            (context ?: ResUtils.context).getResources().getColor(resId)
     }
 
-    fun getColorStateList(@ColorRes resId: Int): ColorStateList? {
-        return ContextCompat.getColorStateList(context, resId)
+    /**
+     * @param resId @ColorRes
+     */
+    fun getColorStateList(/*@ColorRes*/ resId: Int): ColorStateList? {
+        return ResUtils.getColorStateList(context, resId)
     }
 
-    fun getColorStateList(context: Context, @ColorRes resId: Int): ColorStateList? {
-        return ContextCompat.getColorStateList(context, resId)
+    /**
+     * @param resId @ColorRes
+     */
+    fun getColorStateList(context: Context, /*@ColorRes*/ resId: Int): ColorStateList? {
+        return if (Build.VERSION.SDK_INT >= 23)
+            context.getColorStateList(resId)
+        else
+            context.resources.getColorStateList(resId)
     }
 
-    fun getDrawable(@DrawableRes resId: Int): Drawable? {
-        return ContextCompat.getDrawable(context, resId)
+    /**
+     * @param resId @DrawableRes
+     */
+    fun getDrawable(/*@DrawableRes*/ resId: Int): Drawable? {
+        return context.getDrawable(resId)
     }
 
-    fun getDrawable(context:Context, @DrawableRes resId: Int): Drawable? {
-        return ContextCompat.getDrawable(context, resId)
+    /**
+     * @param resId @DrawableRes
+     */
+    fun getDrawable(context:Context, /*@DrawableRes*/ resId: Int): Drawable? {
+        return context.getDrawable(resId)
     }
 
-    fun getTintedDrawable(@DrawableRes resId: Int, @ColorInt color:Int): Drawable? {
-        val drawable = ContextCompat.getDrawable(context, resId)
+    /**
+     * @param resId @DrawableRes
+     * @param colo @ColorInt
+     */
+    fun getTintedDrawable(/*@DrawableRes*/ resId: Int, /*@ColorInt*/ color:Int): Drawable? {
+        val drawable = getDrawable(resId)
 
-        if (drawable != null)
-            DrawableCompat.setTint(drawable, color)
+        drawable?.setTint(color)
 
         return drawable
     }
 
-    fun getTintedDrawable(context:Context, @DrawableRes resId: Int, @ColorInt color:Int): Drawable? {
-        val drawable = ContextCompat.getDrawable(context, resId)
+    /**
+     * @param resId @DrawableRes
+     * @param colo @ColorInt
+     */
+    fun getTintedDrawable(context:Context, /*@DrawableRes*/ resId: Int, /*@ColorInt*/ color:Int): Drawable? {
+        val drawable = getDrawable(context, resId)
 
-        if (drawable != null)
-            DrawableCompat.setTint(drawable, color)
+        drawable?.setTint(color)
 
         return drawable
     }

@@ -2,6 +2,7 @@ package fr.jonathangerbaud.core.ext
 
 
 import android.app.Activity
+import android.app.Fragment
 import android.app.Service
 import android.content.ActivityNotFoundException
 import android.content.ComponentName
@@ -17,8 +18,6 @@ import android.os.Parcelable
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import java.io.Serializable
 
 fun Context.inflate(resource:Int, viewGroup: ViewGroup) = LayoutInflater.from(this).inflate(resource, viewGroup)
@@ -30,8 +29,12 @@ fun Context.getAnimation(animResId: Int): XmlResourceParser =
 fun Context.getBoolean(booleanResId: Int): Boolean =
     resources().getBoolean(booleanResId)
 
-fun Context.getColor(colorResId: Int): Int =
-    ContextCompat.getColor(this, colorResId)
+fun Context.getColor(colorResId: Int): Int {
+    return if (Build.VERSION.SDK_INT >= 23)
+        resources.getColor(colorResId, theme)
+    else
+        resources.getColor(colorResId)
+}
 
 fun Context.getDimension(dimenResId: Int): Float =
     resources().getDimension(dimenResId)
@@ -303,7 +306,7 @@ object Internals
         params: Array<out Pair<String, Any?>>
     )
     {
-        ContextCompat.startActivity(ctx, createIntent(ctx, activity, params), null)
+        ctx.startActivity(createIntent(ctx, activity, params), null)
     }
 
     @JvmStatic

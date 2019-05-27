@@ -2,7 +2,5 @@ dependencies {
     api deps.kotlin
     api deps.kotlinx.coroutines.core
     api deps.kotlinx.coroutines.android
-    api deps.androidx.appcompat
-    api deps.androidx.lifecycle.extensions
     implementation deps.logging.timber
 }
