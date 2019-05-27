@@ -1,4 +1,5 @@
 dependencies {
     implementation project(libraries.core)
     implementation deps.iab
+    implementation deps.androidx.appcompat
 }

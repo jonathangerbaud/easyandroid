@@ -31,6 +31,7 @@ dependencies {
     implementation project(libraries.inappbilling)
     implementation project(libraries.network)
     implementation project(libraries.mockdata)
+    implementation project(libraries.viewmodel)
     implementation project(libraries.ui.core)
     implementation project(libraries.ui.image)
     implementation project(libraries.ui.listitems)

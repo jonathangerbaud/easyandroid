@@ -113,6 +113,7 @@ def libraries = [:]
     libraries.inappbilling  = ":inappbilling"
     libraries.network       = ":network"
     libraries.mockdata      = ":mockdata"
+    libraries.viewmodel     = ":viewmodel"
 
     def gms2 = [:]
         gms2.location       = ":gms-location"
