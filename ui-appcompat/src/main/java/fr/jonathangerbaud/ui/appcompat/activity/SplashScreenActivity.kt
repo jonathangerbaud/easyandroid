@@ -1,11 +1,11 @@
-package fr.jonathangerbaud.ui.core.activity
+package fr.jonathangerbaud.ui.appcompat.activity
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import fr.jonathangerbaud.core.ext.runDelayedOnUiThread
-
+// Move to ui.appcompat module
 abstract class AbstractSplashScreenActivity : AppCompatActivity()
 {
     private var paused = false

@@ -1,4 +1,4 @@
 dependencies {
     api project(libraries.ui.core)
-    implementation deps.androidx.core_ktx
+    //implementation deps.androidx.core_ktx
 }

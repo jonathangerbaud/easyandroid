@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso
 import fr.jonathangerbaud.core.util.Dimens
 import fr.jonathangerbaud.network.Resource
 import fr.jonathangerbaud.ui.core.AspectRatio
-import fr.jonathangerbaud.ui.core.ToolbarDelegate
+import fr.jonathangerbaud.ui.appcompat.ToolbarDelegate
 import fr.jonathangerbaud.ui.core.ext.setPadding
 import fr.jonathangerbaud.ui.image.SuperImageView
 import fr.jonathangerbaud.ui.recyclerview.PaginationDelegate

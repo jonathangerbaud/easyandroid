@@ -1,15 +1,15 @@
-package fr.jonathangerbaud.ui.core.ext
+package fr.jonathangerbaud.ui.appcompat.ext
 
 import android.content.Context
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 
-fun Context?.toast(msg: String, duration: Int = Toast.LENGTH_LONG) = makeToast(this, msg, duration)
-
-fun Context?.shortToast(msg: String) = makeToast(this, msg, Toast.LENGTH_SHORT)
-fun Context?.longToast(msg: String) = makeToast(this, msg, Toast.LENGTH_LONG)
-fun Context?.toastNow(msg: String, duration: Int = Toast.LENGTH_LONG) = cancelAndMakeToast(this, msg, duration)
-fun Context?.shortToastNow(msg: String) = cancelAndMakeToast(this, msg, Toast.LENGTH_SHORT)
-fun Context?.longToastNow(msg: String) = cancelAndMakeToast(this, msg, Toast.LENGTH_LONG)
+fun Fragment?.toast(msg: String) = makeToast(this?.context, msg, Toast.LENGTH_LONG)
+fun Fragment?.shortToast(msg: String) = makeToast(this?.context, msg, Toast.LENGTH_SHORT)
+fun Fragment?.longToast(msg: String) = makeToast(this?.context, msg, Toast.LENGTH_LONG)
+fun Fragment?.toastNow(msg: String) = cancelAndMakeToast(this?.context, msg, Toast.LENGTH_LONG)
+fun Fragment?.shortToastNow(msg: String) = cancelAndMakeToast(this?.context, msg, Toast.LENGTH_SHORT)
+fun Fragment?.longToastNow(msg: String) = cancelAndMakeToast(this?.context, msg, Toast.LENGTH_LONG)
 
 
 fun cancelAllToasts() = ToastQueue.cancelToasts()

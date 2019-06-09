@@ -20,7 +20,7 @@ class SingleLineItem(context: Context) : Row(context)
 
     init {
         Row.Composer()
-            .startItem(SmallIconItem(R.drawable.abc_ic_go_search_api_material))
+            .startItem(SmallIconItem(R.drawable.notification_template_icon_bg))
             .endItem(SwitchItem())
             .mainItem(TitleItem("hello"))
             .build(this)

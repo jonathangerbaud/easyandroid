@@ -28,6 +28,7 @@ android {
 
 dependencies {
     implementation project(libraries.core)
+    implementation project(libraries.ui.appcompat)
     implementation project(libraries.network)
     implementation project(libraries.ui.image)
     implementation project(libraries.ui.listitems)

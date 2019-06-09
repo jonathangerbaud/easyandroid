@@ -1,4 +1,5 @@
 dependencies {
+    implementation deps.androidx.appcompat
     api project(libraries.ui.core)
     api project(libraries.ui.constraintlayout)
     api project(libraries.ui.image)

@@ -8,7 +8,7 @@
             android:layout_width="@dimen/dp_40"
             android:layout_marginStart="@dimen/dp_16"
             android:layout_height="@dimen/dp_40"
-            android:src="@drawable/jg_ic_arrow_left"/>
+            android:src="@drawable/square"/>
 
     <TextView
             android:id="@+id/title"

@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
-import fr.jonathangerbaud.core.util.AndroidUtil
+import fr.jonathangerbaud.core.util.AndroidVersion
 import java.lang.ref.WeakReference
 import java.util.concurrent.Semaphore
 
@@ -110,7 +110,7 @@ class PermissionsDelegate private constructor(
             {
                 //ne need < Android Marshmallow
                 if (permissions.isEmpty()
-                    || !AndroidUtil.isMinMarshmallow()
+                    || !AndroidVersion.isMinMarshmallow()
                     || permissionAlreadyAccepted(it, permissions)
                 )
                 {

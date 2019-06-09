@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso
 import fr.jonathan.mockdata.MockData
 import fr.jonathan.mockdata.MockData.Employee
 import fr.jonathan.mockdata.MockServer
-import fr.jonathangerbaud.ui.core.ToolbarDelegate
+import fr.jonathangerbaud.ui.appcompat.ToolbarDelegate
 import fr.jonathangerbaud.ui.listitems.Row
 import fr.jonathangerbaud.ui.listitems.widgets.AvatarItem
 import fr.jonathangerbaud.ui.listitems.widgets.TextBodyItem

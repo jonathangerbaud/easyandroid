@@ -1,7 +1,7 @@
 package fr.jonathangerbaud.ui.core.ext
 
 import android.view.View
-import fr.jonathangerbaud.core.util.AndroidUtil
+import fr.jonathangerbaud.core.util.AndroidVersion
 import fr.jonathangerbaud.core.util.AttrUtil
 
 
@@ -48,6 +48,6 @@ fun View.resize(width: Int, height: Int) {
 }
 
 fun View.rippleForeground() {
-    if (AndroidUtil.isMinMarshmallow())
+    if (AndroidVersion.isMinMarshmallow())
         this.foreground = AttrUtil.getDrawable(context, android.R.attr.selectableItemBackgroundBorderless)
 }

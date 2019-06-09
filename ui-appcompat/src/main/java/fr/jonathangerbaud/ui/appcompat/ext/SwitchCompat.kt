@@ -1,4 +1,4 @@
-package fr.jonathangerbaud.ui.core.ext
+package fr.jonathangerbaud.ui.appcompat.ext
 
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes

@@ -3,7 +3,6 @@ package fr.jonathangerbaud.ui.image
 import android.graphics.Path
 import android.graphics.Matrix
 import android.graphics.RectF
-import androidx.core.graphics.transform
 import fr.jonathangerbaud.core.ext.d
 
 
@@ -156,3 +155,6 @@ object PathHelper
         return outPath
     }
 }
+
+/* from Core KTX Rect */
+inline fun RectF.transform(m: Matrix) = apply { m.mapRect(this@transform) }

@@ -1,7 +1,6 @@
 package fr.jonathangerbaud.ui.core
 
 import android.graphics.Color
-import androidx.core.graphics.ColorUtils
 
 object ColorUtil
 {
@@ -24,7 +23,16 @@ object ColorUtil
         val b: Int = (b1 + (b2 - b1) * f).toInt()
         val a: Int = (a1 + (a2 - a1) * f).toInt()
 
-        return ColorUtils.setAlphaComponent(Color.rgb(r, g, b), a)
+        return setAlphaComponent(Color.rgb(r, g, b), a)
+    }
+
+    private fun setAlphaComponent(color: Int, alpha: Int): Int
+    {
+        if (alpha < 0 || alpha > 255)
+        {
+            throw IllegalArgumentException("alpha must be between 0 and 255.")
+        }
+        return color and 0x00ffffff or (alpha shl 24)
     }
 
     fun lighten(color: Int, fraction: Double): Int

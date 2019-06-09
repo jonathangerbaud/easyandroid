@@ -3,7 +3,7 @@ package fr.jonathangerbaud.core.util
 import android.os.Build
 
 
-class AndroidUtil
+class AndroidVersion
 {
     companion object
     {

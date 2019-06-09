@@ -1,11 +1,9 @@
 package fr.jonathangerbaud.ui.core.view
 
 import android.content.Context
-import android.content.ContextWrapper
 import android.view.ContextThemeWrapper
 import android.view.View
 import android.widget.*
-import androidx.annotation.StyleRes
 
 object V
 {
@@ -52,5 +50,5 @@ object V
     /**
      * Returns a context for the theme in parameter
      */
-    fun themedContext(context: Context, @StyleRes theme:Int):Context = ContextThemeWrapper(context, theme)
+    fun themedContext(context: Context, themeRes:Int):Context = ContextThemeWrapper(context, themeRes)
 }

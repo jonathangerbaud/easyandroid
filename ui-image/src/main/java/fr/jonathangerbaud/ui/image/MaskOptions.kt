@@ -2,8 +2,6 @@ package fr.jonathangerbaud.ui.image
 
 import android.graphics.Paint
 import android.graphics.Path
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
 import fr.jonathangerbaud.core.util.ResUtils
 
 
@@ -34,13 +32,13 @@ class MaskOptions private constructor(
             return this
         }
 
-        fun borderColor(@ColorInt color: Int): Builder
+        fun borderColor(color: Int): Builder
         {
             borderColor = color
             return this
         }
 
-        fun borderColorRes(@ColorRes colorResId: Int): Builder
+        fun borderColorRes(colorResId: Int): Builder
         {
             borderColor = ResUtils.getColor(colorResId)
             return this

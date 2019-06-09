@@ -1,4 +1,4 @@
-package fr.jonathangerbaud.ui.core
+package fr.jonathangerbaud.ui.appcompat
 
 import android.graphics.Bitmap
 import android.graphics.Canvas

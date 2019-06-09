@@ -1,4 +1,4 @@
-package fr.jonathangerbaud.ui.core;
+package fr.jonathangerbaud.ui.appcompat;
 
 import android.app.Activity;
 import android.graphics.drawable.ColorDrawable;
@@ -7,6 +7,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.ColorUtils;
 
 import java.lang.ref.WeakReference;
 

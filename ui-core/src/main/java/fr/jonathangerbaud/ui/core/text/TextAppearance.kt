@@ -7,11 +7,8 @@ import android.content.res.TypedArray
 import android.graphics.Typeface
 import android.util.TypedValue
 import android.widget.TextView
-import androidx.annotation.ColorInt
-import androidx.annotation.StyleRes
-import fr.jonathangerbaud.core.util.AndroidUtil
+import fr.jonathangerbaud.core.util.AndroidVersion
 import fr.jonathangerbaud.core.util.Dimens
-import fr.jonathangerbaud.core.util.ResUtils
 import fr.jonathangerbaud.ui.core.R
 
 open class TextAppearance
@@ -22,7 +19,6 @@ open class TextAppearance
     var fallbackLineSpacing: Boolean? = null
     var case: MaterialTypography.Case.TextCase? = null
 
-    @ColorInt
     var color: Int? = null
         set(value)
         {
@@ -30,7 +26,6 @@ open class TextAppearance
         }
     var colorStateList: ColorStateList? = null
 
-    @ColorInt
     var hintColor: Int? = null
         set(value)
         {
@@ -38,10 +33,8 @@ open class TextAppearance
         }
     var hintColorStateList: ColorStateList? = null
 
-    @ColorInt
     var highlightColor: Int? = null
 
-    @ColorInt
     var linkColor: Int? = null
         set(value)
         {
@@ -82,7 +75,7 @@ open class TextAppearance
 
         fontFeatureSettings?.let { textView.fontFeatureSettings = fontFeatureSettings }
 
-        if (AndroidUtil.isMinPie())
+        if (AndroidVersion.isMinPie())
             fallbackLineSpacing?.let { textView.isFallbackLineSpacing = it }
 
         if (font == null && fontFamily != null)
@@ -111,7 +104,7 @@ open class TextAppearance
     @Suppress("NAME_SHADOWING")
     private fun resolveStyleAndSetTypeface(textView:TextView, typeface: Typeface?, style: Int, weight: Int)
     {
-        return if (weight >= 0 && AndroidUtil.isMinPie())
+        return if (weight >= 0 && AndroidVersion.isMinPie())
         {
             val weight = Math.min(1000, weight)
             val italic = style and Typeface.ITALIC != 0
@@ -130,9 +123,9 @@ open class TextAppearance
         private const val SERIF: Int = 1
         private const val MONOSPACE: Int = 2
 
-        fun fromStyle(context: Context, @StyleRes style: Int): TextAppearance
+        fun fromStyle(context: Context, styleRes: Int): TextAppearance
         {
-            val appearance: TypedArray? = context.obtainStyledAttributes(style, R.styleable.EasyAndroidTextAppearance)
+            val appearance: TypedArray? = context.obtainStyledAttributes(styleRes, R.styleable.EasyAndroidTextAppearance)
 
             return readTextAppearance(context, appearance)
         }
@@ -186,7 +179,7 @@ open class TextAppearance
                     {
                         if (!context.isRestricted/* && context.canLoadUnsafeResources()*/)
                         {
-                            if (AndroidUtil.isMinOreo())
+                            if (AndroidVersion.isMinOreo())
                             {
                                 try
                                 {
