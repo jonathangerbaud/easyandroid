@@ -65,21 +65,20 @@ class PaginationDelegate(recyclerView: RecyclerView, callback: ((page: Int) -> U
 
                     // We are most likely going to add an item to show the loading state of the list
                     // so the previousTotalItemCount will be useless if we don't increment it by 1
-                    // Else this delegate will send callback events indifinitely
+                    // Else this delegate will send callback events indefinitely
                     // We don't take much risk here, as it would be rare to load the content
                     // one by one
                     if (loading && totalItemCount > previousTotalItemCount + 1)
                     {
-                        d("set loading false $totalItemCount $previousTotalItemCount")
                         loading = false
                         previousTotalItemCount = totalItemCount
                     }
 
                     if (!loading && lastVisibleItemPosition + visibleThreshold > totalItemCount)
                     {
-                        d("delagate sends new page")
                         currentPage++
                         loading = true
+                        previousTotalItemCount = totalItemCount // initialize else it will be 0 and trigger send another next page shortly after
                         recyclerView.post { callbacks.forEach { it(currentPage) } }
                     }
                 }

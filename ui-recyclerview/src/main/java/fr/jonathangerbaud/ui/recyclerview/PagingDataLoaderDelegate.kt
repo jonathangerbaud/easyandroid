@@ -23,7 +23,8 @@ class PagingDataLoaderDelegate<T>(
 
     private var dataLoaded: Boolean = false
 
-    val nextPageData = NextPageData(0)
+    var nextPageData = NextPageData(0)
+        private set
 
     private lateinit var paginationDelegate:PaginationDelegate
 
@@ -67,7 +68,6 @@ class PagingDataLoaderDelegate<T>(
         stateManager.getDataStateView()?.setRetryCallback { load(true) }
 
         paginationDelegate = PaginationDelegate(recyclerView!!) { page ->
-            d("pagination delegate says page = $page")
             nextPageData.page = page
             loadNext()
         }
@@ -120,7 +120,9 @@ class PagingDataLoaderDelegate<T>(
                         UIStateManager.State.LOADING_FIRST
             )
 
-            data = factory(NextPageData(0))
+            paginationDelegate.reset()
+            nextPageData = NextPageData(0)
+            data = factory(nextPageData)
             data!!.observe(callback.get()!!, observer)
         }
     }

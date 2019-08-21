@@ -143,7 +143,6 @@ class GridDivider(val spacingPx: Int, private val includeEdge: Boolean, val colo
 
     private fun drawVertical(canvas: Canvas, parent: RecyclerView)
     {
-        d("drawable size ${drawable.intrinsicWidth} ${drawable.intrinsicHeight}")
         canvas.save()
         val left: Int
         val right: Int
@@ -172,7 +171,6 @@ class GridDivider(val spacingPx: Int, private val includeEdge: Boolean, val colo
 
             drawable.bounds.bottom = drawable.bounds.top + spacingPx
 //            drawable.bounds.top -= spacingPx
-            d("bounds ${drawable.bounds}")
 
             if (shouldDrawDivider(child))
                 drawable.draw(canvas)
