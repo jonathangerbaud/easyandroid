@@ -193,7 +193,7 @@ open class ServiceBuilder(private val server: String)
         if ((useCacheIfConnection || useCacheIfNoConnection) && forceCache)
             okHttpBuilder.addNetworkInterceptor(ForceCacheControlInterceptor(cacheDuration))
 
-        if (enableLogging && BuildConfig.DEBUG)
+        if (enableLogging)
             okHttpBuilder.addInterceptor(HttpLoggingInterceptor().setLevel(loggingLevel))
 
         if (reportResult)
