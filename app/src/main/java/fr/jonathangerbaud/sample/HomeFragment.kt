@@ -49,6 +49,7 @@ class HomeFragment : Fragment()
         {
             0 -> startActivity(Intent(context, MainActivity::class.java))
             1 -> startActivity(Intent(context, MainActivity2::class.java))
+//            2 -> throw Exception("Where the fu** is my crash stacktrace????")
             2 -> startActivity(Intent(context, MainActivity3::class.java))
         }
 

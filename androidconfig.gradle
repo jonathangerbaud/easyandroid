@@ -1,5 +1,5 @@
 def androidconfig = [:]
-    androidconfig.minSdkVersion = 22
+    androidconfig.minSdkVersion = 21
     androidconfig.targetSdkVersion = 28
     androidconfig.compileSdkVersion = 28
     androidconfig.versionCode = 1

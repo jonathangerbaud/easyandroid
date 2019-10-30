@@ -85,6 +85,7 @@ class DataLoaderDelegate<T>(
             }
             Resource.LOADING ->
             {
+
             }
             Resource.ERROR   ->
             {

@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso
 import fr.jonathan.mockdata.MockData
 import fr.jonathan.mockdata.MockData.Employee
 import fr.jonathan.mockdata.MockServer
+import fr.jonathangerbaud.core.ext.d
 import fr.jonathangerbaud.ui.appcompat.ToolbarDelegate
 import fr.jonathangerbaud.ui.listitems.Row
 import fr.jonathangerbaud.ui.listitems.widgets.AvatarItem
@@ -56,6 +57,8 @@ class MainFragment : Fragment(), DataLoaderDelegate.DataLoaderCallback<List<Empl
         adapter.addRenderer(::EmployeeRenderer)
         recyclerView.adapter = adapter
 
+        d("on load")
+
         DataLoaderDelegate(
                 this,
                 UIStateManager(
@@ -65,6 +68,7 @@ class MainFragment : Fragment(), DataLoaderDelegate.DataLoaderCallback<List<Empl
 
     override fun onDataLoaded(data: List<Employee>?)
     {
+        d("dataLoaded $data")
         adapter.addAll(data!!)
     }
 
